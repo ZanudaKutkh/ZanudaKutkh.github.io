@@ -7,7 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <script src="scripts/pseudoScroll.js#1"></script>
+  <script src="scripts/pseudoScrollEvent.js#1"></script>
+  <script src="scripts/animationEndEvent.js#1"></script>
   <script src="scripts/index.js#1"></script>
   <link rel="stylesheet" href="styles/index.css#1">
 </head>
@@ -33,7 +34,53 @@
     <span class="cupText" id="cupText">
       Хочу аксессуары для офиса
     </span>
-    <img class="cup" id="cup" src="media/image/cup.png">
+    <img class="cup" id="cup" src="media/image/cup.png" />
+    <div class="eye"></div>
+  </div>
+</div>
+<div class="contentWrapper center bottleScreen" id="bottleScreen">
+  <div class="content">
+    <div class="background">
+      <span class="bottleText" id="bottleText">
+        Хочу сувениры для спорта и отдыха
+      </span>
+      <div class="eye"></div>
+      <img class="bottle" id="bottle" src="media/image/bottle.png" />
+    </div>
+  </div>
+</div>
+<div class="contentWrapper center boxScreen" id="boxScreen">
+  <div class="content">
+    <div id="box">
+      <img class="box" src="media/image/box.png" />
+      <img class="badge" src="media/image/badge.png" />
+      <img class="note" src="media/image/note.png" />
+      <img class="tShirt" src="media/image/tShirtBoxed.png" />
+      <span class="tShirtText">
+        Хочу</br>welcome-pack</br>для сотрудников
+      </span>
+      <div class="eye"></div>
+      <img class="box" id="boxCover" src="media/image/boxCover.png" />
+    </div>
+  </div>
+</div>
+<div class="contentWrapper center laptopScreen" id="laptopScreen">
+  <div class="content">
+    <div id="laptop">
+      <div class="background">
+        <div class="laptopTextWrapper" id="laptopTextWrapper" >
+          <span class="laptopText" id="laptopText" data-text="Хочу такую же промо страницу"></span>
+          <div class="laptopTextCaret" id="laptopTextCaret"></div>
+          <div class="eye"></div>
+        </div>
+      </div>
+      <img class="laptop" src="media/image/laptop.svg" />
+    </div>
+  </div>
+</div>
+<div class="contentWrapper footer" id="footer">
+  <div class="content">
+    footer
   </div>
 </div>
 </body>

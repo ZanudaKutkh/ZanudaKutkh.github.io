@@ -69,6 +69,33 @@ body {
   }
 }
 
+.eye {
+  position: relative;
+  background-color: @green;
+  background-image: url("/media/image/eye.svg");
+  background-position: 50% 10px;
+  background-size: 50%;
+  width: 128px;
+  height: 90px;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  box-shadow: 0 0 30px @green;
+
+  &:after {
+    content: "посмотреть";
+    color: @blue;
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+    letter-spacing: 0;
+  }
+}
+
 .headerWrapper {
   display: flex;
   flex-flow: row nowrap;
@@ -110,6 +137,11 @@ body {
 }
 
 .contentWrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  opacity: 0;
+  z-index: -1;
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-end;
@@ -147,8 +179,8 @@ body {
 }
 
 .cupScreen {
-  position: relative;
   background: @darkGray;
+  transition: top 0.2s;
 
   .cup {
     opacity: 0;
@@ -157,6 +189,14 @@ body {
     height: 699px;
     top: 100%;
     left: calc((100% - 703px) / 2);
+  }
+
+  .eye {
+    opacity: 0;
+    position: absolute;
+    top: calc((100% - 90px) / 2);
+    left: calc((100% - 128px) / 2);
+    transition: opacity 0.3s;
   }
 
   .cupText {
@@ -171,5 +211,215 @@ body {
     font-weight: 800;
     letter-spacing: 2.84px;
     text-transform: uppercase;
+  }
+}
+
+.bottleScreen {
+  background: @darkGray;
+  transition: top 0.4s;
+
+  .content {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .background {
+    position: relative;
+    background: @white;
+    border-radius: 68px;
+    overflow: hidden;
+    width: 1812px;
+    height: 940px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    .bottle {
+      width: 516px;
+      height: 1638px;
+      position: absolute;
+      top: 80px;
+      left: calc((100% - 516px) / 2);
+    }
+
+    .bottleText {
+      opacity: 0;
+      width: 960px;
+      color: @darkGray;
+      font-size: 100px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .eye {
+      opacity: 0;
+      position: absolute;
+      top: calc((100% - 90px) / 2);
+      left: calc((100% - 128px) / 2);
+      transition: opacity 0.3s;
+    }
+  }
+}
+
+.boxScreen {
+  background: @green;
+  transition: top 0.4s;
+
+  #box {
+    position: absolute;
+    width: 965px;
+    height: 665px;
+    top: calc((100% - 665px) / 2);
+    left: calc((100% - 965px) / 2);
+    transform: scale(0);
+    transition: opacity 0.3s;
+
+    .box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .badge {
+      position: absolute;
+      top: 80px;
+      left: 150px;
+      width: 225px;
+      height: 240px;
+      transform: rotate(-32deg);
+    }
+
+    .note {
+      position: absolute;
+      bottom: 100px;
+      left: 200px;
+      width: 228px;
+      height: 302px;
+    }
+
+    .tShirt {
+      position: absolute;
+      top: 92px;
+      right: 100px;
+      width: 383px;
+      height: 481px;
+    }
+
+    .tShirtText {
+      position: absolute;
+      top: 250px;
+      right: 165px;
+      width: 264px;
+      color: @white;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: 0.48px;
+      text-transform: uppercase;
+    }
+
+    .eye {
+      opacity: 0;
+      position: absolute;
+      top: 270px;
+      right: 233px;
+      transition: opacity 0.3s;
+    }
+  }
+}
+
+.laptopScreen {
+  background: @green;
+
+  #laptop {
+    position: absolute;
+    width: 1352px;
+    height: 783px;
+    top: calc((100% - 783px) / 2);
+    left: calc((100% - 1352px) / 2);
+
+    .laptop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .background {
+      background: @white;
+      position: absolute;
+      padding: 45px 65px;
+      width: 980px;
+      height: 680px;
+      top: calc((100% - 680px) / 2);
+      left: calc((100% - 980px) / 2);
+
+      .laptopTextWrapper {
+        font-size: 100px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+
+        .laptopText {
+          color: @darkGray;
+        }
+
+        .laptopTextCaret {
+          display: inline-block;
+          border-left: 4px solid @blue;
+          height: 1em;
+          margin: 0 0 -0.15em -0.25em;
+          animation: 1s linear 0s infinite caret;
+        }
+      }
+
+      .eye {
+        opacity: 0;
+        position: absolute;
+        top: calc((100% - 90px) / 2);
+        left: calc((100% - 128px) / 2);
+        transition: opacity 0.3s;
+      }
+    }
+  }
+}
+
+.footer {
+  background: @blue;
+  top: 0;
+
+  .content {
+    min-height: 700px;
+    max-height: 700px;
+  }
+}
+
+@keyframes caret {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes prevFooter {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: -25px;
+  }
+  100% {
+    top: 0;
   }
 }
