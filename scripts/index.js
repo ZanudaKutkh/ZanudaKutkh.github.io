@@ -23,8 +23,129 @@ const resizeContent = () => {
   }
 }
 
+const animateFirstScreen = ({ currentY, deltaY }) => {
+  const content = document.querySelector('#firstScreen .content')
+  const wrapper = content.parentElement || content.parentNode
+  const layer2 = document.getElementById('layer2')
+  const eye = document.querySelector('#firstScreen .eye')
+
+  const viewContentHeight = content.offsetHeight * scale
+  const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
+
+  animationScreenEnd.firstScreen = wrapper.offsetHeight * 4.5
+
+  if (currentY >= 0) {
+    if (currentY < wrapper.offsetHeight * 0.5) {
+      eye.style.opacity = '0'
+      layer2.style.top = '0'
+    } else if (currentY < wrapper.offsetHeight * 1.5) {
+      eye.style.opacity = '1'
+      eye.className = 'eye badge'
+      layer2.style.top = '0'
+    } else if (currentY < wrapper.offsetHeight * 2.5) {
+      eye.style.opacity = '1'
+      eye.className = 'eye gift'
+      layer2.style.top = '0'
+    } else if (currentY < wrapper.offsetHeight * 3.5) {
+      eye.style.opacity = '1'
+      eye.className = 'eye bag'
+      layer2.style.top = '0'
+    } else if (currentY < wrapper.offsetHeight * 4.5) {
+      eye.style.opacity = '0'
+      const percent = 1 - ((wrapper.offsetHeight * 4.5 - currentY) / wrapper.offsetHeight)
+      layer2.style.top = `-${percent * (content.offsetHeight + heightDelta)}px`
+    } else {
+      layer2.style.top = `-${content.offsetHeight + heightDelta}px`
+      dispatchAnimationEnd('secondScreen', false)
+    }
+  }
+}
+
+const getStopAttr = (elements) => {
+  for (let el of elements) {
+    const style = getComputedStyle(el)
+    if (style.display !== 'none' && !isNaN(+el.dataset.stop)) {
+      return +el.dataset.stop
+    }
+  }
+  return 0
+}
+
+const animateSecondScreen = ({ currentY: posY, deltaY }) => {
+  const currentY = posY - animationScreenEnd.firstScreen
+  const content = document.querySelector('#secondScreen .content')
+  const wrapper = content.parentElement || content.parentNode
+  const secondText = document.getElementById('secondText')
+  const clothesImages = document.getElementById('clothesImages')
+  const eye = document.querySelector('#secondScreen .eye')
+
+  const viewContentWidth = content.offsetWidth * scale
+  const widthDelta = Math.floor(((wrapper.offsetWidth - viewContentWidth) / 2) / scale)
+  const imagesOffset = content.offsetWidth + widthDelta
+
+  animationScreenEnd.secondScreen = animationScreenEnd.firstScreen + (wrapper.offsetHeight * 4)
+
+  if (deltaY < 0 && currentY <= 0) {
+    wrapper.style.opacity = '0'
+    secondText.style.top = '100%'
+    dispatchAnimationEnd('firstScreen', true, 300)
+    clothesImages.style.opacity = '0'
+    clothesImages.style.zIndex = '-1'
+  } else if (currentY < wrapper.offsetHeight) {
+    clothesImages.style.opacity = '1'
+    clothesImages.style.zIndex = '2'
+    clothesImages.style.left = `${imagesOffset}px`
+    secondText.style.top = `${content.offsetHeight - (currentY / scale)}px`
+  } else if (currentY < (wrapper.offsetHeight * 2)) {
+    const percent = ((wrapper.offsetHeight * 2) - currentY) / wrapper.offsetHeight
+    const stop = getStopAttr(content.getElementsByClassName('tShirt'))
+    const position = Math.round(((imagesOffset - stop) * percent) + stop)
+    clothesImages.style.opacity = '1'
+    clothesImages.style.zIndex = '2'
+    clothesImages.style.left = `${position}px`
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.zIndex = '-1'
+    eye.style.opacity = '0'
+  } else if (currentY < (wrapper.offsetHeight * 2.5)) {
+    // const percent = ((wrapper.offsetHeight * 2.5) - currentY) / (wrapper.offsetHeight / 2)
+    const stop = getStopAttr(content.getElementsByClassName('tShirt'))
+    clothesImages.style.opacity = '1'
+    clothesImages.style.zIndex = '2'
+    clothesImages.style.left = `${stop}px`
+    eye.style.transition = 'opacity 0.3s'
+    eye.style.zIndex = '3'
+    eye.style.opacity = '1'
+  } else if (currentY < (wrapper.offsetHeight * 3)) {
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.opacity = '0'
+    eye.style.zIndex = '-1'
+    const percent = ((wrapper.offsetHeight * 3) - currentY) / (wrapper.offsetHeight / 2)
+    const start = getStopAttr(content.getElementsByClassName('tShirt'))
+    const stop = getStopAttr(content.getElementsByClassName('apron'))
+    const position = Math.round(((start - stop) * percent) + stop)
+    clothesImages.style.opacity = '1'
+    clothesImages.style.zIndex = '2'
+    clothesImages.style.left = `${position}px`
+  } else if (currentY < (wrapper.offsetHeight * 3.5)) {
+    const percent = ((wrapper.offsetHeight * 3.5) - currentY) / (wrapper.offsetHeight / 2)
+    const stop = getStopAttr(content.getElementsByClassName('apron'))
+    clothesImages.style.opacity = '1'
+    clothesImages.style.zIndex = '2'
+    clothesImages.style.left = `${stop}px`
+    eye.style.transition = 'opacity 0.3s'
+    eye.style.zIndex = '3'
+    eye.style.opacity = '1'
+  } else if (posY >= animationScreenEnd.secondScreen) {
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.opacity = '0'
+    eye.style.zIndex = '-1'
+    secondText.style.top = '0'
+    dispatchAnimationEnd('cupScreen', false)
+  }
+}
+
 const animateCupScreen = ({ currentY: posY, deltaY }) => {
-  const currentY = posY // TODO
+  const currentY = posY - animationScreenEnd.secondScreen
   const content = document.querySelector('#cupScreen .content')
   const wrapper = content.parentElement || content.parentNode
   const cup = document.getElementById('cup')
@@ -49,7 +170,8 @@ const animateCupScreen = ({ currentY: posY, deltaY }) => {
     cupText.style.opacity = '1'
   }
 
-  animationScreenEnd.cupScreen = content.offsetWidth + cupText.offsetWidth + (widthDelta * 2)
+  const animationLength = content.offsetWidth + cupText.offsetWidth + (widthDelta * 2)
+  animationScreenEnd.cupScreen = animationScreenEnd.secondScreen + animationLength
 
   if (currentY <= 0) {
     eye.style.opacity = '0'
@@ -57,7 +179,7 @@ const animateCupScreen = ({ currentY: posY, deltaY }) => {
     cup.style.transform = 'rotate(0deg)'
     if (deltaY < 0) {
       cup.style.top = `calc(100% + ${heightDelta}px)`
-      // dispatchAnimationEnd('startScreen', true)
+      dispatchAnimationEnd('secondScreen', true)
     } else {
       cup.style.top = `calc((100% - ${cup.offsetHeight}px) / 2)`
     }
@@ -68,24 +190,14 @@ const animateCupScreen = ({ currentY: posY, deltaY }) => {
     cup.style.transform = 'rotate(360deg)'
     cupText.style.left = `calc(100% + ${widthDelta}px - ${animationScreenEnd.cupScreen}px)`
     dispatchAnimationEnd('bottleScreen', false, 500)
-    /*
-    if (deltaY >= 0) {
-      animationNextStop = true
-      cup.addEventListener('transitionend', e => {
-        if (e.target === cup) {
-          dispatchAnimationEnd('bottleScreen', false)
-        }
-      })
-    }
-     */
   } else {
-    if (posY >= animationScreenEnd.cupScreen / 3 && posY < (animationScreenEnd.cupScreen * 0.95)) {
+    if (currentY >= (animationLength / 3) && currentY < (animationLength * 0.95)) {
       eye.style.opacity = '1'
     } else {
       eye.style.opacity = '0'
     }
     cup.style.opacity = '1'
-    const rotate = (currentY / animationScreenEnd.cupScreen) * 360
+    const rotate = (currentY / animationLength) * 360
     cup.style.transform = `rotate(${-rotate}deg)`
     cupText.style.left = `calc(100% + ${widthDelta}px - ${currentY}px)`
   }
@@ -220,6 +332,12 @@ const animateLaptopScreen = ({ currentY: posY, deltaY }) => {
 
 const animate = ({ detail = {} }) => {
   switch (currentScreen) {
+    case 'firstScreen':
+      animateFirstScreen(detail)
+      break
+    case 'secondScreen':
+      animateSecondScreen(detail)
+      break
     case 'cupScreen':
       animateCupScreen(detail)
       break
@@ -309,6 +427,11 @@ const changeCurrentScreen = (e) => {
   setTimeout(() => {
     animationStop = false
     switch (nextScreen) {
+      case 'firstScreen':
+        defaultActivateScreen(nextScreen, prev)
+        animationNextStop = false
+        break
+      case 'secondScreen':
       case 'cupScreen':
       case 'bottleScreen':
       case 'boxScreen':
@@ -338,5 +461,5 @@ window.onload = () => {
   window.addEventListener('pseudoScroll', animate)
   window.addEventListener('animationEnd', changeCurrentScreen)
 
-  dispatchAnimationEnd('cupScreen', false)
+  dispatchAnimationEnd('firstScreen', false)
 }

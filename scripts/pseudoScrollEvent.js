@@ -3,7 +3,10 @@ const registerPseudoScrollEvent = (el, getStopPseudoScroll) => {
   let currentY = 0
 
   el.addEventListener("wheel", e => {
-    const { deltaY } = e
+    let { deltaY } = e
+    if (Math.abs(deltaY) > 30) {
+      deltaY = deltaY < 0 ? -30 : 30
+    }
     const stopPseudoScroll = getStopPseudoScroll(deltaY)
     let nextY = currentY + deltaY
     nextY = nextY < 0 ? 0 : nextY
