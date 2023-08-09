@@ -1,20 +1,51 @@
 const registerPseudoScrollEvent = (el, getStopPseudoScroll) => {
   let startY
   let currentY = 0
+  const maxScrollLength = 30
+
+  const dispatchPseudoScroll = (detail) => {
+    currentY = detail?.currentY
+    const pseudoScrollEvent = new CustomEvent('pseudoScroll', { detail })
+    el.dispatchEvent(pseudoScrollEvent)
+  }
+
+  el.addEventListener("moveTo", e => {
+    const { detail } = e
+    const { moveTo, step = maxScrollLength, delayStep = 2 } = detail
+
+    let delay = 0;
+    if (moveTo >= currentY) {
+      for (let i = currentY; i < moveTo + step; i += step) {
+        delay += delayStep;
+        const nextY = i > moveTo ? moveTo : i
+        const deltaY = nextY - currentY
+        setTimeout(() => {
+          dispatchPseudoScroll({ currentY: nextY, deltaY })
+        }, delay)
+      }
+    } else {
+      for (let i = currentY; i > moveTo - step; i -= step) {
+        delay += 2;
+        const nextY = i < moveTo ? moveTo : i
+        const deltaY = nextY - currentY
+        setTimeout(() => {
+          dispatchPseudoScroll({ currentY: nextY, deltaY })
+        }, delay)
+      }
+    }
+  })
 
   el.addEventListener("wheel", e => {
     let { deltaY } = e
-    if (Math.abs(deltaY) > 30) {
-      deltaY = deltaY < 0 ? -30 : 30
+    if (Math.abs(deltaY) > maxScrollLength) {
+      deltaY = deltaY < 0 ? -maxScrollLength : maxScrollLength
     }
     const stopPseudoScroll = getStopPseudoScroll(deltaY)
     let nextY = currentY + deltaY
     nextY = nextY < 0 ? 0 : nextY
 
     if (currentY !== nextY && !stopPseudoScroll) {
-      currentY = nextY
-      const pseudoScrollEvent = new CustomEvent('pseudoScroll', { detail: { currentY, deltaY } })
-      el.dispatchEvent(pseudoScrollEvent)
+      dispatchPseudoScroll({ currentY: nextY, deltaY })
     }
   })
 
@@ -36,9 +67,7 @@ const registerPseudoScrollEvent = (el, getStopPseudoScroll) => {
       nextY = nextY < 0 ? 0 : nextY
 
       if (currentY !== nextY && !stopPseudoScroll) {
-        currentY = nextY
-        const pseudoScrollEvent = new CustomEvent('pseudoScroll', { detail: { currentY, deltaY } })
-        el.dispatchEvent(pseudoScrollEvent)
+        dispatchPseudoScroll({ currentY: nextY, deltaY })
       }
     }
   })

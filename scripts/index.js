@@ -4,7 +4,7 @@ const animationScreenEnd = {}
 let animationNextStop = false
 let animationStop = false
 let bottleStartOffset
-let laptopTextInterval
+let laptopTextInterval = []
 
 const resizeContent = () => {
   bottleStartOffset = undefined
@@ -22,6 +22,8 @@ const resizeContent = () => {
     content.style.opacity = '1'
   }
 }
+
+const moveToSecondScreen = () => moveTo(animationScreenEnd.firstScreen)
 
 const animateFirstScreen = ({ currentY, deltaY }) => {
   const content = document.querySelector('#firstScreen .content')
@@ -92,10 +94,11 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '0'
     clothesImages.style.zIndex = '-1'
   } else if (currentY < wrapper.offsetHeight) {
+    const percent = (wrapper.offsetHeight - currentY) / wrapper.offsetHeight
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${imagesOffset}px`
-    secondText.style.top = `${content.offsetHeight - (currentY / scale)}px`
+    secondText.style.top = `${content.offsetHeight * percent}px`
   } else if (currentY < (wrapper.offsetHeight * 2)) {
     const percent = ((wrapper.offsetHeight * 2) - currentY) / wrapper.offsetHeight
     const stop = getStopAttr(content.getElementsByClassName('tShirt'))
@@ -107,7 +110,6 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
   } else if (currentY < (wrapper.offsetHeight * 2.5)) {
-    // const percent = ((wrapper.offsetHeight * 2.5) - currentY) / (wrapper.offsetHeight / 2)
     const stop = getStopAttr(content.getElementsByClassName('tShirt'))
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
@@ -127,7 +129,6 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${position}px`
   } else if (currentY < (wrapper.offsetHeight * 3.5)) {
-    const percent = ((wrapper.offsetHeight * 3.5) - currentY) / (wrapper.offsetHeight / 2)
     const stop = getStopAttr(content.getElementsByClassName('apron'))
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
@@ -135,6 +136,15 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     eye.style.transition = 'opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
+  } else if (currentY < (wrapper.offsetHeight * 4)) {
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.zIndex = '-1'
+    eye.style.opacity = '0'
+    const stop = getStopAttr(content.getElementsByClassName('apron'))
+    const percent = 1 - ((wrapper.offsetHeight * 4) - currentY) / (wrapper.offsetHeight / 2)
+    clothesImages.style.opacity = '1'
+    clothesImages.style.zIndex = '2'
+    clothesImages.style.left = `calc(${stop - (widthDelta * percent)}px - ${100 * percent}%)`
   } else if (posY >= animationScreenEnd.secondScreen) {
     eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
@@ -316,8 +326,9 @@ const animateLaptopScreen = ({ currentY: posY, deltaY }) => {
 
   if (deltaY < 0 && posY <= animationScreenEnd.boxScreen) {
     eye.style.opacity = '0'
-    if (laptopTextInterval) {
-      clearInterval(laptopTextInterval)
+    if (laptopTextInterval.length) {
+      laptopTextInterval.forEach(clearInterval)
+      laptopTextInterval = []
     }
     const textEl = document.getElementById('laptopText')
     textEl.innerText = ''
@@ -407,16 +418,17 @@ const activateLaptopScreen = () => {
   const setText = i => {
     textEl.innerText = text.substring(0, i)
   }
-  laptopTextInterval = setInterval(() => {
+  laptopTextInterval.push(setInterval(() => {
     setText(i)
     if (i >= text.length) {
-      clearInterval(laptopTextInterval)
+      laptopTextInterval.forEach(clearInterval)
+      laptopTextInterval = []
       eye.style.opacity = '1'
       laptopScreen.style.animation = '1s linear 0s prevFooter'
       animationNextStop = false
     }
     i += 1
-  }, 100)
+  }, 100))
 }
 
 const changeCurrentScreen = (e) => {
@@ -445,6 +457,11 @@ const changeCurrentScreen = (e) => {
   }, delay)
 }
 
+const moveTo = (moveToY) => {
+  const moveToEvent = new CustomEvent('moveTo', { detail: { moveTo: moveToY } })
+  window.dispatchEvent(moveToEvent)
+}
+
 const getStopPseudoScroll = (deltaY) => {
   if (animationStop) return true
   if (deltaY < 0) {
@@ -453,13 +470,16 @@ const getStopPseudoScroll = (deltaY) => {
   return animationNextStop
 }
 
-window.onload = () => {
-  registerPseudoScrollEvent(window, getStopPseudoScroll)
-  resizeContent()
-
+const addEvents = () => {
   window.addEventListener('resize', resizeContent)
   window.addEventListener('pseudoScroll', animate)
   window.addEventListener('animationEnd', changeCurrentScreen)
+}
+
+window.onload = () => {
+  registerPseudoScrollEvent(window, getStopPseudoScroll)
+  resizeContent()
+  addEvents()
 
   dispatchAnimationEnd('firstScreen', false)
 }
