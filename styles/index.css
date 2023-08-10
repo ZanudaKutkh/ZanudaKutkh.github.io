@@ -143,38 +143,40 @@ a:visited {
   left: 0;
   width: 100%;
   z-index: 10;
+  transform-origin: top;
 }
-.headerWrapper #header {
+.headerWrapper .header {
   opacity: 0;
   transition: opacity 0.1s;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   gap: 20px;
-  padding: 32px 54px;
+  padding: 32px 54px 0;
   min-width: 1920px;
   max-width: 1920px;
   transform-origin: top;
 }
 @media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
-  .headerWrapper #header {
+  .headerWrapper .header {
     min-width: 1080px;
     max-width: 1080px;
   }
 }
 @media (aspect-ratio < 0.75) {
-  .headerWrapper #header {
+  .headerWrapper .header {
     min-width: 320px;
     max-width: 320px;
   }
 }
-.headerWrapper #header .logo {
+.headerWrapper .header .logo {
   width: 147px;
   height: 16px;
   margin-right: 40px;
 }
-.headerWrapper #header .catalog {
+.headerWrapper .header .catalog {
   margin-right: auto;
+  width: 200px;
 }
 .contentWrapper {
   position: absolute;
@@ -222,6 +224,125 @@ a:visited {
 }
 .contentWrapper.center .content {
   transform-origin: center;
+}
+.modal {
+  opacity: 1;
+  z-index: 100;
+}
+.modal.open {
+  top: 0;
+}
+.modal.menu {
+  background: #7382EC;
+  top: unset;
+  bottom: 100%;
+  transition: bottom 0.3s;
+}
+.modal.menu .headerWrapper {
+  display: none;
+}
+.modal.menu .content {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.modal.menu .navigator {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  color: #FFFFFF;
+  font-size: 55px;
+  font-weight: 600;
+  line-height: 1.44;
+  text-transform: uppercase;
+  padding: 200px 135px 0 260px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s 0.3s;
+}
+.modal.menu .navigator .navButton {
+  cursor: pointer;
+}
+.modal.menu .menuHintContentWrapper {
+  background: #D5FD74;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 100vw;
+  min-height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+.modal.menu .menuHintContentWrapper .menuHintContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: 534px;
+  min-height: 1080px;
+  max-width: 534px;
+  max-height: 1080px;
+}
+.modal.menu .menuHintContentWrapper .menuHintContent > img {
+  max-width: 412px;
+  max-height: 710px;
+}
+.modal.menu .menuHintContentWrapper.conference img {
+  transform: rotate(25deg);
+}
+.modal.menu .menuHintContentWrapper.welcome .boxWrapper {
+  position: relative;
+  width: 412px;
+  height: 550px;
+}
+.modal.menu .menuHintContentWrapper.welcome .boxWrapper .box {
+  position: absolute;
+  bottom: 0;
+  left: calc((100% - 412px) / 2);
+  width: 412px;
+  height: 284px;
+}
+.modal.menu .menuHintContentWrapper.welcome .boxWrapper .badge {
+  position: absolute;
+  bottom: 145px;
+  left: calc(((100% - 412px) / 2) + 80px);
+  width: 100px;
+  height: 110px;
+  transform: rotate(-46deg);
+}
+.modal.menu .menuHintContentWrapper.welcome .boxWrapper .note {
+  position: absolute;
+  bottom: 42px;
+  left: calc(((100% - 412px) / 2) + 85px);
+  width: 100px;
+  height: 132px;
+}
+.modal.menu .menuHintContentWrapper.welcome .boxWrapper .tShirt {
+  position: absolute;
+  bottom: 42px;
+  right: calc(((100% - 412px) / 2) + 50px);
+  width: 160px;
+  height: 200px;
+}
+.modal.menu .menuHintContentWrapper.welcome .boxWrapper .boxCover {
+  position: absolute;
+  top: 0;
+  left: calc((100% - 412px) / 2);
+  width: 412px;
+  height: 284px;
+}
+.modal.menu.open {
+  top: unset;
+  bottom: 0;
+}
+.modal.menu.open .headerWrapper {
+  display: flex;
+}
+.modal.menu.open .navigator {
+  max-height: 900px;
 }
 .firstScreen {
   background: #D5FD74;

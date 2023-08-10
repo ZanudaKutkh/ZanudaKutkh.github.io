@@ -12,14 +12,25 @@ const resizeContent = () => {
   const { body } = document
   scale = Math.min(body.offsetWidth / hc.offsetWidth, body.offsetHeight / hc.offsetHeight)
 
-  const header = document.getElementById('header')
-  header.style.transform = `scale(${scale})`
-  header.style.opacity = '1'
+  const headerWrappers = document.getElementsByClassName('headerWrapper')
+  for(let headerWrapper of headerWrappers) {
+    headerWrapper.style.transform = `scaleY(${scale})`
+    for(let header of headerWrapper.children) {
+      header.style.transform = `scaleX(${scale})`
+      header.style.opacity = '1'
+    }
+  }
 
   const contents = document.getElementsByClassName('content')
   for(let content of contents) {
     content.style.transform = `scale(${scale})`
     content.style.opacity = '1'
+  }
+
+  const menuHintContents = document.getElementsByClassName('menuHintContent')
+  for(let menuHintContent of menuHintContents) {
+    menuHintContent.style.transform = `scale(${scale})`
+    menuHintContent.style.opacity = '1'
   }
 }
 
@@ -474,6 +485,58 @@ const addEvents = () => {
   window.addEventListener('resize', resizeContent)
   window.addEventListener('pseudoScroll', animate)
   window.addEventListener('animationEnd', changeCurrentScreen)
+
+  const modalOpenButtons = document.getElementsByClassName('modalOpen')
+  const modalCloseButtons = document.getElementsByClassName('modalClose')
+
+  for(let modalOpenButton of modalOpenButtons) {
+    const { modal: modalName } = modalOpenButton.dataset
+    modalOpenButton.addEventListener("click", () => {
+      const modal = document.getElementById(modalName)
+      if (modal) {
+        modal.classList.add('open')
+      }
+    })
+  }
+
+  for(let modalCloseButton of modalCloseButtons) {
+    const { modal: modalName } = modalCloseButton.dataset
+    modalCloseButton.addEventListener("click", () => {
+      const modal = document.getElementById(modalName)
+      if (modal) {
+        modal.classList.remove('open')
+      }
+    })
+  }
+
+  const navButtons = document.getElementsByClassName('navButton')
+  const menuNavigator = document.getElementById('menuNavigator')
+  const menuContent = menuNavigator.parentElement || menuNavigator.parentNode
+  const menuContentWrapper = menuContent.parentElement || menuContent.parentNode
+
+  for(let navButton of navButtons) {
+    const { type } = navButton.dataset
+    const menuHintContent = document.querySelector(`.menuHintContentWrapper.${type} .menuHintContent`)
+    const menuHintContentWrapper = menuHintContent.parentElement || menuHintContent.parentNode
+    navButton.addEventListener('mouseover', () => {
+      const viewContentWidth = menuContent.offsetWidth * scale
+      const widthDelta = Math.floor(((menuContentWrapper.offsetWidth - viewContentWidth) / 2))
+      const navigatorDelta = (menuContent.offsetWidth - menuNavigator.offsetWidth) * scale
+      const contentWidth = widthDelta + navigatorDelta
+      if (contentWidth < menuHintContent.offsetWidth) {
+        menuHintContent.style.minWidth = `${widthDelta + navigatorDelta}px`
+        menuHintContent.style.maxWidth = `${widthDelta + navigatorDelta}px`
+      }
+      menuHintContentWrapper.style.transition = 'left 0.3s 0.2s';
+      menuHintContentWrapper.style.left = `calc(100% - ${contentWidth}px)`
+    })
+    navButton.addEventListener('mouseout', () => {
+      menuHintContent.style.minWidth = ''
+      menuHintContent.style.maxWidth = ''
+      menuHintContentWrapper.style.transition = 'left 0.3s';
+      menuHintContentWrapper.style.left = '100%'
+    })
+  }
 }
 
 window.onload = () => {

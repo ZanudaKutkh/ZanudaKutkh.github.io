@@ -13,9 +13,9 @@
 <body>
 <div id="hiddenContent"></div>
 <div class="headerWrapper">
-  <div id="header">
+  <div class="header">
     <img class="logo" src="media/image/logo.svg" alt="logo" />
-    <button class="button blue catalog">
+    <button class="button blue catalog modalOpen" data-modal="modalMenu">
       <img src="media/image/burger.svg" width="32" height="32" alt="burger" />
       Каталог
     </button>
@@ -166,6 +166,97 @@
         <script>
           document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear().toString()))
         </script>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="contentWrapper center modal menu" id="modalMenu">
+  <div class="headerWrapper">
+    <div class="header">
+      <img class="logo" src="media/image/logoWhite.svg" alt="logo" />
+      <button class="button white catalog modalClose" data-modal="modalMenu">
+        <img src="media/image/close.svg" width="32" height="32" alt="burger" />
+        Закрыть
+      </button>
+      <button class="button white about">
+        О проекте
+      </button>
+      <button class="button white contact">
+        Связаться с нами
+      </button>
+    </div>
+  </div>
+  <div class="content" id="menuContent">
+    <div class="navigator" id="menuNavigator">
+      <div class="navButton" data-type="conference">
+        все для конференций
+      </div>
+      <div class="navButton" data-type="merch">
+        мерч для продажи
+      </div>
+      <div class="navButton" data-type="gift">
+        подарки на праздники
+      </div>
+      <div class="navButton" data-type="branding">
+        брендированная одежда
+      </div>
+      <div class="navButton" data-type="corp">
+        корпоративная одежда
+      </div>
+      <div class="navButton" data-type="office">
+        аксессуары для офиса
+      </div>
+      <div class="navButton" data-type="souvenir">
+        сувениры для спорта и отдыха
+      </div>
+      <div class="navButton" data-type="welcome">
+        welcome-pack
+      </div>
+    </div>
+  </div>
+  <div class="menuHintContentWrapper conference">
+    <div class="menuHintContent">
+      <img src="media/image/badge.png" alt="id">
+    </div>
+  </div>
+  <div class="menuHintContentWrapper merch">
+    <div class="menuHintContent">
+      <img src="media/image/bag.png" alt="bag">
+    </div>
+  </div>
+  <div class="menuHintContentWrapper gift">
+    <div class="menuHintContent">
+      <img src="media/image/gift.png" alt="gift">
+    </div>
+  </div>
+  <div class="menuHintContentWrapper branding">
+    <div class="menuHintContent">
+      <img src="media/image/tShirt.png" alt="tShirt">
+    </div>
+  </div>
+  <div class="menuHintContentWrapper corp">
+    <div class="menuHintContent">
+      <img src="media/image/apron.png" alt="apron">
+    </div>
+  </div>
+  <div class="menuHintContentWrapper office">
+    <div class="menuHintContent">
+      <img src="media/image/cup.png" alt="cup">
+    </div>
+  </div>
+  <div class="menuHintContentWrapper souvenir">
+    <div class="menuHintContent">
+      <img src="media/image/bottle.png" alt="bottle">
+    </div>
+  </div>
+  <div class="menuHintContentWrapper welcome">
+    <div class="menuHintContent">
+      <div class="boxWrapper" id="boxWrapper">
+        <img class="box" src="media/image/box.png" alt="box" />
+        <img class="badge" src="media/image/badge.png" alt="id" />
+        <img class="note" src="media/image/note.png" alt="note" />
+        <img class="tShirt" src="media/image/tShirtBoxed.png" alt="tShirt" />
+        <img class="boxCover" src="media/image/boxCover.png" alt="boxCover" />
       </div>
     </div>
   </div>

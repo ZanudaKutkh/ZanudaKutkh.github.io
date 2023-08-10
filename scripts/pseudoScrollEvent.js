@@ -4,7 +4,7 @@ const registerPseudoScrollEvent = (el, getStopPseudoScroll) => {
   const maxScrollLength = 30
 
   const dispatchPseudoScroll = (detail) => {
-    currentY = detail?.currentY
+    currentY = detail?.currentY || currentY
     const pseudoScrollEvent = new CustomEvent('pseudoScroll', { detail })
     el.dispatchEvent(pseudoScrollEvent)
   }
