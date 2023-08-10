@@ -4,25 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <title>Title</title>
-  <script src="scripts/pseudoScrollEvent.js"></script>
-  <script src="scripts/animationEndEvent.js"></script>
-  <script src="scripts/index.js"></script>
-  <link rel="stylesheet" href="styles/fonts.css">
-  <link rel="stylesheet" href="styles/index.css">
+  <script src="scripts/lodash.throttle@4.1.1.js#q"></script>
+  <script src="scripts/pseudoScrollEvent.js#q"></script>
+  <script src="scripts/animationEndEvent.js#q"></script>
+  <script src="scripts/index.js#q"></script>
+  <link rel="stylesheet" href="styles/fonts.css#q">
+  <link rel="stylesheet" href="styles/index.css#q">
 </head>
 <body>
 <div id="hiddenContent"></div>
-<div class="headerWrapper">
+<div class="headerWrapper" id="mainHeader">
   <div class="header">
     <img class="logo" src="media/image/logo.svg" alt="logo" />
     <button class="button blue catalog modalOpen" data-modal="modalMenu">
       <img src="media/image/burger.svg" width="32" height="32" alt="burger" />
       Каталог
     </button>
-    <button class="button white about">
+    <button class="button white about modalOpen" data-modal="modalAbout">
       О проекте
     </button>
-    <button class="button white contact">
+    <button class="button white contact modalOpen" data-modal="modalContact">
       Связаться с нами
     </button>
   </div>
@@ -82,10 +83,10 @@
       <img class="tShirt vertical" alt="tShirt" src="media/image/tShirt.png" data-stop="637" />
       <img class="apron vertical" alt="apron" src="media/image/apron.png" data-stop="19" />
       <span class="text tShirtText">
-        Хочу одежду<br/>со своим<br/>брендингом
+        Хочу одежду<br>со своим<br>брендингом
       </span>
       <span class="text apronText">
-        Хочу<br/>одеть своих<br/>сотрудников
+        Хочу<br>одеть своих<br>сотрудников
       </span>
     </div>
     <div class="eye"></div>
@@ -119,7 +120,7 @@
       <img class="note" src="media/image/note.png" alt="note" />
       <img class="tShirt" src="media/image/tShirtBoxed.png" alt="tShirt" />
       <span class="tShirtText">
-        Хочу<br/>welcome-pack<br/>для сотрудников
+        Хочу<br>welcome-pack<br>для сотрудников
       </span>
       <div class="eye"></div>
       <img class="box" id="boxCover" src="media/image/boxCover.png" alt="boxCover" />
@@ -143,10 +144,10 @@
 <div class="contentWrapper footer" id="footer">
   <div class="content">
     <div class="top">
-      <button class="button white about">
+      <button class="button white" onclick="moveToTop()">
         Вернуться к началу
       </button>
-      <button class="button white about">
+      <button class="button white catalog modalOpen" data-modal="modalMenu">
         Открыть каталог
       </button>
     </div>
@@ -178,10 +179,10 @@
         <img src="media/image/close.svg" width="32" height="32" alt="burger" />
         Закрыть
       </button>
-      <button class="button white about">
+      <button class="button white about modalOpen" data-modal="modalAbout">
         О проекте
       </button>
-      <button class="button white contact">
+      <button class="button white contact modalOpen" data-modal="modalContact">
         Связаться с нами
       </button>
     </div>
@@ -257,6 +258,73 @@
         <img class="note" src="media/image/note.png" alt="note" />
         <img class="tShirt" src="media/image/tShirtBoxed.png" alt="tShirt" />
         <img class="boxCover" src="media/image/boxCover.png" alt="boxCover" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="contentWrapper top modal about" id="modalAbout">
+  <div class="headerWrapper">
+    <div class="header">
+      <img class="logo" src="media/image/logo.svg" alt="logo" />
+      <button class="button blue catalog modalOpen" data-modal="modalMenu">
+        <img src="media/image/burger.svg" width="32" height="32" alt="burger" />
+        Каталог
+      </button>
+      <button class="button white about modalClose" data-modal="modalAbout">
+        <img src="media/image/close.svg" width="32" height="32" alt="burger" />
+        Закрыть
+      </button>
+      <button class="button white contact modalOpen" data-modal="modalContact">
+        Связаться с нами
+      </button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="block">
+      <div class="blockTitle">
+        Создаем уникальные<br>продукты для вашего бренда
+      </div>
+      <div class="blockContent">
+        Наши дизайнеры создадут продукт согласно философии<br>и бизнес целям вашего бренда. Реализуем любую задумку,<br>найдем как технически ее реализовать, четко следуя<br>техническому заданию. Готовы предлагать нестандартные<br>решения, используем современные технологии и только<br>качественные материалы.
+      </div>
+    </div>
+  </div>
+</div>
+<div class="contentWrapper top modal contact" id="modalContact">
+  <div class="headerWrapper">
+    <div class="header">
+      <img class="logo" src="media/image/logo.svg" alt="logo" />
+      <button class="button blue catalog modalOpen" data-modal="modalMenu">
+        <img src="media/image/burger.svg" width="32" height="32" alt="burger" />
+        Каталог
+      </button>
+      <button class="button white about modalOpen" data-modal="modalAbout">
+        О проекте
+      </button>
+      <button class="button white contact modalClose" data-modal="modalContact">
+        <img src="media/image/close.svg" width="32" height="32" alt="burger" />
+        Закрыть
+      </button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="block">
+      <div class="blockContent">
+        Вы можите связаться с нами<br>любым удобным для вас способом
+      </div>
+      <div class="blockTitle">
+        <a href="tel:+79999999999">
+          + 7 999 999 99 99
+        </a>
+        <br>
+        <a href="mailto:pochta@yandex.ru">
+          pochta@yandex.ru
+        </a>
+      </div>
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
       </div>
     </div>
   </div>

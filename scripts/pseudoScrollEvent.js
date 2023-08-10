@@ -3,15 +3,15 @@ const registerPseudoScrollEvent = (el, getStopPseudoScroll) => {
   let currentY = 0
   const maxScrollLength = 30
 
-  const dispatchPseudoScroll = (detail) => {
+  const dispatchPseudoScroll = throttle((detail) => {
     currentY = detail?.currentY || currentY
     const pseudoScrollEvent = new CustomEvent('pseudoScroll', { detail })
     el.dispatchEvent(pseudoScrollEvent)
-  }
+  }, 20)
 
   el.addEventListener("moveTo", e => {
     const { detail } = e
-    const { moveTo, step = maxScrollLength, delayStep = 2 } = detail
+    const { moveTo, step = maxScrollLength, delayStep = 10 } = detail
 
     let delay = 0;
     if (moveTo >= currentY) {
@@ -25,10 +25,10 @@ const registerPseudoScrollEvent = (el, getStopPseudoScroll) => {
       }
     } else {
       for (let i = currentY; i > moveTo - step; i -= step) {
-        delay += 2;
+        delay += delayStep;
         const nextY = i < moveTo ? moveTo : i
-        const deltaY = nextY - currentY
         setTimeout(() => {
+          const deltaY = nextY - currentY
           dispatchPseudoScroll({ currentY: nextY, deltaY })
         }, delay)
       }

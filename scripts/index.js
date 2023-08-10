@@ -6,6 +6,8 @@ let animationStop = false
 let bottleStartOffset
 let laptopTextInterval = []
 
+const moveToTop = () => moveTo(1)
+
 const resizeContent = () => {
   bottleStartOffset = undefined
   const hc = document.getElementById('hiddenContent')
@@ -33,8 +35,6 @@ const resizeContent = () => {
     menuHintContent.style.opacity = '1'
   }
 }
-
-const moveToSecondScreen = () => moveTo(animationScreenEnd.firstScreen)
 
 const animateFirstScreen = ({ currentY, deltaY }) => {
   const content = document.querySelector('#firstScreen .content')
@@ -346,9 +346,6 @@ const animateLaptopScreen = ({ currentY: posY, deltaY }) => {
     dispatchAnimationEnd('boxScreen', true)
   } else if (posY <= animationScreenEnd.laptopScreen) {
     wrapper.style.top = `-${currentY}px`
-  } else {
-    wrapper.style.top = `-${footerHeight}px`
-    animationNextStop = true
   }
 }
 
@@ -488,20 +485,29 @@ const addEvents = () => {
 
   const modalOpenButtons = document.getElementsByClassName('modalOpen')
   const modalCloseButtons = document.getElementsByClassName('modalClose')
+  const modals = document.getElementsByClassName('modal')
+  const mainHeader = document.getElementById('mainHeader')
 
   for(let modalOpenButton of modalOpenButtons) {
     const { modal: modalName } = modalOpenButton.dataset
     modalOpenButton.addEventListener("click", () => {
-      const modal = document.getElementById(modalName)
-      if (modal) {
-        modal.classList.add('open')
+      for(let modal of modals) {
+        if (modal.id === modalName) {
+          modal.classList.add('open')
+        } else {
+          modal.classList.remove('open')
+        }
       }
+      mainHeader.style.transition = 'opacity 0.3s'
+      mainHeader.style.opacity = '0'
     })
   }
 
   for(let modalCloseButton of modalCloseButtons) {
     const { modal: modalName } = modalCloseButton.dataset
     modalCloseButton.addEventListener("click", () => {
+      mainHeader.style.transition = ''
+      mainHeader.style.opacity = ''
       const modal = document.getElementById(modalName)
       if (modal) {
         modal.classList.remove('open')
@@ -529,12 +535,22 @@ const addEvents = () => {
       }
       menuHintContentWrapper.style.transition = 'left 0.3s 0.2s';
       menuHintContentWrapper.style.left = `calc(100% - ${contentWidth}px)`
+      for(let navButton2 of navButtons) {
+        if (navButton2 !== navButton) {
+          navButton2.style.opacity = '0.3'
+        }
+      }
     })
     navButton.addEventListener('mouseout', () => {
       menuHintContent.style.minWidth = ''
       menuHintContent.style.maxWidth = ''
       menuHintContentWrapper.style.transition = 'left 0.3s';
       menuHintContentWrapper.style.left = '100%'
+      for(let navButton2 of navButtons) {
+        if (navButton2 !== navButton) {
+          navButton2.style.opacity = ''
+        }
+      }
     })
   }
 }
