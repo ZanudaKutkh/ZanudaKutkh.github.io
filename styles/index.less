@@ -3,6 +3,7 @@
 @vertical: ~"(aspect-ratio < 0.75)";
 
 @white: #FFFFFF;
+@gray: #DDDAD7;
 @darkGray: #333333;
 @blue: #7382EC;
 @green: #D5FD74;
@@ -306,6 +307,65 @@ a:visited {
 
   &.open {
     top: 0;
+  }
+
+  &.preloader {
+    background: @gray;
+    transition: opacity 1s;
+
+    .preloaderImage {
+      opacity: 0;
+      position: absolute;
+      width: 826px;
+      height: 987px;
+      bottom: 0;
+      left: calc((100% - 826px) / 2);
+      transition: opacity 0.1s;
+    }
+
+    .preloaderRound {
+      position: absolute;
+      background: @green;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      top: calc(50% + 150px);
+      left: calc(50% - 1px);
+      transition: transform 0.5s;
+    }
+
+    .preloaderVideo {
+      width: 900px;
+      position: absolute;
+      top: 0;
+      left: calc((100% - 900px) / 2);
+      transition: opacity 0.3s;
+    }
+
+    .preloaderText {
+      opacity: 0;
+      position: absolute;
+      color: @blue;
+      font-size: 142px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 2.84px;
+      text-transform: uppercase;
+      top: calc((100% - 142px) / 2);
+    }
+
+    .button {
+      color: @darkGray;
+      position: absolute;
+      width: 382px;
+      left: calc((100% - 382px) / 2);
+      bottom: -100px;
+      transition: bottom 0.3s 0.3s;
+    }
+
+    &:not(.open) {
+      display: none;
+    }
   }
 
   &.menu {

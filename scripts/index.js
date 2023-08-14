@@ -478,10 +478,63 @@ const getStopPseudoScroll = (deltaY) => {
   return animationNextStop
 }
 
+const startMainFlow = () => {
+  const preloader = document.getElementById('preloader')
+  const content = document.querySelector('#preloader .content')
+  const wrapper = content.parentElement || content.parentNode
+  const preloaderRound = document.getElementById('preloaderRound')
+  const preloaderButton = document.getElementById('preloaderButton')
+
+  const maxSize = Math.max(wrapper.offsetHeight, wrapper.offsetWidth)
+  const viewContentHeight = content.offsetHeight * scale
+  const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
+
+  dispatchAnimationEnd('firstScreen', false)
+  preloaderRound.style.transform = `scale(${maxSize / scale})`
+  preloaderButton.style.bottom = `calc(100% + ${heightDelta}px)`
+  preloader.style.opacity = `0.1`
+
+  preloader.addEventListener('transitionend', () => {
+    preloader.classList.remove('open')
+  })
+}
+
+const preloaderActivate = ({ target }) => {
+  const { duration } = target
+  const content = document.querySelector('#preloader .content')
+  const wrapper = content.parentElement || content.parentNode
+  const preloaderText = document.getElementById('preloaderText')
+
+  const viewContentWidth = content.offsetWidth * scale
+  const widthDelta = Math.floor(((wrapper.offsetWidth - viewContentWidth) / 2) / scale)
+
+  preloaderText.style.left = `calc(100% + ${widthDelta}px)`
+  preloaderText.style.transition = `left ${duration}s`
+  preloaderText.style.left = `-${preloaderText.offsetWidth + widthDelta}px`
+  preloaderText.style.opacity = '1'
+}
+
+const preloaderVideoEnd = ({ target }) => {
+  const preloaderImage = document.getElementById('preloaderImage')
+  const preloaderRound = document.getElementById('preloaderRound')
+  const preloaderButton = document.getElementById('preloaderButton')
+
+  preloaderButton.addEventListener('click', startMainFlow)
+
+  target.style.opacity = '0'
+  preloaderImage.style.opacity = '1'
+  preloaderRound.style.transform = 'scale(445)'
+  preloaderButton.style.bottom = '310px'
+}
+
 const addEvents = () => {
   window.addEventListener('resize', resizeContent)
   window.addEventListener('pseudoScroll', animate)
   window.addEventListener('animationEnd', changeCurrentScreen)
+
+  const preloaderVideo = document.querySelector('#preloader video')
+  preloaderVideo.addEventListener('play', preloaderActivate)
+  preloaderVideo.addEventListener('ended', preloaderVideoEnd)
 
   const modalOpenButtons = document.getElementsByClassName('modalOpen')
   const modalCloseButtons = document.getElementsByClassName('modalClose')
@@ -556,9 +609,8 @@ const addEvents = () => {
 }
 
 window.onload = () => {
+  animationStop = true
   registerPseudoScrollEvent(window, getStopPseudoScroll)
   resizeContent()
   addEvents()
-
-  dispatchAnimationEnd('firstScreen', false)
 }

@@ -277,6 +277,58 @@ a:visited {
 .modal.open {
   top: 0;
 }
+.modal.preloader {
+  background: #DDDAD7;
+  transition: opacity 1s;
+}
+.modal.preloader .preloaderImage {
+  opacity: 0;
+  position: absolute;
+  width: 826px;
+  height: 987px;
+  bottom: 0;
+  left: calc((100% - 826px) / 2);
+  transition: opacity 0.1s;
+}
+.modal.preloader .preloaderRound {
+  position: absolute;
+  background: #D5FD74;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  top: calc(50% + 150px);
+  left: calc(50% - 1px);
+  transition: transform 0.5s;
+}
+.modal.preloader .preloaderVideo {
+  width: 900px;
+  position: absolute;
+  top: 0;
+  left: calc((100% - 900px) / 2);
+  transition: opacity 0.3s;
+}
+.modal.preloader .preloaderText {
+  opacity: 0;
+  position: absolute;
+  color: #7382EC;
+  font-size: 142px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 2.84px;
+  text-transform: uppercase;
+  top: calc((100% - 142px) / 2);
+}
+.modal.preloader .button {
+  color: #333333;
+  position: absolute;
+  width: 382px;
+  left: calc((100% - 382px) / 2);
+  bottom: -100px;
+  transition: bottom 0.3s 0.3s;
+}
+.modal.preloader:not(.open) {
+  display: none;
+}
 .modal.menu {
   background: #7382EC;
   top: unset;

@@ -13,6 +13,21 @@
 </head>
 <body>
 <div id="hiddenContent"></div>
+<div class="contentWrapper modal preloader open" id="preloader">
+  <div class="content">
+    <div class="preloaderText" id="preloaderText">
+      Загружаемся...
+    </div>
+    <div class="preloaderRound" id="preloaderRound"></div>
+    <img class="preloaderImage" id="preloaderImage" src="/media/image/girl.png" alt="girl" />
+    <video class="preloaderVideo" autoplay muted preload="metadata">
+      <source src="/media/video/preloader.webm" type="video/webm" />
+    </video>
+    <div class="button white big" id="preloaderButton">
+      Начать
+    </div>
+  </div>
+</div>
 <div class="headerWrapper" id="mainHeader">
   <div class="header">
     <img class="logo" src="/media/image/logo.svg" alt="logo" />
