@@ -77,7 +77,7 @@
         <img src="/media/image/gift.png" alt="gift" />
         <span>Хочу подарки на праздники</span>
       </div>
-      <div class="eye"></div>
+      <div class="eye modalOpen" data-modal="modalProduct"></div>
     </div>
   </div>
 </div>
@@ -104,7 +104,7 @@
         Хочу<br>одеть своих<br>сотрудников
       </span>
     </div>
-    <div class="eye"></div>
+    <div class="eye modalOpen" data-modal="modalProduct"></div>
   </div>
 </div>
 <div class="contentWrapper center cupScreen" id="cupScreen">
@@ -113,7 +113,7 @@
       Хочу аксессуары для офиса
     </span>
     <img class="cup" id="cup" src="/media/image/cup.png" alt="cup" />
-    <div class="eye"></div>
+    <div class="eye modalOpen" data-modal="modalProduct" data-product="cup"></div>
   </div>
 </div>
 <div class="contentWrapper center bottleScreen" id="bottleScreen">
@@ -122,7 +122,7 @@
       <span class="bottleText" id="bottleText">
         Хочу сувениры для спорта и отдыха
       </span>
-      <div class="eye"></div>
+      <div class="eye modalOpen" data-modal="modalProduct" data-product="bottle"></div>
       <img class="bottle" id="bottle" src="/media/image/bottle.png" alt="bottle" />
     </div>
   </div>
@@ -137,7 +137,7 @@
       <span class="tShirtText">
         Хочу<br>welcome-pack<br>для сотрудников
       </span>
-      <div class="eye"></div>
+      <div class="eye modalOpen" data-modal="modalProduct" data-product="welcome"></div>
       <img class="box" id="boxCover" src="/media/image/boxCover.png" alt="boxCover" />
     </div>
   </div>
@@ -149,7 +149,7 @@
         <div class="laptopTextWrapper" id="laptopTextWrapper" >
           <span class="laptopText" id="laptopText" data-text="Хочу такую же промо страницу"></span>
           <div class="laptopTextCaret" id="laptopTextCaret"></div>
-          <div class="eye"></div>
+          <div class="eye modalOpen" data-modal="modalProduct" data-product="laptop"></div>
         </div>
       </div>
       <img class="laptop" src="/media/image/laptop.svg" alt="laptop" />
@@ -204,28 +204,28 @@
   </div>
   <div class="content" id="menuContent">
     <div class="navigator" id="menuNavigator">
-      <div class="navButton" data-type="conference">
+      <div class="navButton modalOpen" data-modal="modalProduct" data-product="id" data-type="conference">
         все для конференций
       </div>
-      <div class="navButton" data-type="merch">
+      <div class="navButton modalOpen" data-modal="modalProduct" data-product="bag" data-type="merch">
         мерч для продажи
       </div>
-      <div class="navButton" data-type="gift">
+      <div class="navButton modalOpen" data-modal="modalProduct" data-product="gift" data-type="gift">
         подарки на праздники
       </div>
-      <div class="navButton" data-type="branding">
+      <div class="navButton modalOpen" data-modal="modalProduct" data-product="tShirt" data-type="branding">
         брендированная одежда
       </div>
-      <div class="navButton" data-type="corp">
+      <div class="navButton modalOpen" data-modal="modalProduct" data-product="apron" data-type="corp">
         корпоративная одежда
       </div>
-      <div class="navButton" data-type="office">
+      <div class="navButton modalOpen" data-modal="modalProduct" data-product="cup" data-type="office">
         аксессуары для офиса
       </div>
-      <div class="navButton" data-type="souvenir">
+      <div class="navButton modalOpen" data-modal="modalProduct" data-product="bottle" data-type="souvenir">
         сувениры для спорта и отдыха
       </div>
-      <div class="navButton" data-type="welcome">
+      <div class="navButton modalOpen" data-modal="modalProduct" data-product="welcome" data-type="welcome">
         welcome-pack
       </div>
     </div>
@@ -340,6 +340,107 @@
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="contentWrapper modal product" id="modalProduct">
+  <div class="headerWrapper">
+    <div class="header">
+      <img class="logo" src="/media/image/logo.svg" alt="logo" />
+      <button class="button blue catalog modalOpen" data-modal="modalMenu">
+        <img src="/media/image/burger.svg" width="32" height="32" alt="burger" />
+        Каталог
+      </button>
+      <button class="button white about modalOpen" data-modal="modalAbout">
+        О проекте
+      </button>
+      <button class="button white contact modalOpen" data-modal="modalContact">
+        Связаться с нами
+      </button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="imageWrapper" id="imageWrapper">
+      <img class="img" src="/media/image/badge.png" id="productId" alt="id" />
+      <img class="img" src="/media/image/gift.png" id="productGift" alt="gift" />
+      <img class="img" src="/media/image/bag.png" id="productBag" alt="bag" />
+      <img class="img" src="/media/image/tShirt.png" id="productTShirt" alt="tShirt" />
+      <img class="img" src="/media/image/apron.png" id="productApron" alt="apron" />
+      <img class="img" src="/media/image/cup.png" id="productCup" alt="cup" />
+      <div class="img" id="productBottle">
+        <img class="bottle" src="/media/image/bottle.png" alt="bottle" />
+      </div>
+      <div class="img welcome" id="productWelcome">
+        <img class="box" src="/media/image/box.png" alt="box" />
+        <img class="badge" src="/media/image/badge.png" alt="id" />
+        <img class="note" src="/media/image/note.png" alt="note" />
+        <img class="tShirt" src="/media/image/tShirtBoxed.png" alt="tShirt" />
+      </div>
+      <div class="img laptop" id="productLaptop">
+        <img src="/media/image/laptop.svg" alt="laptop" />
+      </div>
+    </div>
+    <div class="block">
+      <div class="blockTitle">Хочу одежду со своим брендигом</div>
+      <div class="blockContent">Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.</div>
+      <button class="button blue quiz">Заполнить анкету</button>
+    </div>
+    <button class="button white modalClose back" data-modal="modalProduct">
+      <img src="/media/image/arrow.svg" width="32" height="32" alt="arrow" />
+      Вернуться назад
+    </button>
+    <div class="videoWrapper">
+      <button class="button white play">Смотреть видео</button>
+    </div>
+    <div class="navigator">
+      <div class="itemWrapper" id="navigatorId">
+        <div class="item white badge changeProduct" data-product="id">
+          <img src="/media/image/badge.png" alt="id">
+        </div>
+      </div>
+      <div class="itemWrapper" id="navigatorGift">
+        <div class="item black gift changeProduct" data-product="gift">
+          <img src="/media/image/gift.png" alt="gift">
+        </div>
+      </div>
+      <div class="itemWrapper" id="navigatorBag">
+        <div class="item white changeProduct" data-product="bag">
+          <img src="/media/image/bag.png" alt="bag">
+        </div>
+      </div>
+      <div class="itemWrapper" id="navigatorTShirt">
+        <div class="item white changeProduct" data-product="tShirt">
+          <img src="/media/image/tShirt.png" alt="tShirt">
+        </div>
+      </div>
+      <div class="itemWrapper" id="navigatorApron">
+        <div class="item white apron changeProduct" data-product="apron">
+          <img src="/media/image/apron.png" alt="apron">
+        </div>
+      </div>
+      <div class="itemWrapper" id="navigatorCup">
+        <div class="item black changeProduct" data-product="cup">
+          <img src="/media/image/cup.png" alt="cup">
+        </div>
+      </div>
+      <div class="itemWrapper" id="navigatorBottle">
+        <div class="item white bottle changeProduct" data-product="bottle">
+          <img src="/media/image/bottle.png" alt="bottle">
+        </div>
+      </div>
+      <div class="itemWrapper" id="navigatorWelcome">
+        <div class="item black changeProduct" data-product="welcome">
+          <img class="box" src="/media/image/box.png" alt="box" />
+          <img class="badge" src="/media/image/badge.png" alt="id" />
+          <img class="note" src="/media/image/note.png" alt="note" />
+          <img class="tShirt" src="/media/image/tShirtBoxed.png" alt="tShirt" />
+        </div>
+      </div>
+      <div class="itemWrapper" id="navigatorLaptop">
+        <div class="item white changeProduct" data-product="laptop">
+          <img src="/media/image/laptop.svg" alt="laptop">
+        </div>
       </div>
     </div>
   </div>

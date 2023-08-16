@@ -36,7 +36,7 @@ const resizeContent = () => {
   }
 }
 
-const animateFirstScreen = ({ currentY, deltaY }) => {
+const animateFirstScreen = ({ currentY }) => {
   const content = document.querySelector('#firstScreen .content')
   const wrapper = content.parentElement || content.parentNode
   const layer2 = document.getElementById('layer2')
@@ -45,27 +45,30 @@ const animateFirstScreen = ({ currentY, deltaY }) => {
   const viewContentHeight = content.offsetHeight * scale
   const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
 
-  animationScreenEnd.firstScreen = wrapper.offsetHeight * 4.5
+  animationScreenEnd.firstScreen = wrapper.offsetHeight * 4.2
 
   if (currentY >= 0) {
-    if (currentY < wrapper.offsetHeight * 0.5) {
+    if (currentY < wrapper.offsetHeight * 0.2) {
       eye.style.opacity = '0'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 1.5) {
+    } else if (currentY < wrapper.offsetHeight * 1.2) {
       eye.style.opacity = '1'
       eye.className = 'eye badge'
+      eye.dataset.product = 'id'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 2.5) {
+    } else if (currentY < wrapper.offsetHeight * 2.2) {
       eye.style.opacity = '1'
       eye.className = 'eye gift'
+      eye.dataset.product = 'gift'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 3.5) {
+    } else if (currentY < wrapper.offsetHeight * 3.2) {
       eye.style.opacity = '1'
       eye.className = 'eye bag'
+      eye.dataset.product = 'bag'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 4.5) {
+    } else if (currentY < wrapper.offsetHeight * 4.2) {
       eye.style.opacity = '0'
-      const percent = 1 - ((wrapper.offsetHeight * 4.5 - currentY) / wrapper.offsetHeight)
+      const percent = 1 - ((wrapper.offsetHeight * 4.2 - currentY) / wrapper.offsetHeight)
       layer2.style.top = `-${percent * (content.offsetHeight + heightDelta)}px`
     } else {
       layer2.style.top = `-${content.offsetHeight + heightDelta}px`
@@ -117,7 +120,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${position}px`
-    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 0.4s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
   } else if (currentY < (wrapper.offsetHeight * 2.5)) {
@@ -125,11 +128,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'opacity 0.3s'
+    eye.style.transition = 'transform 0.4s, opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
+    eye.dataset.product = 'tShirt'
   } else if (currentY < (wrapper.offsetHeight * 3)) {
-    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 0.4s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     const percent = ((wrapper.offsetHeight * 3) - currentY) / (wrapper.offsetHeight / 2)
@@ -144,11 +148,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'opacity 0.3s'
+    eye.style.transition = 'transform 0.4s, opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
+    eye.dataset.product = 'apron'
   } else if (currentY < (wrapper.offsetHeight * 4)) {
-    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 0.4s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
     const stop = getStopAttr(content.getElementsByClassName('apron'))
@@ -157,7 +162,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `calc(${stop - (widthDelta * percent)}px - ${100 * percent}%)`
   } else if (posY >= animationScreenEnd.secondScreen) {
-    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 0.4s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     secondText.style.top = '0'
@@ -312,7 +317,7 @@ const animateBoxScreen = ({ currentY: posY, deltaY }) => {
     const height = boxCover.offsetHeight - 25
     boxCover.style.top = `${height}px`
   } else if (posY < animationScreenEnd.boxScreen) {
-    eye.style.opacity = '1'
+    eye.style.opacity = '0'
     const animationPercent = (currentY - (scrollScreenHeight * 2.3)) / scrollScreenHeight
     const height = boxCover.offsetHeight - 25
     const offset = height - (height * animationPercent)
@@ -500,19 +505,24 @@ const startMainFlow = () => {
 }
 
 const preloaderActivate = ({ target }) => {
-  const { duration } = target
-  const content = document.querySelector('#preloader .content')
-  const wrapper = content.parentElement || content.parentNode
-  const preloaderText = document.getElementById('preloaderText')
+  if (!videoStarted) {
+    videoStarted = true
+    const { duration } = target
+    const content = document.querySelector('#preloader .content')
+    const wrapper = content.parentElement || content.parentNode
+    const preloaderText = document.getElementById('preloaderText')
 
-  const viewContentWidth = content.offsetWidth * scale
-  const widthDelta = Math.floor(((wrapper.offsetWidth - viewContentWidth) / 2) / scale)
+    const viewContentWidth = content.offsetWidth * scale
+    const widthDelta = Math.floor(((wrapper.offsetWidth - viewContentWidth) / 2) / scale)
 
-  preloaderText.style.left = `calc(100% + ${widthDelta}px)`
-  preloaderText.style.transition = `left ${duration}s`
-  preloaderText.style.left = `-${preloaderText.offsetWidth + widthDelta}px`
-  preloaderText.style.opacity = '1'
+    preloaderText.style.left = `calc(100% + ${widthDelta}px)`
+    preloaderText.style.transition = `left ${duration}s`
+    preloaderText.style.left = `-${preloaderText.offsetWidth + widthDelta}px`
+    preloaderText.style.opacity = '1'
+  }
 }
+
+let videoStarted = false
 
 const preloaderVideoEnd = ({ target }) => {
   const preloaderImage = document.getElementById('preloaderImage')
@@ -527,6 +537,59 @@ const preloaderVideoEnd = ({ target }) => {
   preloaderButton.style.bottom = '310px'
 }
 
+const activateProduct = (product, animate = true) => {
+  const capitalizedProduct = product.charAt(0).toUpperCase() + product.slice(1)
+  const productImageId = 'product' + capitalizedProduct
+  const productNavigatorId = 'navigator' + capitalizedProduct
+  const productImage = document.getElementById(productImageId)
+  const productWrapper = productImage.parentElement || productImage.parentNode
+  for(let image of productWrapper.children) {
+    if (image !== productImage && image.classList.contains('active')) {
+      if (animate) {
+        const keyframes = [
+          {
+            top: 'unset',
+            left: 'unset',
+            bottom: 0,
+            right: 0,
+            opacity: 1,
+            transform: 'none'
+          },
+          {
+            bottom: '-50%',
+            right: '-100%',
+            opacity: 0,
+            transform: 'rotate(32deg)'
+          },
+          {
+            bottom: '-50%',
+            right: '-100%',
+            opacity: 0,
+            transform: 'rotate(32deg)'
+          },
+        ]
+        const timing = {
+          duration: 550,
+          iterations: 1,
+          rangeStart: "cover 0%",
+          rangeEnd: "cover 90%",
+        }
+        image.animate(keyframes, timing)
+      }
+      image.classList.remove('active')
+    }
+  }
+  productImage.classList.add('active')
+  const productNavigator = document.getElementById(productNavigatorId)
+  const navigator = productNavigator.parentElement || productNavigator.parentNode
+  for(let nav of navigator.children) {
+    if (nav !== productNavigator) nav.classList.remove('active')
+  }
+  productNavigator.classList.add('active')
+}
+
+let zIndex = 10000
+
 const addEvents = () => {
   window.addEventListener('resize', resizeContent)
   window.addEventListener('pseudoScroll', animate)
@@ -534,26 +597,48 @@ const addEvents = () => {
 
   const preloaderVideo = document.querySelector('#preloader video')
   preloaderVideo.addEventListener('play', preloaderActivate)
+  preloaderVideo.addEventListener('timeupdate', preloaderActivate)
   preloaderVideo.addEventListener('ended', preloaderVideoEnd)
 
   const modalOpenButtons = document.getElementsByClassName('modalOpen')
   const modalCloseButtons = document.getElementsByClassName('modalClose')
-  const modals = document.getElementsByClassName('modal')
   const mainHeader = document.getElementById('mainHeader')
 
   for(let modalOpenButton of modalOpenButtons) {
-    const { modal: modalName } = modalOpenButton.dataset
-    modalOpenButton.addEventListener("click", () => {
-      for(let modal of modals) {
-        if (modal.id === modalName) {
+    const { classList, dataset } = modalOpenButton
+    const { modal: modalName } = dataset
+    if (classList.contains('eye')) {
+      modalOpenButton.addEventListener('transitionend', e => {
+        if (e.target === modalOpenButton && e.propertyName === 'transform') {
+          const { product } = dataset
+          const modal = document.getElementById(modalName)
           modal.classList.add('open')
-        } else {
-          modal.classList.remove('open')
+          zIndex += 1
+          modal.style.zIndex = zIndex.toString()
+          activateProduct(product, false)
+          mainHeader.style.transition = 'opacity 0.3s'
+          mainHeader.style.opacity = '0'
+          e.target.style.transform = ''
+          animationStop = true
         }
-      }
-      mainHeader.style.transition = 'opacity 0.3s'
-      mainHeader.style.opacity = '0'
-    })
+      })
+      modalOpenButton.addEventListener('click', e => {
+        e.target.style.transform = 'scale(350)'
+      })
+    } else {
+      modalOpenButton.addEventListener("click", () => {const { product } = dataset
+        const modal = document.getElementById(modalName)
+        modal.classList.add('open')
+        zIndex += 1
+        modal.style.zIndex = zIndex.toString()
+        if (dataset.product) {
+          activateProduct(dataset.product, false)
+        }
+        mainHeader.style.transition = 'opacity 0.3s'
+        mainHeader.style.opacity = '0'
+        animationStop = true
+      })
+    }
   }
 
   for(let modalCloseButton of modalCloseButtons) {
@@ -564,7 +649,21 @@ const addEvents = () => {
       const modal = document.getElementById(modalName)
       if (modal) {
         modal.classList.remove('open')
+        zIndex -= 1
+        modal.style.zIndex = ''
+        animationStop = false
       }
+    })
+  }
+
+  const changeProductButtons = document.getElementsByClassName('changeProduct')
+
+  for(let changeProductButton of changeProductButtons) {
+    const { dataset } = changeProductButton
+    const { product } = dataset
+    changeProductButton.addEventListener("click", () => {
+      activateProduct(product)
+      animationStop = true
     })
   }
 
