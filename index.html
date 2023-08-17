@@ -382,16 +382,21 @@
       </div>
     </div>
     <div class="block">
-      <div class="blockTitle">Хочу одежду со своим брендигом</div>
-      <div class="blockContent">Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.</div>
-      <button class="button blue quiz">Заполнить анкету</button>
+      <div class="blockTitle" id="productTitle"></div>
+      <div class="blockContent" id="productText"></div>
+      <button class="button blue quiz" id="quizButton">Заполнить анкету</button>
+      <a href="mailto:pochta@yandex.ru" class="button blue mail" id="mailButton">Написать</a>
     </div>
     <button class="button white modalClose back" data-modal="modalProduct">
       <img src="/media/image/arrow.svg" width="32" height="32" alt="arrow" />
       Вернуться назад
     </button>
-    <div class="videoWrapper">
-      <button class="button white play">Смотреть видео</button>
+    <div class="videoWrapper" id="productVideo">
+      <video>
+        <source src="/media/video/preloader.webm" type="video/webm" />
+      </video>
+      <button class="button white play" id="playButton">Смотреть видео</button>
+      <a class="button white download" id="downloadButton">Скачать презентацию</a>
     </div>
     <div class="navigator">
       <div class="itemWrapper" id="navigatorId">

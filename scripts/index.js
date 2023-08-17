@@ -6,6 +6,62 @@ let animationStop = false
 let bottleStartOffset
 let laptopTextInterval = []
 
+const productsData = {
+  id: {
+    type: 'product',
+    title: 'Хочу выделяться во время конференции',
+    text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    video: '/media/video/conference.webm',
+  },
+  gift: {
+    type: 'product',
+    title: 'Хочу подарки на праздники',
+    text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    video: '/media/video/gift.webm',
+  },
+  bag: {
+    type: 'product',
+    title: 'Хочу мерч для продажи',
+    text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    video: '/media/video/merch.webm',
+  },
+  tShirt: {
+    type: 'product',
+    title: 'Хочу одежду со своим брендигом',
+    text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    video: '/media/video/branding.webm',
+  },
+  apron: {
+    type: 'product',
+    title: 'Хочу одеть своих сотрудников',
+    text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    video: '/media/video/corp.webm',
+  },
+  cup: {
+    type: 'product',
+    title: 'Хочу аксессуары для офиса',
+    text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    video: '/media/video/office.webm',
+  },
+  bottle: {
+    type: 'product',
+    title: 'Хочу сувениры для спорта и отдыха',
+    text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    video: '/media/video/souvenir.webm',
+  },
+  welcome: {
+    type: 'product',
+    title: 'Хочу welcome-pack для сотрудников',
+    text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    video: '/media/video/welcome.webm',
+  },
+  laptop: {
+    type: 'service',
+    title: 'Хотите заказать такую же промо страницу?',
+    text: 'У вас есть продукт, который нужно эффектно представить потенциальной аудитории? Хотите видеть на вашей странице подобную анимацию? Тогда отправляйте свой запрос нам на почту <a href="mailto:pochta@yandex.ru">pochta@yandex.ru</a> и в ближайшее время наш менеджер свяжется с вами.',
+  }
+}
+
 const moveToTop = () => moveTo(1)
 
 const resizeContent = () => {
@@ -586,6 +642,47 @@ const activateProduct = (product, animate = true) => {
     if (nav !== productNavigator) nav.classList.remove('active')
   }
   productNavigator.classList.add('active')
+
+  const productData = productsData[product]
+  const productTitle = document.getElementById('productTitle')
+  productTitle.innerHTML = productData.title
+  const productText = document.getElementById('productText')
+  productText.innerHTML = productData.text
+
+  const quizButton = document.getElementById('quizButton')
+  const mailButton = document.getElementById('mailButton')
+
+  const productVideo = document.getElementById('productVideo')
+  const playButton = document.getElementById('playButton')
+  const downloadButton = document.getElementById('downloadButton')
+
+  const videos = productVideo.getElementsByTagName('video')
+  while (videos.length) {
+    videos.item(0).remove()
+  }
+
+  if (productData.type === 'service') {
+    quizButton.style.display = 'none'
+    mailButton.style.display = 'flex'
+    playButton.style.display = 'none'
+    downloadButton.style.display = 'flex'
+    productVideo.classList.add('empty')
+  } else if (productData.type === 'product') {
+    mailButton.style.display = 'none'
+    quizButton.style.display = 'flex'
+    downloadButton.style.display = 'none'
+    playButton.style.display = 'flex'
+
+    productVideo.classList.remove('empty')
+    const video = document.createElement('video')
+    video.autoplay = true
+    video.loop = true
+    const source = document.createElement('source')
+    source.src = productData.video
+    source.type = 'video/webm'
+    video.append(source)
+    productVideo.insertBefore(video, productVideo.firstChild)
+  }
 }
 
 let zIndex = 10000
