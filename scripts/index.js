@@ -600,6 +600,7 @@ const addEvents = () => {
   preloaderVideo.addEventListener('timeupdate', preloaderActivate)
   preloaderVideo.addEventListener('ended', preloaderVideoEnd)
 
+  const modalsAutoClose = document.getElementsByClassName('modalAutoClose')
   const modalOpenButtons = document.getElementsByClassName('modalOpen')
   const modalCloseButtons = document.getElementsByClassName('modalClose')
   const mainHeader = document.getElementById('mainHeader')
@@ -610,6 +611,9 @@ const addEvents = () => {
     if (classList.contains('eye')) {
       modalOpenButton.addEventListener('transitionend', e => {
         if (e.target === modalOpenButton && e.propertyName === 'transform') {
+          for(let modalAutoClose of modalsAutoClose) {
+            modalAutoClose.classList.remove('open')
+          }
           const { product } = dataset
           const modal = document.getElementById(modalName)
           modal.classList.add('open')
@@ -626,7 +630,11 @@ const addEvents = () => {
         e.target.style.transform = 'scale(350)'
       })
     } else {
-      modalOpenButton.addEventListener("click", () => {const { product } = dataset
+      modalOpenButton.addEventListener("click", () => {
+        for(let modalAutoClose of modalsAutoClose) {
+          modalAutoClose.classList.remove('open')
+        }
+        const { product } = dataset
         const modal = document.getElementById(modalName)
         modal.classList.add('open')
         zIndex += 1
