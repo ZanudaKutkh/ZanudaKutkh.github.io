@@ -9,60 +9,72 @@ let laptopTextInterval = []
 const productsData = {
   id: {
     type: 'product',
-    title: 'Хочу выделяться во время конференции',
+    title: 'Хочу выделяться\nво время конференции',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     video: '/media/video/conference.webm',
   },
   gift: {
     type: 'product',
-    title: 'Хочу подарки на праздники',
+    title: 'Хочу подарки\nна праздники',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     video: '/media/video/gift.webm',
   },
   bag: {
     type: 'product',
-    title: 'Хочу мерч для продажи',
+    title: 'Хочу мерч\nдля продажи',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     video: '/media/video/merch.webm',
   },
   tShirt: {
     type: 'product',
-    title: 'Хочу одежду со своим брендигом',
+    title: 'Хочу одежду\nсо своим брендигом',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     video: '/media/video/branding.webm',
   },
   apron: {
     type: 'product',
-    title: 'Хочу одеть своих сотрудников',
+    title: 'Хочу одеть\nсвоих сотрудников',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     video: '/media/video/corp.webm',
   },
   cup: {
     type: 'product',
-    title: 'Хочу аксессуары для офиса',
+    title: 'Хочу аксессуары\nдля офиса',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     video: '/media/video/office.webm',
   },
   bottle: {
     type: 'product',
-    title: 'Хочу сувениры для спорта и отдыха',
+    title: 'Хочу сувениры\nдля спорта и отдыха',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     video: '/media/video/souvenir.webm',
   },
   welcome: {
     type: 'product',
-    title: 'Хочу welcome-pack для сотрудников',
+    title: 'Хочу welcome-pack\nдля сотрудников',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     video: '/media/video/welcome.webm',
   },
   laptop: {
     type: 'service',
-    title: 'Хотите заказать такую же промо страницу?',
+    title: 'Хотите заказать такую же\nпромо страницу?',
     text: 'У вас есть продукт, который нужно эффектно представить потенциальной аудитории? Хотите видеть на вашей странице подобную анимацию? Тогда отправляйте свой запрос нам на почту <a href="mailto:pochta@yandex.ru">pochta@yandex.ru</a> и в ближайшее время наш менеджер свяжется с вами.',
   }
 }
 
-const moveToTop = () => moveTo(1)
+const moveToTop = () => {
+  const mainHeader = document.getElementById('mainHeader')
+  mainHeader.style.transition = ''
+  mainHeader.style.opacity = ''
+  const openModals = document.querySelectorAll('.modal.open')
+  for (let modal of openModals) {
+    modal.classList.remove('open')
+    zIndex -= 1
+    modal.style.zIndex = ''
+  }
+  moveTo(1)
+  animationStop = false
+}
 
 const resizeContent = () => {
   bottleStartOffset = undefined
@@ -176,7 +188,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${position}px`
-    eye.style.transition = 'transform 0.4s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 1s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
   } else if (currentY < (wrapper.offsetHeight * 2.5)) {
@@ -184,12 +196,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'transform 0.4s, opacity 0.3s'
+    eye.style.transition = 'transform 1s, opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'tShirt'
   } else if (currentY < (wrapper.offsetHeight * 3)) {
-    eye.style.transition = 'transform 0.4s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 1s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     const percent = ((wrapper.offsetHeight * 3) - currentY) / (wrapper.offsetHeight / 2)
@@ -204,12 +216,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'transform 0.4s, opacity 0.3s'
+    eye.style.transition = 'transform 1s, opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'apron'
   } else if (currentY < (wrapper.offsetHeight * 4)) {
-    eye.style.transition = 'transform 0.4s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 1s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
     const stop = getStopAttr(content.getElementsByClassName('apron'))
@@ -218,7 +230,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `calc(${stop - (widthDelta * percent)}px - ${100 * percent}%)`
   } else if (posY >= animationScreenEnd.secondScreen) {
-    eye.style.transition = 'transform 0.4s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 1s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     secondText.style.top = '0'
@@ -558,6 +570,14 @@ const startMainFlow = () => {
   preloader.addEventListener('transitionend', () => {
     preloader.classList.remove('open')
   })
+
+  if (!window.localStorage.hintClosed) {
+    animationStop = true
+    const modalHint = document.getElementById('modalHint')
+    zIndex += 1
+    modalHint.style.zIndex = zIndex.toString()
+    modalHint.classList.add('open')
+  }
 }
 
 const preloaderActivate = ({ target }) => {
@@ -625,7 +645,7 @@ const activateProduct = (product, animate = true) => {
           },
         ]
         const timing = {
-          duration: 550,
+          duration: 800,
           iterations: 1,
           rangeStart: "cover 0%",
           rangeEnd: "cover 90%",
@@ -667,6 +687,8 @@ const activateProduct = (product, animate = true) => {
     playButton.style.display = 'none'
     downloadButton.style.display = 'flex'
     productVideo.classList.add('empty')
+    productVideo.style.height = ''
+    productVideo.style.width = ''
   } else if (productData.type === 'product') {
     mailButton.style.display = 'none'
     quizButton.style.display = 'flex'
@@ -675,6 +697,11 @@ const activateProduct = (product, animate = true) => {
 
     productVideo.classList.remove('empty')
     const video = document.createElement('video')
+    video.addEventListener('timeupdate', e => {
+      if (e.target.currentTime > 2) {
+        e.target.currentTime = 0
+      }
+    })
     video.autoplay = true
     video.loop = true
     const source = document.createElement('source')
@@ -731,7 +758,6 @@ const addEvents = () => {
         for(let modalAutoClose of modalsAutoClose) {
           modalAutoClose.classList.remove('open')
         }
-        const { product } = dataset
         const modal = document.getElementById(modalName)
         modal.classList.add('open')
         zIndex += 1
@@ -810,6 +836,15 @@ const addEvents = () => {
       }
     })
   }
+}
+
+const closeHint = () => {
+  animationStop = false
+  const modalHint = document.getElementById('modalHint')
+  modalHint.classList.remove('open')
+  zIndex -= 1
+  modalHint.style.zIndex = ''
+  window.localStorage.hintClosed = true
 }
 
 window.onload = () => {

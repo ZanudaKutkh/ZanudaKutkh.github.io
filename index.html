@@ -30,7 +30,7 @@
 </div>
 <div class="headerWrapper" id="mainHeader">
   <div class="header">
-    <img class="logo" src="/media/image/logo.svg" alt="logo" />
+    <img class="logo" src="/media/image/logo.svg" alt="logo" onclick="moveToTop()" />
     <button class="button blue catalog modalOpen" data-modal="modalMenu">
       <img src="/media/image/burger.svg" width="32" height="32" alt="burger" />
       Каталог
@@ -120,7 +120,7 @@
   <div class="content">
     <div class="background">
       <span class="bottleText" id="bottleText">
-        Хочу сувениры для спорта и отдыха
+        Хочу сувениры для спорта<br>и отдыха
       </span>
       <div class="eye modalOpen" data-modal="modalProduct" data-product="bottle"></div>
       <img class="bottle" id="bottle" src="/media/image/bottle.png" alt="bottle" />
@@ -189,7 +189,7 @@
 <div class="contentWrapper center modal menu" id="modalMenu">
   <div class="headerWrapper">
     <div class="header">
-      <img class="logo" src="/media/image/logoWhite.svg" alt="logo" />
+      <img class="logo" src="/media/image/logoWhite.svg" alt="logo" onclick="moveToTop()" />
       <button class="button white catalog modalClose" data-modal="modalMenu">
         <img src="/media/image/close.svg" width="32" height="32" alt="burger" />
         Закрыть
@@ -280,7 +280,7 @@
 <div class="contentWrapper top modal about modalAutoClose" id="modalAbout">
   <div class="headerWrapper">
     <div class="header">
-      <img class="logo" src="/media/image/logo.svg" alt="logo" />
+      <img class="logo" src="/media/image/logo.svg" alt="logo" onclick="moveToTop()" />
       <button class="button blue catalog modalOpen" data-modal="modalMenu">
         <img src="/media/image/burger.svg" width="32" height="32" alt="burger" />
         Каталог
@@ -308,7 +308,7 @@
 <div class="contentWrapper top modal contact modalAutoClose" id="modalContact">
   <div class="headerWrapper">
     <div class="header">
-      <img class="logo" src="/media/image/logo.svg" alt="logo" />
+      <img class="logo" src="/media/image/logo.svg" alt="logo" onclick="moveToTop()" />
       <button class="button blue catalog modalOpen" data-modal="modalMenu">
         <img src="/media/image/burger.svg" width="32" height="32" alt="burger" />
         Каталог
@@ -347,7 +347,7 @@
 <div class="contentWrapper modal product" id="modalProduct">
   <div class="headerWrapper">
     <div class="header">
-      <img class="logo" src="/media/image/logo.svg" alt="logo" />
+      <img class="logo" src="/media/image/logo.svg" alt="logo" onclick="moveToTop()" />
       <button class="button blue catalog modalOpen" data-modal="modalMenu">
         <img src="/media/image/burger.svg" width="32" height="32" alt="burger" />
         Каталог
@@ -362,20 +362,34 @@
   </div>
   <div class="content">
     <div class="imageWrapper" id="imageWrapper">
-      <img class="img" src="/media/image/badge.png" id="productId" alt="id" />
-      <img class="img" src="/media/image/gift.png" id="productGift" alt="gift" />
-      <img class="img" src="/media/image/bag.png" id="productBag" alt="bag" />
-      <img class="img" src="/media/image/tShirt.png" id="productTShirt" alt="tShirt" />
-      <img class="img" src="/media/image/apron.png" id="productApron" alt="apron" />
-      <img class="img" src="/media/image/cup.png" id="productCup" alt="cup" />
-      <div class="img" id="productBottle">
-        <img class="bottle" src="/media/image/bottle.png" alt="bottle" />
+      <div class="img badge" id="productId">
+        <img src="/media/image/badge.png" alt="id" />
+      </div>
+      <div class="img gift" id="productGift">
+        <img src="/media/image/gift.png" alt="gift" />
+      </div>
+      <div class="img bag" id="productBag">
+        <img src="/media/image/bag.png" alt="bag" />
+      </div>
+      <div class="img tShirt" id="productTShirt">
+        <img src="/media/image/tShirt.png" alt="tShirt" />
+      </div>
+      <div class="img apron" id="productApron">
+        <img src="/media/image/apron.png" alt="apron" />
+      </div>
+      <div class="img cup" id="productCup">
+        <img src="/media/image/cup.png" alt="cup" />
+      </div>
+      <div class="img bottle" id="productBottle">
+        <img src="/media/image/bottle.png" alt="bottle" />
       </div>
       <div class="img welcome" id="productWelcome">
-        <img class="box" src="/media/image/box.png" alt="box" />
-        <img class="badge" src="/media/image/badge.png" alt="id" />
-        <img class="note" src="/media/image/note.png" alt="note" />
-        <img class="tShirt" src="/media/image/tShirtBoxed.png" alt="tShirt" />
+        <div class="welcomeWrapper">
+          <img class="box" src="/media/image/box.png" alt="box" />
+          <img class="badge" src="/media/image/badge.png" alt="id" />
+          <img class="note" src="/media/image/note.png" alt="note" />
+          <img class="tShirt" src="/media/image/tShirtBoxed.png" alt="tShirt" />
+        </div>
       </div>
       <div class="img laptop" id="productLaptop">
         <img src="/media/image/laptop.svg" alt="laptop" />
@@ -403,36 +417,43 @@
         <div class="item white badge changeProduct" data-product="id">
           <img src="/media/image/badge.png" alt="id">
         </div>
+        <div class="text">Все для конференций</div>
       </div>
       <div class="itemWrapper" id="navigatorGift">
         <div class="item black gift changeProduct" data-product="gift">
           <img src="/media/image/gift.png" alt="gift">
         </div>
+        <div class="text">Мерч для продажи</div>
       </div>
       <div class="itemWrapper" id="navigatorBag">
         <div class="item white changeProduct" data-product="bag">
           <img src="/media/image/bag.png" alt="bag">
         </div>
+        <div class="text">Подарки на праздники</div>
       </div>
       <div class="itemWrapper" id="navigatorTShirt">
         <div class="item white changeProduct" data-product="tShirt">
           <img src="/media/image/tShirt.png" alt="tShirt">
         </div>
+        <div class="text">Брендированная одежда</div>
       </div>
       <div class="itemWrapper" id="navigatorApron">
         <div class="item white apron changeProduct" data-product="apron">
           <img src="/media/image/apron.png" alt="apron">
         </div>
+        <div class="text">Корпоративная одежда</div>
       </div>
       <div class="itemWrapper" id="navigatorCup">
         <div class="item black changeProduct" data-product="cup">
           <img src="/media/image/cup.png" alt="cup">
         </div>
+        <div class="text">Аксессуары для офиса</div>
       </div>
       <div class="itemWrapper" id="navigatorBottle">
         <div class="item white bottle changeProduct" data-product="bottle">
           <img src="/media/image/bottle.png" alt="bottle">
         </div>
+        <div class="text">Сувениры для спорта и отдыха</div>
       </div>
       <div class="itemWrapper" id="navigatorWelcome">
         <div class="item black changeProduct" data-product="welcome">
@@ -441,12 +462,31 @@
           <img class="note" src="/media/image/note.png" alt="note" />
           <img class="tShirt" src="/media/image/tShirtBoxed.png" alt="tShirt" />
         </div>
+        <div class="text">Welcome-pack</div>
       </div>
       <div class="itemWrapper" id="navigatorLaptop">
         <div class="item white changeProduct" data-product="laptop">
           <img src="/media/image/laptop.svg" alt="laptop">
         </div>
+        <div class="text">Промо страница</div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="contentWrapper center modal hint" id="modalHint">
+  <div class="content">
+    <div class="block">
+      <img class="mouse" src="/media/image/mouse.svg" />
+      <div class="text">
+        Для перемещения по нашей промо странице используй скролл и ты увидишь все возможности.
+      </div>
+      <div class="eye"></div>
+      <div class="text">
+        При нажатии на кнопку «Посмотреть», ты узнаешь все подробности.
+      </div>
+      <button class="button blue" onclick="closeHint()">
+        Понятно
+      </button>
     </div>
   </div>
 </div>
