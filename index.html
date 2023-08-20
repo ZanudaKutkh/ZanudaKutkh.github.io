@@ -35,10 +35,10 @@
       <img src="/media/image/burger.svg" width="32" height="32" alt="burger" />
       Каталог
     </button>
-    <button class="button white about modalOpen" data-modal="modalAbout">
+    <button class="button white about modalOpen hideOnClick" data-modal="modalAbout">
       О проекте
     </button>
-    <button class="button white contact modalOpen" data-modal="modalContact">
+    <button class="button white contact modalOpen hideOnClick" data-modal="modalContact">
       Связаться с нами
     </button>
   </div>
@@ -194,10 +194,10 @@
         <img src="/media/image/close.svg" width="32" height="32" alt="burger" />
         Закрыть
       </button>
-      <button class="button white about modalOpen" data-modal="modalAbout">
+      <button class="button white about modalOpen hideOnClick" data-modal="modalAbout">
         О проекте
       </button>
-      <button class="button white contact modalOpen" data-modal="modalContact">
+      <button class="button white contact modalOpen hideOnClick" data-modal="modalContact">
         Связаться с нами
       </button>
     </div>
@@ -277,11 +277,11 @@
     </div>
   </div>
 </div>
-<div class="contentWrapper top modal about modalAutoClose" id="modalAbout">
+<div class="contentWrapper top modal about" id="modalAbout">
   <div class="headerWrapper">
     <div class="header">
-      <img style="opacity: 0" class="logo" src="/media/image/logo.svg" alt="logo" onclick="moveToTop()" />
-      <button style="opacity: 0" class="button blue catalog modalOpen" data-modal="modalMenu">
+      <img style="opacity: 0; pointer-events: none" class="logo" src="/media/image/logo.svg" alt="logo" onclick="moveToTop()" />
+      <button style="opacity: 0; pointer-events: none" class="button blue catalog modalOpen" data-modal="modalMenu">
         <img src="/media/image/burger.svg" width="32" height="32" alt="burger" />
         Каталог
       </button>
@@ -289,7 +289,7 @@
         <img src="/media/image/close.svg" width="32" height="32" alt="burger" />
         Закрыть
       </button>
-      <button style="opacity: 0" class="button white contact modalOpen" data-modal="modalContact">
+      <button style="opacity: 0; pointer-events: none" class="button white contact modalOpen hideOnClick" data-modal="modalContact">
         Связаться с нами
       </button>
     </div>
@@ -305,15 +305,15 @@
     </div>
   </div>
 </div>
-<div class="contentWrapper top modal contact modalAutoClose" id="modalContact">
+<div class="contentWrapper top modal contact" id="modalContact">
   <div class="headerWrapper">
     <div class="header">
-      <img style="opacity: 0" class="logo" src="/media/image/logo.svg" alt="logo" onclick="moveToTop()" />
-      <button style="opacity: 0" class="button blue catalog modalOpen" data-modal="modalMenu">
+      <img style="opacity: 0; pointer-events: none" class="logo" src="/media/image/logo.svg" alt="logo" onclick="moveToTop()" />
+      <button style="opacity: 0; pointer-events: none" class="button blue catalog modalOpen" data-modal="modalMenu">
         <img src="/media/image/burger.svg" width="32" height="32" alt="burger" />
         Каталог
       </button>
-      <button style="opacity: 0" class="button white about modalOpen" data-modal="modalAbout">
+      <button style="opacity: 0; pointer-events: none" class="button white about modalOpen hideOnClick" data-modal="modalAbout">
         О проекте
       </button>
       <button class="button white contact modalClose" data-modal="modalContact">
@@ -401,7 +401,7 @@
       <button class="button blue quiz" id="quizButton">Заполнить анкету</button>
       <a href="mailto:pochta@yandex.ru" class="button blue mail" id="mailButton">Написать</a>
     </div>
-    <button class="button white modalClose back" data-modal="modalProduct">
+    <button class="button white modalClose back" id="backButton" data-modal="modalProduct">
       <img src="/media/image/arrow.svg" width="32" height="32" alt="arrow" />
       Вернуться назад
     </button>

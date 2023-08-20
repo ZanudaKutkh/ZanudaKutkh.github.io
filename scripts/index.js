@@ -610,7 +610,62 @@ const preloaderVideoEnd = ({ target }) => {
   preloaderButton.style.bottom = '310px'
 }
 
+const videoSample = e => {
+  if (e.target.currentTime > 2) {
+    e.target.currentTime = 0
+  }
+}
+
+const closeModal = e => {
+  const modalOpenButtons = document.querySelectorAll('.modalOpen.hideOnClick')
+  const { modal: modalName } = e.target.dataset
+  const modal = document.getElementById(modalName)
+  for(let modalOpenButton of modalOpenButtons) {
+    if (modalOpenButton.dataset.modal === modalName) {
+      modalOpenButton.style.opacity = ''
+    }
+  }
+  if (modal) {
+    modal.classList.remove('open')
+    modal.classList.remove('inactiveVideo')
+    zIndex -= 1
+    modal.style.zIndex = ''
+    animationStop = false
+  }
+}
+
+const closeFullVideo = e => {
+  const modalProduct = document.getElementById('modalProduct')
+  const backButton = document.getElementById('backButton')
+  const playButton = document.getElementById('playButton')
+  const video = document.querySelector('#modalProduct video')
+
+  playButton.style.display = ''
+  backButton.removeEventListener('click', closeFullVideo)
+  backButton.addEventListener('click', closeModal)
+  modalProduct.classList.remove('activeVideo')
+  modalProduct.classList.add('inactiveVideo')
+  video.addEventListener('timeupdate', videoSample)
+}
+
+
+const playFullVideo = e => {
+  const modalProduct = document.getElementById('modalProduct')
+  const backButton = document.getElementById('backButton')
+  const playButton = document.getElementById('playButton')
+  const video = document.querySelector('#modalProduct video')
+
+  playButton.style.display = 'none'
+  backButton.removeEventListener('click', closeModal)
+  backButton.addEventListener('click', closeFullVideo)
+  modalProduct.classList.remove('inactiveVideo')
+  modalProduct.classList.add('activeVideo')
+  video.removeEventListener('timeupdate', videoSample)
+}
+
 const activateProduct = (product, animate = true) => {
+  const modalProduct = document.getElementById('modalProduct')
+  modalProduct.classList.remove('activeVideo')
   const capitalizedProduct = product.charAt(0).toUpperCase() + product.slice(1)
   const productImageId = 'product' + capitalizedProduct
   const productNavigatorId = 'navigator' + capitalizedProduct
@@ -643,9 +698,7 @@ const activateProduct = (product, animate = true) => {
         ]
         const timing = {
           duration: 800,
-          iterations: 1,
-          rangeStart: "cover 0%",
-          rangeEnd: "cover 90%",
+          iterations: 1
         }
         image.animate(keyframes, timing)
       }
@@ -694,11 +747,7 @@ const activateProduct = (product, animate = true) => {
 
     productVideo.classList.remove('empty')
     const video = document.createElement('video')
-    video.addEventListener('timeupdate', e => {
-      if (e.target.currentTime > 2) {
-        e.target.currentTime = 0
-      }
-    })
+    video.addEventListener('timeupdate', videoSample)
     video.autoplay = true
     video.loop = true
     const source = document.createElement('source')
@@ -706,6 +755,8 @@ const activateProduct = (product, animate = true) => {
     source.type = 'video/webm'
     video.append(source)
     productVideo.insertBefore(video, productVideo.firstChild)
+
+    playButton.addEventListener('click', playFullVideo)
   }
 }
 
@@ -721,7 +772,6 @@ const addEvents = () => {
   preloaderVideo.addEventListener('timeupdate', preloaderActivate)
   preloaderVideo.addEventListener('ended', preloaderVideoEnd)
 
-  const modalsAutoClose = document.getElementsByClassName('modalAutoClose')
   const modalOpenButtons = document.getElementsByClassName('modalOpen')
   const modalCloseButtons = document.getElementsByClassName('modalClose')
 
@@ -731,9 +781,6 @@ const addEvents = () => {
     if (classList.contains('eye')) {
       modalOpenButton.addEventListener('transitionend', e => {
         if (e.target === modalOpenButton && e.propertyName === 'transform') {
-          for(let modalAutoClose of modalsAutoClose) {
-            modalAutoClose.classList.remove('open')
-          }
           const { product } = dataset
           const modal = document.getElementById(modalName)
           modal.classList.add('open')
@@ -749,38 +796,24 @@ const addEvents = () => {
       })
     } else {
       modalOpenButton.addEventListener("click", e => {
-        for(let modalAutoClose of modalsAutoClose) {
-          modalAutoClose.classList.remove('open')
-        }
         const modal = document.getElementById(modalName)
+        let animate = modal.classList.contains('open')
         modal.classList.add('open')
         zIndex += 1
         modal.style.zIndex = zIndex.toString()
         if (dataset.product) {
-          activateProduct(dataset.product, false)
+          activateProduct(dataset.product, animate)
         }
-        e.target.style.opacity = '0'
+        if (e.target.classList.contains('hideOnClick')) {
+          e.target.style.opacity = '0'
+        }
         animationStop = true
       })
     }
   }
 
   for(let modalCloseButton of modalCloseButtons) {
-    const { modal: modalName } = modalCloseButton.dataset
-    modalCloseButton.addEventListener("click", () => {
-      const modal = document.getElementById(modalName)
-      for(let modalOpenButton of modalOpenButtons) {
-        if (modalOpenButton.dataset.modal === modalName) {
-          modalOpenButton.style.opacity = ''
-        }
-      }
-      if (modal) {
-        modal.classList.remove('open')
-        zIndex -= 1
-        modal.style.zIndex = ''
-        animationStop = false
-      }
-    })
+    modalCloseButton.addEventListener("click", closeModal)
   }
 
   const changeProductButtons = document.getElementsByClassName('changeProduct')

@@ -980,6 +980,62 @@ a:visited {
         transition: bottom 0.3s 2s;
       }
     }
+
+    &.activeVideo {
+      .block {
+        left: -100%;
+        transition: left 1.2s;
+      }
+
+      .back {
+        bottom: calc(100% - 165px);
+        transition: bottom 1.2s;
+      }
+
+      .imageWrapper {
+        top: -100%;
+        transition: top 1.2s;
+      }
+
+      .navigator {
+        bottom: -100%;
+        transition: bottom 1.2s;
+      }
+
+      .videoWrapper {
+        width: 1040px;
+        height: 586px;
+        bottom: 247px;
+        right: 440px;
+        transition: width 1.2s, height 1.2s, bottom 1.2s, right 1.2s;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    &.inactiveVideo {
+      .block {
+        transition: left 1.2s;
+      }
+
+      .back {
+        transition: bottom 1.2s;
+      }
+
+      .imageWrapper {
+        transition: top 1.2s;
+      }
+
+      .navigator {
+        transition: bottom 1.2s;
+      }
+
+      .videoWrapper {
+        transition: width 1.2s, height 1.2s, bottom 1.2s, right 1.2s;
+      }
+    }
   }
 
   &.hint {
