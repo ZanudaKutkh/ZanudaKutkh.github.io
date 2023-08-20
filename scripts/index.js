@@ -63,9 +63,6 @@ const productsData = {
 }
 
 const moveToTop = () => {
-  const mainHeader = document.getElementById('mainHeader')
-  mainHeader.style.transition = ''
-  mainHeader.style.opacity = ''
   const openModals = document.querySelectorAll('.modal.open')
   for (let modal of openModals) {
     modal.classList.remove('open')
@@ -727,7 +724,6 @@ const addEvents = () => {
   const modalsAutoClose = document.getElementsByClassName('modalAutoClose')
   const modalOpenButtons = document.getElementsByClassName('modalOpen')
   const modalCloseButtons = document.getElementsByClassName('modalClose')
-  const mainHeader = document.getElementById('mainHeader')
 
   for(let modalOpenButton of modalOpenButtons) {
     const { classList, dataset } = modalOpenButton
@@ -744,8 +740,6 @@ const addEvents = () => {
           zIndex += 1
           modal.style.zIndex = zIndex.toString()
           activateProduct(product, false)
-          mainHeader.style.transition = 'opacity 0.3s'
-          mainHeader.style.opacity = '0'
           e.target.style.transform = ''
           animationStop = true
         }
@@ -754,7 +748,7 @@ const addEvents = () => {
         e.target.style.transform = 'scale(350)'
       })
     } else {
-      modalOpenButton.addEventListener("click", () => {
+      modalOpenButton.addEventListener("click", e => {
         for(let modalAutoClose of modalsAutoClose) {
           modalAutoClose.classList.remove('open')
         }
@@ -765,8 +759,7 @@ const addEvents = () => {
         if (dataset.product) {
           activateProduct(dataset.product, false)
         }
-        mainHeader.style.transition = 'opacity 0.3s'
-        mainHeader.style.opacity = '0'
+        e.target.style.opacity = '0'
         animationStop = true
       })
     }
@@ -775,9 +768,12 @@ const addEvents = () => {
   for(let modalCloseButton of modalCloseButtons) {
     const { modal: modalName } = modalCloseButton.dataset
     modalCloseButton.addEventListener("click", () => {
-      mainHeader.style.transition = ''
-      mainHeader.style.opacity = ''
       const modal = document.getElementById(modalName)
+      for(let modalOpenButton of modalOpenButtons) {
+        if (modalOpenButton.dataset.modal === modalName) {
+          modalOpenButton.style.opacity = ''
+        }
+      }
       if (modal) {
         modal.classList.remove('open')
         zIndex -= 1
