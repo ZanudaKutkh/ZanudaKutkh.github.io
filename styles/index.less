@@ -1168,6 +1168,19 @@ a:visited {
         text-transform: uppercase;
       }
 
+      .eye {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 1.5s, opacity 0.3s;
+      }
+
+      &:hover .eye {
+        opacity: 1;
+        pointer-events: all;
+      }
+
       &.badge {
         top: 110px;
         left: 635px;
@@ -1180,6 +1193,11 @@ a:visited {
           top: 75px;
           left: 40px;
           width: 108px;
+        }
+
+        .eye {
+          top: calc(50% + 10px);
+          left: calc(50% + 2px);
         }
       }
 
@@ -1195,6 +1213,12 @@ a:visited {
           left: 36px;
           width: 156px;
         }
+
+        .eye {
+          transform: rotate(-36deg);
+          left: calc(50% - 67px);
+          top: calc(50% + 42px);
+        }
       }
 
       &.gift {
@@ -1209,6 +1233,11 @@ a:visited {
           left: 30px;
           width: 170px;
         }
+
+        .eye {
+          top: calc(50% + 24px);
+          left: 50%;
+        }
       }
     }
 
@@ -1218,38 +1247,6 @@ a:visited {
       bottom: 100px;
       width: 382px;
       left: calc((100% - 382px) / 2);
-    }
-
-    .eye {
-      position: absolute;
-      opacity: 0;
-      z-index: -1;
-      transition:
-              transform 1.5s,
-              top 0.3s,
-              left 0.3s,
-              opacity 0.3s;
-
-      &.badge {
-        opacity: 1;
-        z-index: auto;
-        top: 198px;
-        left: 683px;
-      }
-
-      &.gift {
-        opacity: 1;
-        z-index: auto;
-        top: 424px;
-        left: calc(100% - 365px);
-      }
-
-      &.bag {
-        opacity: 1;
-        z-index: auto;
-        top: calc(100% - 290px);
-        left: 425px;
-      }
     }
   }
 }

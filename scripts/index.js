@@ -101,11 +101,20 @@ const resizeContent = () => {
   }
 }
 
+const hideFSEyes = exclude => {
+  const eyes = document.querySelectorAll('#firstScreen .eye')
+  for (let eye of eyes) {
+    if (eye !== exclude) {
+      eye.style.opacity = ''
+      eye.style.zIndex = ''
+    }
+  }
+}
+
 const animateFirstScreen = ({ currentY }) => {
   const content = document.querySelector('#firstScreen .content')
   const wrapper = content.parentElement || content.parentNode
   const layer2 = document.getElementById('layer2')
-  const eye = document.querySelector('#firstScreen .eye')
 
   const viewContentHeight = content.offsetHeight * scale
   const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
@@ -114,28 +123,32 @@ const animateFirstScreen = ({ currentY }) => {
 
   if (currentY >= 0) {
     if (currentY < wrapper.offsetHeight * 0.2) {
-      eye.style.opacity = '0'
+      hideFSEyes()
       layer2.style.top = '0'
     } else if (currentY < wrapper.offsetHeight * 1.2) {
+      const eye = document.querySelector('#firstScreen .badge .eye')
+      hideFSEyes(eye)
       eye.style.opacity = '1'
-      eye.className = 'eye modalOpen badge'
-      eye.dataset.product = 'id'
+      eye.style.zIndex = '10'
       layer2.style.top = '0'
     } else if (currentY < wrapper.offsetHeight * 2.2) {
+      const eye = document.querySelector('#firstScreen .gift .eye')
+      hideFSEyes(eye)
       eye.style.opacity = '1'
-      eye.className = 'eye modalOpen gift'
-      eye.dataset.product = 'gift'
+      eye.style.zIndex = '10'
       layer2.style.top = '0'
     } else if (currentY < wrapper.offsetHeight * 3.2) {
+      const eye = document.querySelector('#firstScreen .bag .eye')
+      hideFSEyes(eye)
       eye.style.opacity = '1'
-      eye.className = 'eye modalOpen bag'
-      eye.dataset.product = 'bag'
+      eye.style.zIndex = '10'
       layer2.style.top = '0'
     } else if (currentY < wrapper.offsetHeight * 4.2) {
-      eye.style.opacity = '0'
+      hideFSEyes()
       const percent = 1 - ((wrapper.offsetHeight * 4.2 - currentY) / wrapper.offsetHeight)
       layer2.style.top = `-${percent * (content.offsetHeight + heightDelta)}px`
     } else {
+      hideFSEyes()
       layer2.style.top = `-${content.offsetHeight + heightDelta}px`
       dispatchAnimationEnd('secondScreen', false)
     }
