@@ -990,17 +990,6 @@ a:visited {
   line-height: 1.15;
   text-transform: uppercase;
 }
-.firstScreen .layer2 .img .eye {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 1.5s, opacity 0.3s;
-}
-.firstScreen .layer2 .img:hover .eye {
-  opacity: 1;
-  pointer-events: all;
-}
 .firstScreen .layer2 .img.badge {
   top: 110px;
   left: 635px;
@@ -1014,10 +1003,6 @@ a:visited {
   left: 40px;
   width: 108px;
 }
-.firstScreen .layer2 .img.badge .eye {
-  top: calc(50% + 10px);
-  left: calc(50% + 2px);
-}
 .firstScreen .layer2 .img.bag {
   bottom: 42px;
   left: 387px;
@@ -1029,11 +1014,6 @@ a:visited {
   top: 225px;
   left: 36px;
   width: 156px;
-}
-.firstScreen .layer2 .img.bag .eye {
-  transform: rotate(-36deg);
-  left: calc(50% - 67px);
-  top: calc(50% + 42px);
 }
 .firstScreen .layer2 .img.gift {
   right: 175px;
@@ -1047,16 +1027,36 @@ a:visited {
   left: 30px;
   width: 170px;
 }
-.firstScreen .layer2 .img.gift .eye {
-  top: calc(50% + 24px);
-  left: 50%;
-}
 .firstScreen .layer2 .button {
   color: #333333;
   position: absolute;
   bottom: 100px;
   width: 382px;
   left: calc((100% - 382px) / 2);
+}
+.firstScreen .layer2 .eye {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  transition: transform 1.5s, top 0.3s, left 0.3s, opacity 0.3s;
+}
+.firstScreen .layer2 .eye.badge {
+  opacity: 1;
+  z-index: auto;
+  top: 198px;
+  left: 683px;
+}
+.firstScreen .layer2 .eye.gift {
+  opacity: 1;
+  z-index: auto;
+  top: 424px;
+  left: calc(100% - 365px);
+}
+.firstScreen .layer2 .eye.bag {
+  opacity: 1;
+  z-index: auto;
+  top: calc(100% - 290px);
+  left: 425px;
 }
 .secondScreen {
   background: #FFEFDF;
