@@ -118,17 +118,17 @@ const animateFirstScreen = ({ currentY }) => {
       layer2.style.top = '0'
     } else if (currentY < wrapper.offsetHeight * 1.2) {
       eye.style.opacity = '1'
-      eye.className = 'eye badge'
+      eye.className = 'eye modalOpen badge'
       eye.dataset.product = 'id'
       layer2.style.top = '0'
     } else if (currentY < wrapper.offsetHeight * 2.2) {
       eye.style.opacity = '1'
-      eye.className = 'eye gift'
+      eye.className = 'eye modalOpen gift'
       eye.dataset.product = 'gift'
       layer2.style.top = '0'
     } else if (currentY < wrapper.offsetHeight * 3.2) {
       eye.style.opacity = '1'
-      eye.className = 'eye bag'
+      eye.className = 'eye modalOpen bag'
       eye.dataset.product = 'bag'
       layer2.style.top = '0'
     } else if (currentY < wrapper.offsetHeight * 4.2) {
@@ -185,7 +185,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${position}px`
-    eye.style.transition = 'transform 1s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 1.5s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
   } else if (currentY < (wrapper.offsetHeight * 2.5)) {
@@ -193,12 +193,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'transform 1s, opacity 0.3s'
+    eye.style.transition = 'transform 1.5s, opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'tShirt'
   } else if (currentY < (wrapper.offsetHeight * 3)) {
-    eye.style.transition = 'transform 1s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 1.5s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     const percent = ((wrapper.offsetHeight * 3) - currentY) / (wrapper.offsetHeight / 2)
@@ -213,12 +213,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'transform 1s, opacity 0.3s'
+    eye.style.transition = 'transform 1.5s, opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'apron'
   } else if (currentY < (wrapper.offsetHeight * 4)) {
-    eye.style.transition = 'transform 1s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 1.5s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
     const stop = getStopAttr(content.getElementsByClassName('apron'))
@@ -227,7 +227,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `calc(${stop - (widthDelta * percent)}px - ${100 * percent}%)`
   } else if (posY >= animationScreenEnd.secondScreen) {
-    eye.style.transition = 'transform 1s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform 1.5s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     secondText.style.top = '0'
@@ -617,8 +617,14 @@ const videoSample = e => {
 }
 
 const closeModal = e => {
+  let { target } = e
+  let i = 0
+  while (!target.classList.contains('modalClose') && i < 10) {
+    target = target.parentElement || target.parentNode
+    i += 1
+  }
   const modalOpenButtons = document.querySelectorAll('.modalOpen.hideOnClick')
-  const { modal: modalName } = e.target.dataset
+  const { modal: modalName } = target.dataset
   const modal = document.getElementById(modalName)
   for(let modalOpenButton of modalOpenButtons) {
     if (modalOpenButton.dataset.modal === modalName) {
@@ -779,23 +785,38 @@ const addEvents = () => {
     const { classList, dataset } = modalOpenButton
     const { modal: modalName } = dataset
     if (classList.contains('eye')) {
-      modalOpenButton.addEventListener('transitionend', e => {
-        if (e.target === modalOpenButton && e.propertyName === 'transform') {
+      modalOpenButton.addEventListener('transitionend', e => {let { target } = e
+        let i = 0
+        while (!target.classList.contains('modalOpen') && i < 10) {
+          target = target.parentElement || target.parentNode
+          i += 1
+        }
+        if (target === modalOpenButton && e.propertyName === 'transform') {
           const { product } = dataset
           const modal = document.getElementById(modalName)
           modal.classList.add('open')
           zIndex += 1
           modal.style.zIndex = zIndex.toString()
           activateProduct(product, false)
-          e.target.style.transform = ''
+          target.style.transform = ''
           animationStop = true
         }
       })
-      modalOpenButton.addEventListener('click', e => {
-        e.target.style.transform = 'scale(350)'
+      modalOpenButton.addEventListener('click', e => {let { target } = e
+        let i = 0
+        while (!target.classList.contains('modalOpen') && i < 10) {
+          target = target.parentElement || target.parentNode
+          i += 1
+        }
+        target.style.transform = 'scale(350)'
       })
     } else {
-      modalOpenButton.addEventListener("click", e => {
+      modalOpenButton.addEventListener("click", e => {let { target } = e
+        let i = 0
+        while (!target.classList.contains('modalOpen') && i < 10) {
+          target = target.parentElement || target.parentNode
+          i += 1
+        }
         const modal = document.getElementById(modalName)
         let animate = modal.classList.contains('open')
         modal.classList.add('open')
@@ -804,8 +825,8 @@ const addEvents = () => {
         if (dataset.product) {
           activateProduct(dataset.product, animate)
         }
-        if (e.target.classList.contains('hideOnClick')) {
-          e.target.style.opacity = '0'
+        if (target.classList.contains('hideOnClick')) {
+          target.style.opacity = '0'
         }
         animationStop = true
       })
