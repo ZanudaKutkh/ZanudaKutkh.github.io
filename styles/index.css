@@ -121,7 +121,7 @@ a:visited {
   border-radius: 50%;
   box-shadow: 0 0 30px #D5FD74;
   cursor: pointer;
-  transition: transform 1.5s;
+  transition: transform cubic-bezier(1, 1.06, 0.99, 0.78) 1.5s;
   z-index: 1000;
 }
 .eye:after {
@@ -544,6 +544,16 @@ a:visited {
 .modal.product .block .blockContent a {
   font-weight: 700;
 }
+.modal.product .block #infoBlock {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 20px;
+}
+.modal.product .block #quizBlock {
+  display: none;
+  flex-flow: column nowrap;
+  gap: 20px;
+}
 .modal.product .back {
   position: absolute;
   left: -100%;
@@ -840,6 +850,16 @@ a:visited {
   bottom: 84px;
   transition: bottom 0.3s 2s;
 }
+.modal.product.activeQuiz .imageWrapper,
+.modal.product.activeVideo .imageWrapper {
+  top: -100%;
+  transition: top 1.2s;
+}
+.modal.product.activeQuiz .navigator,
+.modal.product.activeVideo .navigator {
+  bottom: -100%;
+  transition: bottom 1.2s;
+}
 .modal.product.activeVideo .block {
   left: -100%;
   transition: left 1.2s;
@@ -848,14 +868,6 @@ a:visited {
   bottom: calc(100% - 165px);
   transform: translateY(100%);
   transition: bottom 1.2s, transform 1.2s;
-}
-.modal.product.activeVideo .imageWrapper {
-  top: -100%;
-  transition: top 1.2s;
-}
-.modal.product.activeVideo .navigator {
-  bottom: -100%;
-  transition: bottom 1.2s;
 }
 .modal.product.activeVideo .videoWrapper {
   width: 1040px;
@@ -867,19 +879,36 @@ a:visited {
 .modal.product.activeVideo .videoWrapper:after {
   display: none;
 }
-.modal.product.inactiveVideo .block {
-  transition: left 1.2s;
+.modal.product.activeQuiz .block {
+  transform: translateX(-50%);
+  left: 50%;
+  top: 272px;
+  height: 614px !important;
+  transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s;
 }
-.modal.product.inactiveVideo .back {
-  transition: bottom 1.2s, transform 1.2s;
+.modal.product.activeQuiz .back {
+  left: calc(50% - (554px / 2));
+  bottom: calc(100% - 165px);
+  transform: translateY(100%);
+  transition: bottom 1.2s, left 1.2s, transform 1.2s;
 }
-.modal.product.inactiveVideo .imageWrapper {
+.modal.product.activeQuiz .videoWrapper {
+  right: -100%;
+  transition: right 1.2s;
+}
+.modal.product.inactiveVideoOrQuiz .block {
+  transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s;
+}
+.modal.product.inactiveVideoOrQuiz .back {
+  transition: bottom 1.2s, left 1.2s, transform 1.2s;
+}
+.modal.product.inactiveVideoOrQuiz .imageWrapper {
   transition: top 1.2s;
 }
-.modal.product.inactiveVideo .navigator {
+.modal.product.inactiveVideoOrQuiz .navigator {
   transition: bottom 1.2s;
 }
-.modal.product.inactiveVideo .videoWrapper {
+.modal.product.inactiveVideoOrQuiz .videoWrapper {
   transition: width 1.2s, height 1.2s, bottom 1.2s, right 1.2s;
 }
 .modal.hint {
@@ -1038,7 +1067,7 @@ a:visited {
   position: absolute;
   opacity: 0;
   z-index: -1;
-  transition: transform 1.5s, top 0.3s, left 0.3s, opacity 0.3s;
+  transition: transform cubic-bezier(1, 1.06, 0.99, 0.78) 1.5s, top 0.3s, left 0.3s, opacity 0.3s;
 }
 .firstScreen .layer2 .eye.badge {
   opacity: 1;
@@ -1172,7 +1201,7 @@ a:visited {
   position: absolute;
   top: calc((100% - 90px) / 2);
   left: calc((100% - 128px) / 2);
-  transition: transform 1.5s, opacity 0.3s;
+  transition: transform cubic-bezier(1, 1.06, 0.99, 0.78) 1.5s, opacity 0.3s;
 }
 .cupScreen .cupText {
   opacity: 0;
@@ -1231,7 +1260,7 @@ a:visited {
   position: absolute;
   top: calc((100% - 90px) / 2);
   left: calc((100% - 128px) / 2);
-  transition: transform 1.5s, opacity 0.3s;
+  transition: transform cubic-bezier(1, 1.06, 0.99, 0.78) 1.5s, opacity 0.3s;
 }
 .boxScreen {
   background: #D5FD74;
@@ -1292,7 +1321,7 @@ a:visited {
   position: absolute;
   top: 270px;
   right: 233px;
-  transition: transform 1.5s, opacity 0.3s;
+  transition: transform cubic-bezier(1, 1.06, 0.99, 0.78) 1.5s, opacity 0.3s;
 }
 .laptopScreen {
   background: #D5FD74;
@@ -1342,7 +1371,7 @@ a:visited {
   position: absolute;
   top: calc((100% - 90px) / 2);
   left: calc((100% - 128px) / 2);
-  transition: transform 1.5s, opacity 0.3s;
+  transition: transform cubic-bezier(1, 1.06, 0.99, 0.78) 1.5s, opacity 0.3s;
 }
 .footer {
   background: #7382EC;

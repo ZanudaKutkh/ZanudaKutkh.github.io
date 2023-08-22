@@ -185,7 +185,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${position}px`
-    eye.style.transition = 'transform 1.5s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
   } else if (currentY < (wrapper.offsetHeight * 2.5)) {
@@ -193,12 +193,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'transform 1.5s, opacity 0.3s'
+    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'tShirt'
   } else if (currentY < (wrapper.offsetHeight * 3)) {
-    eye.style.transition = 'transform 1.5s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     const percent = ((wrapper.offsetHeight * 3) - currentY) / (wrapper.offsetHeight / 2)
@@ -213,12 +213,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'transform 1.5s, opacity 0.3s'
+    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'apron'
   } else if (currentY < (wrapper.offsetHeight * 4)) {
-    eye.style.transition = 'transform 1.5s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
     const stop = getStopAttr(content.getElementsByClassName('apron'))
@@ -227,7 +227,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `calc(${stop - (widthDelta * percent)}px - ${100 * percent}%)`
   } else if (posY >= animationScreenEnd.secondScreen) {
-    eye.style.transition = 'transform 1.5s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     secondText.style.top = '0'
@@ -633,27 +633,37 @@ const closeModal = e => {
   }
   if (modal) {
     modal.classList.remove('open')
-    modal.classList.remove('inactiveVideo')
+    modal.classList.remove('inactiveVideoOrQuiz')
     zIndex -= 1
     modal.style.zIndex = ''
     animationStop = false
   }
 }
 
-const closeFullVideo = e => {
+const closeFullVideoOrQuiz = e => {
+  const productBlock = document.getElementById('productBlock')
   const modalProduct = document.getElementById('modalProduct')
   const backButton = document.getElementById('backButton')
   const playButton = document.getElementById('playButton')
   const video = document.querySelector('#modalProduct video')
+  const infoBlock = document.getElementById('infoBlock')
+  const quizBlock = document.getElementById('quizBlock')
 
   playButton.style.display = ''
-  backButton.removeEventListener('click', closeFullVideo)
+  setTimeout(() => {
+    infoBlock.style.display = ''
+    quizBlock.style.display = ''
+  }, 200)
+  setTimeout(() => {
+    productBlock.style.height = ''
+  }, 1200)
+  backButton.removeEventListener('click', closeFullVideoOrQuiz)
   backButton.addEventListener('click', closeModal)
   modalProduct.classList.remove('activeVideo')
-  modalProduct.classList.add('inactiveVideo')
+  modalProduct.classList.remove('activeQuiz')
+  modalProduct.classList.add('inactiveVideoOrQuiz')
   video.addEventListener('timeupdate', videoSample)
 }
-
 
 const playFullVideo = e => {
   const modalProduct = document.getElementById('modalProduct')
@@ -663,10 +673,30 @@ const playFullVideo = e => {
 
   playButton.style.display = 'none'
   backButton.removeEventListener('click', closeModal)
-  backButton.addEventListener('click', closeFullVideo)
-  modalProduct.classList.remove('inactiveVideo')
+  backButton.addEventListener('click', closeFullVideoOrQuiz)
+  modalProduct.classList.remove('inactiveVideoOrQuiz')
   modalProduct.classList.add('activeVideo')
   video.removeEventListener('timeupdate', videoSample)
+}
+
+const startQuiz = e => {
+  const modalProduct = document.getElementById('modalProduct')
+  const productBlock = document.getElementById('productBlock')
+  const backButton = document.getElementById('backButton')
+  const infoBlock = document.getElementById('infoBlock')
+  const quizBlock = document.getElementById('quizBlock')
+
+  productBlock.style.height = `${productBlock.offsetHeight}px`
+  backButton.removeEventListener('click', closeModal)
+  backButton.addEventListener('click', closeFullVideoOrQuiz)
+  setTimeout(() => {
+    modalProduct.classList.remove('inactiveVideoOrQuiz')
+    modalProduct.classList.add('activeQuiz')
+  }, 10)
+  setTimeout(() => {
+    infoBlock.style.display = 'none'
+    quizBlock.style.display = 'flex'
+  }, 1000)
 }
 
 const activateProduct = (product, animate = true) => {
@@ -763,6 +793,7 @@ const activateProduct = (product, animate = true) => {
     productVideo.insertBefore(video, productVideo.firstChild)
 
     playButton.addEventListener('click', playFullVideo)
+    quizButton.addEventListener('click', startQuiz)
   }
 }
 

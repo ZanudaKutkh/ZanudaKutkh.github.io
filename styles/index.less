@@ -139,7 +139,7 @@ a:visited {
   border-radius: 50%;
   box-shadow: 0 0 30px @green;
   cursor: pointer;
-  transition: transform 1.5s;
+  transition: transform cubic-bezier(1,1.06,.99,.78) 1.5s;
   z-index: 1000;
 
   &:after {
@@ -624,6 +624,18 @@ a:visited {
           font-weight: 700;
         }
       }
+
+      #infoBlock {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 20px;
+      }
+
+      #quizBlock {
+        display: none;
+        flex-flow: column nowrap;
+        gap: 20px;
+      }
     }
 
     .back {
@@ -981,6 +993,19 @@ a:visited {
       }
     }
 
+    &.activeQuiz,
+    &.activeVideo {
+      .imageWrapper {
+        top: -100%;
+        transition: top 1.2s;
+      }
+
+      .navigator {
+        bottom: -100%;
+        transition: bottom 1.2s;
+      }
+    }
+
     &.activeVideo {
       .block {
         left: -100%;
@@ -991,16 +1016,6 @@ a:visited {
         bottom: calc(100% - 165px);
         transform: translateY(100%);
         transition: bottom 1.2s, transform 1.2s;
-      }
-
-      .imageWrapper {
-        top: -100%;
-        transition: top 1.2s;
-      }
-
-      .navigator {
-        bottom: -100%;
-        transition: bottom 1.2s;
       }
 
       .videoWrapper {
@@ -1016,13 +1031,35 @@ a:visited {
       }
     }
 
-    &.inactiveVideo {
+    &.activeQuiz {
       .block {
-        transition: left 1.2s;
+        transform: translateX(-50%);
+        left: 50%;
+        top: 272px;
+        height: 614px !important;
+        transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s;
       }
 
       .back {
-        transition: bottom 1.2s, transform 1.2s;
+        left: calc(50% - (554px / 2));
+        bottom: calc(100% - 165px);
+        transform: translateY(100%);
+        transition: bottom 1.2s, left 1.2s, transform 1.2s;
+      }
+
+      .videoWrapper {
+        right: -100%;
+        transition: right 1.2s;
+      }
+    }
+
+    &.inactiveVideoOrQuiz {
+      .block {
+        transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s;
+      }
+
+      .back {
+        transition: bottom 1.2s, left 1.2s, transform 1.2s;
       }
 
       .imageWrapper {
@@ -1225,7 +1262,7 @@ a:visited {
       opacity: 0;
       z-index: -1;
       transition:
-              transform 1.5s,
+              transform cubic-bezier(1,1.06,.99,.78) 1.5s,
               top 0.3s,
               left 0.3s,
               opacity 0.3s;
@@ -1384,7 +1421,7 @@ a:visited {
     top: calc((100% - 90px) / 2);
     left: calc((100% - 128px) / 2);
     transition:
-            transform 1.5s,
+            transform cubic-bezier(1,1.06,.99,.78) 1.5s,
             opacity 0.3s;
   }
 
@@ -1451,7 +1488,7 @@ a:visited {
       top: calc((100% - 90px) / 2);
       left: calc((100% - 128px) / 2);
       transition:
-              transform 1.5s,
+              transform cubic-bezier(1,1.06,.99,.78) 1.5s,
               opacity 0.3s;
     }
   }
@@ -1522,7 +1559,7 @@ a:visited {
       top: 270px;
       right: 233px;
       transition:
-              transform 1.5s,
+              transform cubic-bezier(1,1.06,.99,.78) 1.5s,
               opacity 0.3s;
     }
   }
@@ -1581,7 +1618,7 @@ a:visited {
         top: calc((100% - 90px) / 2);
         left: calc((100% - 128px) / 2);
         transition:
-                transform 1.5s,
+                transform cubic-bezier(1,1.06,.99,.78) 1.5s,
                 opacity 0.3s;
       }
     }
