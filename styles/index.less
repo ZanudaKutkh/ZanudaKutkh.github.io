@@ -123,6 +123,13 @@ a:visited {
     color: @blue;
   }
 
+  @media @vertical {
+    height: 40px;
+    border-radius: 20px;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
   &.big {
     height: 92px;
     padding: 0 85px;
@@ -135,13 +142,6 @@ a:visited {
       font-size: 14px;
       padding: 0 50px;
     }
-  }
-
-  @media @vertical {
-    height: 40px;
-    border-radius: 20px;
-    font-size: 14px;
-    padding: 0 10px;
   }
 }
 
@@ -224,6 +224,15 @@ a:visited {
       padding: 20px 20px 0;
       min-width: 320px;
       max-width: 320px;
+      justify-content: space-between;
+
+      .contact {
+        display: none;
+      }
+
+      .about {
+        display: none;
+      }
     }
 
     .logo {
@@ -253,6 +262,9 @@ a:visited {
       }
 
       @media @vertical {
+        margin-right: 0;
+        width: auto;
+
         span {
           display: none;
         }
@@ -1264,34 +1276,82 @@ a:visited {
       letter-spacing: 2.84px;
       text-transform: uppercase;
 
+      @media @vertical {
+        font-size: 48px;
+        letter-spacing: 0.96px;
+      }
+
       &.choose {
         top: 206px;
         left: 50px;
+
+        @media @vertical {
+          top: 83px;
+          left: 20px;
+        }
       }
 
       &.exactly {
         top: 348px;
         left: 184px;
+
+        @media @vertical {
+          display: none;
+        }
       }
 
       &.that {
         top: 490px;
         left: 516px;
+
+        @media @vertical {
+          top: 131px;
+          left: 79px;
+
+          &:after {
+            position: absolute;
+            content: ',';
+            top: 0;
+            right: -0.25em;
+          }
+        }
       }
 
       &.you {
         bottom: 162px;
         right: 230px;
+
+        @media @vertical {
+          bottom: unset;
+          top: 228px;
+          right: 28px;
+          z-index: -1;
+        }
       }
 
       &.want {
         bottom: 304px;
         right: 230px;
+
+        @media @vertical {
+          bottom: unset;
+          right: unset;
+          top: 180px;
+          left: 20px;
+          z-index: -1;
+        }
       }
 
       &.what {
         bottom: 446px;
         right: 442px;
+
+        @media @vertical {
+          bottom: unset;
+          right: unset;
+          top: 131px;
+          left: 160px;
+        }
       }
     }
 
@@ -1315,6 +1375,10 @@ a:visited {
         font-weight: 800;
         line-height: 1.15;
         text-transform: uppercase;
+
+        @media @vertical {
+          font-size: 10px;
+        }
       }
 
       &.badge {
@@ -1322,6 +1386,10 @@ a:visited {
         left: 635px;
         width: 215px;
         height: 240px;
+
+        @media @vertical {
+          display: none;
+        }
 
         span {
           font-size: 12px;
@@ -1339,10 +1407,25 @@ a:visited {
         height: 550px;
         transform: rotate(36deg);
 
+        @media @vertical {
+          bottom: 147px;
+          left: 16px;
+          width: 126px;
+          height: 213px;
+          transform: rotate(-14deg);
+          z-index: -2;
+        }
+
         span {
           top: 225px;
           left: 36px;
           width: 156px;
+
+          @media @vertical {
+            top: 79px;
+            left: 14px;
+            width: 87px;
+          }
         }
       }
 
@@ -1352,11 +1435,25 @@ a:visited {
         width: 248px;
         height: 317px;
 
+        @media @vertical {
+          top: unset;
+          right: 33px;
+          bottom: 32px;
+          width: 120px;
+          height: 153px;
+        }
+
         span {
           color: @darkGray;
           top: 60px;
           left: 30px;
           width: 170px;
+
+          @media @vertical {
+            top: 35px;
+            left: 16px;
+            width: 100px;
+          }
         }
       }
     }

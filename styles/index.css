@@ -107,6 +107,14 @@ a:visited {
   background: #FFFFFF;
   color: #7382EC;
 }
+@media (aspect-ratio < 0.75) {
+  .button {
+    height: 40px;
+    border-radius: 20px;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+}
 .button.big {
   height: 92px;
   padding: 0 85px;
@@ -119,14 +127,6 @@ a:visited {
     border-radius: 25px;
     font-size: 14px;
     padding: 0 50px;
-  }
-}
-@media (aspect-ratio < 0.75) {
-  .button {
-    height: 40px;
-    border-radius: 20px;
-    font-size: 14px;
-    padding: 0 10px;
   }
 }
 .eye {
@@ -206,6 +206,13 @@ a:visited {
     padding: 20px 20px 0;
     min-width: 320px;
     max-width: 320px;
+    justify-content: space-between;
+  }
+  .headerWrapper .header .contact {
+    display: none;
+  }
+  .headerWrapper .header .about {
+    display: none;
   }
 }
 .headerWrapper .header .logo {
@@ -235,6 +242,10 @@ a:visited {
   }
 }
 @media (aspect-ratio < 0.75) {
+  .headerWrapper .header .catalog {
+    margin-right: 0;
+    width: auto;
+  }
   .headerWrapper .header .catalog span {
     display: none;
   }
@@ -1090,29 +1101,83 @@ a:visited {
   letter-spacing: 2.84px;
   text-transform: uppercase;
 }
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .text {
+    font-size: 48px;
+    letter-spacing: 0.96px;
+  }
+}
 .firstScreen .layer2 .text.choose {
   top: 206px;
   left: 50px;
+}
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .text.choose {
+    top: 83px;
+    left: 20px;
+  }
 }
 .firstScreen .layer2 .text.exactly {
   top: 348px;
   left: 184px;
 }
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .text.exactly {
+    display: none;
+  }
+}
 .firstScreen .layer2 .text.that {
   top: 490px;
   left: 516px;
+}
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .text.that {
+    top: 131px;
+    left: 79px;
+  }
+  .firstScreen .layer2 .text.that:after {
+    position: absolute;
+    content: ',';
+    top: 0;
+    right: -0.25em;
+  }
 }
 .firstScreen .layer2 .text.you {
   bottom: 162px;
   right: 230px;
 }
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .text.you {
+    bottom: unset;
+    top: 228px;
+    right: 28px;
+    z-index: -1;
+  }
+}
 .firstScreen .layer2 .text.want {
   bottom: 304px;
   right: 230px;
 }
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .text.want {
+    bottom: unset;
+    right: unset;
+    top: 180px;
+    left: 20px;
+    z-index: -1;
+  }
+}
 .firstScreen .layer2 .text.what {
   bottom: 446px;
   right: 442px;
+}
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .text.what {
+    bottom: unset;
+    right: unset;
+    top: 131px;
+    left: 160px;
+  }
 }
 .firstScreen .layer2 .img {
   position: absolute;
@@ -1134,11 +1199,21 @@ a:visited {
   line-height: 1.15;
   text-transform: uppercase;
 }
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .img span {
+    font-size: 10px;
+  }
+}
 .firstScreen .layer2 .img.badge {
   top: 110px;
   left: 635px;
   width: 215px;
   height: 240px;
+}
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .img.badge {
+    display: none;
+  }
 }
 .firstScreen .layer2 .img.badge span {
   font-size: 12px;
@@ -1154,10 +1229,27 @@ a:visited {
   height: 550px;
   transform: rotate(36deg);
 }
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .img.bag {
+    bottom: 147px;
+    left: 16px;
+    width: 126px;
+    height: 213px;
+    transform: rotate(-14deg);
+    z-index: -2;
+  }
+}
 .firstScreen .layer2 .img.bag span {
   top: 225px;
   left: 36px;
   width: 156px;
+}
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .img.bag span {
+    top: 79px;
+    left: 14px;
+    width: 87px;
+  }
 }
 .firstScreen .layer2 .img.gift {
   right: 175px;
@@ -1165,11 +1257,27 @@ a:visited {
   width: 248px;
   height: 317px;
 }
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .img.gift {
+    top: unset;
+    right: 33px;
+    bottom: 32px;
+    width: 120px;
+    height: 153px;
+  }
+}
 .firstScreen .layer2 .img.gift span {
   color: #333333;
   top: 60px;
   left: 30px;
   width: 170px;
+}
+@media (aspect-ratio < 0.75) {
+  .firstScreen .layer2 .img.gift span {
+    top: 35px;
+    left: 16px;
+    width: 100px;
+  }
 }
 .firstScreen .layer2 .button {
   color: #333333;
