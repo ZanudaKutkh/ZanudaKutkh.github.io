@@ -597,17 +597,13 @@ const preloaderActivate = ({ target }) => {
 
 let videoStarted = false
 
-const preloaderVideoEnd = ({ target }) => {
-  const preloaderImage = document.getElementById('preloaderImage')
-  const preloaderRound = document.getElementById('preloaderRound')
+const preloaderVideoEnd = () => {
+  const preloader = document.getElementById('preloader')
   const preloaderButton = document.getElementById('preloaderButton')
 
   preloaderButton.addEventListener('click', startMainFlow)
 
-  target.style.opacity = '0'
-  preloaderImage.style.opacity = '1'
-  preloaderRound.style.transform = 'scale(445)'
-  preloaderButton.style.bottom = '310px'
+  preloader.classList.add('videoEnd')
 }
 
 const videoSample = e => {
