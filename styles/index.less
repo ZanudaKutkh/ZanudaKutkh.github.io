@@ -64,36 +64,6 @@ a:visited {
   }
 }
 
-.horizontal {
-  @media @square {
-    display: none;
-  }
-
-  @media @vertical {
-    display: none;
-  }
-}
-
-.square {
-  @media @horizontal {
-    display: none;
-  }
-
-  @media @vertical {
-    display: none;
-  }
-}
-
-.vertical {
-  @media @horizontal {
-    display: none;
-  }
-
-  @media @square {
-    display: none;
-  }
-}
-
 .button {
   display: flex;
   flex-flow: row nowrap;
@@ -172,6 +142,15 @@ a:visited {
     text-transform: uppercase;
     width: 100%;
     letter-spacing: 0;
+  }
+
+  @media @vertical {
+    width: 62px;
+    height: 44px;
+
+    &:after {
+      display: none;
+    }
   }
 }
 
@@ -379,6 +358,7 @@ a:visited {
     transition: opacity 1s;
 
     &:not(.open) {
+      display: none;
       transition: opacity 1s, z-index 0s 2s;
     }
 
@@ -459,11 +439,11 @@ a:visited {
       transform: translateX(-50%);
       left: 50%;
       bottom: -100px;
-      transition: bottom 0.3s 0.3s;
-    }
+      transition: bottom 0.3s 0.3s, width 0.3s 0.3s;
 
-    &:not(.open) {
-      display: none;
+      @media @vertical {
+        transition: bottom 0.3s, width 0.3s;
+      }
     }
 
     &.videoEnd {
@@ -488,7 +468,7 @@ a:visited {
 
         @media @vertical {
           width: auto;
-          bottom: 145px;
+          bottom: 175px;
         }
       }
     }
@@ -1459,28 +1439,27 @@ a:visited {
     }
 
     .button {
-      color: @darkGray;
       position: absolute;
-      bottom: 100px;
-      width: 382px;
-      left: calc((100% - 382px) / 2);
+      bottom: 20px;
+      width: 280px;
+      left: 20px;
     }
 
     .eye {
       position: absolute;
       opacity: 0;
       z-index: -1;
-      transition:
-              transform cubic-bezier(1,1.06,.99,.78) 1.5s,
-              top 0.3s,
-              left 0.3s,
-              opacity 0.3s;
 
       &.badge {
         opacity: 1;
         z-index: auto;
         top: 198px;
         left: 683px;
+        transition:
+                transform cubic-bezier(1,1.06,.99,.78) 1.5s,
+                top 0.3s,
+                left 0.3s,
+                opacity 0.3s;
       }
 
       &.gift {
@@ -1488,6 +1467,15 @@ a:visited {
         z-index: auto;
         top: 424px;
         left: calc(100% - 365px);
+        transition:
+                transform cubic-bezier(1,1.06,.99,.78) 1.5s,
+                top 0.3s,
+                left 0.3s,
+                opacity 0.3s;
+
+        @media @vertical {
+          left: calc(100% - 123px);
+        }
       }
 
       &.bag {
@@ -1495,6 +1483,16 @@ a:visited {
         z-index: auto;
         top: calc(100% - 290px);
         left: 425px;
+        transition:
+                transform cubic-bezier(1,1.06,.99,.78) 1.5s,
+                top 0.3s,
+                left 0.3s,
+                opacity 0.3s;
+
+        @media @vertical {
+          left: 36px;
+          top: calc(100% - 280px);
+        }
       }
     }
   }
@@ -1877,6 +1875,36 @@ a:visited {
         line-height: 1;
       }
     }
+  }
+}
+
+.horizontal {
+  @media @square {
+    display: none;
+  }
+
+  @media @vertical {
+    display: none;
+  }
+}
+
+.square {
+  @media @horizontal {
+    display: none;
+  }
+
+  @media @vertical {
+    display: none;
+  }
+}
+
+.vertical {
+  @media @horizontal {
+    display: none;
+  }
+
+  @media @square {
+    display: none;
   }
 }
 

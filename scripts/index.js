@@ -106,37 +106,45 @@ const animateFirstScreen = ({ currentY }) => {
   const wrapper = content.parentElement || content.parentNode
   const layer2 = document.getElementById('layer2')
   const eye = document.querySelector('#firstScreen .eye')
+  const badge = document.querySelector('#firstScreen .badge')
 
   const viewContentHeight = content.offsetHeight * scale
   const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
 
-  animationScreenEnd.firstScreen = wrapper.offsetHeight * 4.2
+  const badgeStyle = getComputedStyle(badge)
+  const badgeExist = badgeStyle.display !== 'none'
+  const scrollHeightDelta = +badgeExist
+
+  animationScreenEnd.firstScreen = wrapper.offsetHeight * (3.2 + scrollHeightDelta)
 
   if (currentY >= 0) {
     if (currentY < wrapper.offsetHeight * 0.2) {
       eye.style.opacity = '0'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 1.2) {
+      eye.className = 'eye modalOpen'
+    } else if (badgeExist && currentY < wrapper.offsetHeight * 1.2) {
       eye.style.opacity = '1'
       eye.className = 'eye modalOpen badge'
       eye.dataset.product = 'id'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 2.2) {
+    } else if (currentY < wrapper.offsetHeight * (1.2 + scrollHeightDelta)) {
       eye.style.opacity = '1'
       eye.className = 'eye modalOpen gift'
       eye.dataset.product = 'gift'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 3.2) {
+    } else if (currentY < wrapper.offsetHeight * (2.2 + scrollHeightDelta)) {
       eye.style.opacity = '1'
       eye.className = 'eye modalOpen bag'
       eye.dataset.product = 'bag'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 4.2) {
+    } else if (currentY < wrapper.offsetHeight * (3.2 + scrollHeightDelta)) {
       eye.style.opacity = '0'
-      const percent = 1 - ((wrapper.offsetHeight * 4.2 - currentY) / wrapper.offsetHeight)
+      eye.className = 'eye modalOpen'
+      const percent = 1 - ((wrapper.offsetHeight * (3.2 + scrollHeightDelta) - currentY) / wrapper.offsetHeight)
       layer2.style.top = `-${percent * (content.offsetHeight + heightDelta)}px`
     } else {
       layer2.style.top = `-${content.offsetHeight + heightDelta}px`
+      eye.className = 'eye modalOpen'
       dispatchAnimationEnd('secondScreen', false)
     }
   }
@@ -449,12 +457,14 @@ const defaultActivateScreen = (screen, prev, stopAnimation) => {
   footer.style.zIndex = '-1'
   animationNextStop = true
   if (prev) {
-    const current = document.querySelector(`#${screen}`)
+    const current = document.getElementById(screen)
     const next = current.nextElementSibling
     if (next) {
       if (!stopAnimation) {
         next.addEventListener('transitionend', e => {
           if (e.target === next) {
+            current.style.zIndex = '2'
+            next.style.zIndex = ''
             animationNextStop = false
           }
         })
@@ -462,7 +472,7 @@ const defaultActivateScreen = (screen, prev, stopAnimation) => {
       next.style.top = '100%'
     }
   } else {
-    const current = document.querySelector(`#${screen}`)
+    const current = document.getElementById(screen)
     if (current) {
       if (!stopAnimation) {
         current.addEventListener('transitionend', e => {
@@ -561,7 +571,13 @@ const startMainFlow = () => {
 
   dispatchAnimationEnd('firstScreen', false)
   preloaderRound.style.transform = `scale(${maxSize / scale})`
-  preloaderButton.style.bottom = `calc(100% + ${heightDelta}px)`
+  const isVertical = (preloader.offsetWidth / preloader.offsetHeight) < 0.75
+  if (isVertical) {
+    preloaderButton.style.bottom = '20px'
+    preloaderButton.style.width = '280px'
+  } else  {
+    preloaderButton.style.bottom = `calc(100% + ${heightDelta}px)`
+  }
   preloader.style.opacity = `0.1`
 
   preloader.addEventListener('transitionend', () => {
