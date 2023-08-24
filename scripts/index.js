@@ -150,14 +150,24 @@ const animateFirstScreen = ({ currentY }) => {
   }
 }
 
-const getStopAttr = (elements) => {
+const getDisplayedEl = elements => {
   for (let el of elements) {
     const style = getComputedStyle(el)
-    if (style.display !== 'none' && !isNaN(+el.dataset.stop)) {
-      return +el.dataset.stop
-    }
+    if (style.display !== 'none') return el
   }
-  return 0
+  return undefined
+}
+
+const getAttr = (elements, name, def) => {
+  const el = getDisplayedEl(elements)
+  if (el) {
+    const attr = el.dataset[name]
+    if (!isNaN(+attr)) return +attr
+    if (attr === 'true') return true
+    if (attr === 'false') return false
+    return el.dataset[name]
+  }
+  return def
 }
 
 const animateSecondScreen = ({ currentY: posY, deltaY }) => {
@@ -189,8 +199,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
   } else if (currentY < (wrapper.offsetHeight * 2)) {
     secondText.style.top = `0px`
     const percent = ((wrapper.offsetHeight * 2) - currentY) / wrapper.offsetHeight
-    const stop = getStopAttr(content.getElementsByClassName('tShirt'))
-    console.log(stop, imagesOffset - stop)
+    const stop = getAttr(content.getElementsByClassName('tShirt'), 'stop', 0)
     const position = Math.round(((imagesOffset - stop) * percent) + stop)
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
@@ -199,7 +208,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
   } else if (currentY < (wrapper.offsetHeight * 2.5)) {
-    const stop = getStopAttr(content.getElementsByClassName('tShirt'))
+    const stop = getAttr(content.getElementsByClassName('tShirt'), 'stop', 0)
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
@@ -212,14 +221,14 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     const percent = ((wrapper.offsetHeight * 3) - currentY) / (wrapper.offsetHeight / 2)
-    const start = getStopAttr(content.getElementsByClassName('tShirt'))
-    const stop = getStopAttr(content.getElementsByClassName('apron'))
+    const start = getAttr(content.getElementsByClassName('tShirt'), 'stop', 0)
+    const stop = getAttr(content.getElementsByClassName('apron'), 'stop', 0)
     const position = Math.round(((start - stop) * percent) + stop)
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${position}px`
   } else if (currentY < (wrapper.offsetHeight * 3.5)) {
-    const stop = getStopAttr(content.getElementsByClassName('apron'))
+    const stop = getAttr(content.getElementsByClassName('apron'), 'stop', 0)
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
@@ -231,7 +240,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
-    const stop = getStopAttr(content.getElementsByClassName('apron'))
+    const stop = getAttr(content.getElementsByClassName('apron'), 'stop', 0)
     const percent = 1 - ((wrapper.offsetHeight * 4) - currentY) / (wrapper.offsetHeight / 2)
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
@@ -308,7 +317,10 @@ const animateBottleScreen = ({ currentY: posY, deltaY }) => {
   const currentY = posY - animationScreenEnd.cupScreen
   const content = document.querySelector('#bottleScreen .content')
   const wrapper = content.parentElement || content.parentNode
-  const bottle = document.getElementById('bottle')
+  const bottles = document.getElementsByClassName('bottle')
+  const bottle = getDisplayedEl(bottles)
+  const bottleRotate = getAttr(bottles, 'rotate', true)
+  const bottleStop = getAttr(bottles, 'stop', true)
   const bottleText = document.getElementById('bottleText')
   const eye = document.querySelector('#bottleScreen .eye')
 
@@ -319,31 +331,51 @@ const animateBottleScreen = ({ currentY: posY, deltaY }) => {
 
   animationScreenEnd.bottleScreen = animationScreenEnd.cupScreen + (scrollScreenHeight * 2.5)
 
+  if (bottleStartOffset === undefined) {
+    bottleStartOffset = bottle.offsetTop
+  }
+
   if (deltaY < 0 && currentY <= 0) {
     eye.style.opacity = '0'
+    bottle.style.top = ''
+    bottleText.style.opacity = '0'
     dispatchAnimationEnd('cupScreen', true)
   } else if (currentY < scrollScreenHeight) {
     eye.style.opacity = '0'
-    bottleText.style.opacity = '0'
     const animationPercent = currentY / scrollScreenHeight
-    if (bottleStartOffset === undefined) {
-      bottleStartOffset = bottle.offsetTop
+    if (bottleRotate) {
+      bottleText.style.opacity = '0'
+      bottle.style.top = `calc(${50 * animationPercent}% - ${(bottle.offsetHeight / 2) * animationPercent}px + ${bottleStartOffset * (1 - animationPercent)}px)`
+      const rotate = 90 * animationPercent
+      bottle.style.transform = `rotate(${rotate}deg)`
+    } else {
+      bottleText.style.opacity = '1'
+      bottle.style.top = `calc(${bottleStartOffset * (1 - animationPercent)}px + ${bottleStop * animationPercent}px - ${bottle.offsetHeight * animationPercent}px)`
     }
-    bottle.style.top = `calc(${50 * animationPercent}% - ${(bottle.offsetHeight / 2) * animationPercent}px + ${bottleStartOffset * (1 - animationPercent)}px)`
-    const rotate = 90 * animationPercent
-    bottle.style.transform = `rotate(${rotate}deg)`
   } else if (currentY < scrollScreenHeight * 2) {
     eye.style.opacity = '0'
     bottleText.style.opacity = '1'
-    const animationPercent = (currentY - scrollScreenHeight) / scrollScreenHeight
-    bottle.style.transform = `rotate(90deg)`
-    const center = `(50% - ${bottle.offsetHeight / 2}px)`
-    bottle.style.top = `calc(${center} - (50% * ${animationPercent}))`
+    if (bottleRotate) {
+      const animationPercent = (currentY - scrollScreenHeight) / scrollScreenHeight
+      bottle.style.transform = `rotate(90deg)`
+      const center = `(50% - ${bottle.offsetHeight / 2}px)`
+      bottle.style.top = `calc(${center} - (50% * ${animationPercent}))`
+    } else {
+      bottle.style.top = `${bottleStop - bottle.offsetHeight}px`
+    }
   } else if (posY < animationScreenEnd.bottleScreen) {
     eye.style.opacity = '1'
-    bottle.style.top = `calc(-${bottle.offsetHeight / 2}px)`
+    if (bottleRotate) {
+      bottle.style.top = `calc(-${bottle.offsetHeight / 2}px)`
+    } else {
+      bottle.style.top = `${bottleStop - bottle.offsetHeight}px`
+    }
   } else {
-    bottle.style.top = `calc(-${bottle.offsetHeight / 2}px)`
+    if (bottleRotate) {
+      bottle.style.top = `calc(-${bottle.offsetHeight / 2}px)`
+    } else {
+      bottle.style.top = `${bottleStop - bottle.offsetHeight}px`
+    }
     dispatchAnimationEnd('boxScreen', false)
   }
 }

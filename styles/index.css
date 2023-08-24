@@ -1552,12 +1552,30 @@ a:visited {
   justify-content: center;
   align-items: center;
 }
+@media (aspect-ratio < 0.75) {
+  .bottleScreen .background {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    border-radius: 20px;
+    width: 280px;
+    height: 200%;
+  }
+}
 .bottleScreen .background .bottle {
   width: 516px;
   height: 1638px;
   position: absolute;
   top: 80px;
   left: calc((100% - 516px) / 2);
+}
+@media (aspect-ratio < 0.75) {
+  .bottleScreen .background .bottle {
+    width: 200px;
+    height: 635px;
+    top: 10px;
+    left: calc((100% - 200px) / 2);
+  }
 }
 .bottleScreen .background .bottleText {
   opacity: 0;
@@ -1569,12 +1587,28 @@ a:visited {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+@media (aspect-ratio < 0.75) {
+  .bottleScreen .background .bottleText {
+    position: absolute;
+    top: 183px;
+    left: 44px;
+    width: 196px;
+    font-size: 32px;
+    letter-spacing: unset;
+  }
+}
 .bottleScreen .background .eye {
   opacity: 0;
   position: absolute;
   top: calc((100% - 90px) / 2);
   left: calc((100% - 128px) / 2);
   transition: transform cubic-bezier(1, 1.06, 0.99, 0.78) 1.5s, opacity 0.3s;
+}
+@media (aspect-ratio < 0.75) {
+  .bottleScreen .background .eye {
+    top: 252px;
+    left: calc((100% - 62px) / 2);
+  }
 }
 .boxScreen {
   background: #D5FD74;
@@ -1588,6 +1622,14 @@ a:visited {
   left: calc((100% - 965px) / 2);
   transform: scale(0);
   transition: opacity 0.3s;
+}
+@media (aspect-ratio < 0.75) {
+  .boxScreen #box {
+    width: 280px;
+    height: 193px;
+    top: calc((100% - 193px) / 2);
+    left: calc((100% - 280px) / 2);
+  }
 }
 .boxScreen #box .box {
   position: absolute;
@@ -1604,6 +1646,14 @@ a:visited {
   height: 240px;
   transform: rotate(-46deg);
 }
+@media (aspect-ratio < 0.75) {
+  .boxScreen #box .badge {
+    top: 21px;
+    left: 46px;
+    width: 62px;
+    height: 70px;
+  }
+}
 .boxScreen #box .note {
   position: absolute;
   bottom: 100px;
@@ -1611,12 +1661,28 @@ a:visited {
   width: 228px;
   height: 302px;
 }
+@media (aspect-ratio < 0.75) {
+  .boxScreen #box .note {
+    bottom: 29px;
+    left: 58px;
+    width: 66px;
+    height: 87px;
+  }
+}
 .boxScreen #box .tShirt {
   position: absolute;
   top: 92px;
   right: 100px;
   width: 383px;
   height: 481px;
+}
+@media (aspect-ratio < 0.75) {
+  .boxScreen #box .tShirt {
+    top: 28px;
+    right: 29px;
+    width: 111px;
+    height: 139px;
+  }
 }
 .boxScreen #box .tShirtText {
   position: absolute;
@@ -1630,12 +1696,26 @@ a:visited {
   letter-spacing: 0.48px;
   text-transform: uppercase;
 }
+@media (aspect-ratio < 0.75) {
+  .boxScreen #box .tShirtText {
+    font-size: 10px;
+    top: 68px;
+    right: 42px;
+    width: 87px;
+  }
+}
 .boxScreen #box .eye {
   opacity: 0;
   position: absolute;
   top: 270px;
   right: 233px;
   transition: transform cubic-bezier(1, 1.06, 0.99, 0.78) 1.5s, opacity 0.3s;
+}
+@media (aspect-ratio < 0.75) {
+  .boxScreen #box .eye {
+    top: 76px;
+    right: 54px;
+  }
 }
 .laptopScreen {
   background: #D5FD74;

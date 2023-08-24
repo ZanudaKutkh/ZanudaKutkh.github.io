@@ -1752,12 +1752,28 @@ a:visited {
     justify-content: center;
     align-items: center;
 
+    @media @vertical {
+      position: absolute;
+      top: 70px;
+      left: 20px;
+      border-radius: 20px;
+      width: 280px;
+      height: 200%;
+    }
+
     .bottle {
       width: 516px;
       height: 1638px;
       position: absolute;
       top: 80px;
       left: calc((100% - 516px) / 2);
+
+      @media @vertical {
+        width: 200px;
+        height: 635px;
+        top: 10px;
+        left: calc((100% - 200px) / 2);
+      }
     }
 
     .bottleText {
@@ -1769,6 +1785,15 @@ a:visited {
       line-height: 1.15;
       letter-spacing: 2px;
       text-transform: uppercase;
+
+      @media @vertical {
+        position: absolute;
+        top: 183px;
+        left: 44px;
+        width: 196px;
+        font-size: 32px;
+        letter-spacing: unset;
+      }
     }
 
     .eye {
@@ -1779,6 +1804,11 @@ a:visited {
       transition:
               transform cubic-bezier(1,1.06,.99,.78) 1.5s,
               opacity 0.3s;
+
+      @media @vertical {
+        top: 252px;
+        left: calc((100% - 62px) / 2);
+      }
     }
   }
 }
@@ -1796,6 +1826,13 @@ a:visited {
     transform: scale(0);
     transition: opacity 0.3s;
 
+    @media @vertical {
+      width: 280px;
+      height: 193px;
+      top: calc((100% - 193px) / 2);
+      left: calc((100% - 280px) / 2);
+    }
+
     .box {
       position: absolute;
       top: 0;
@@ -1811,6 +1848,13 @@ a:visited {
       width: 215px;
       height: 240px;
       transform: rotate(-46deg);
+
+      @media @vertical {
+        top: 21px;
+        left: 46px;
+        width: 62px;
+        height: 70px;
+      }
     }
 
     .note {
@@ -1819,6 +1863,13 @@ a:visited {
       left: 200px;
       width: 228px;
       height: 302px;
+
+      @media @vertical {
+        bottom: 29px;
+        left: 58px;
+        width: 66px;
+        height: 87px;
+      }
     }
 
     .tShirt {
@@ -1827,6 +1878,13 @@ a:visited {
       right: 100px;
       width: 383px;
       height: 481px;
+
+      @media @vertical {
+        top: 28px;
+        right: 29px;
+        width: 111px;
+        height: 139px;
+      }
     }
 
     .tShirtText {
@@ -1840,6 +1898,13 @@ a:visited {
       line-height: 1.15;
       letter-spacing: 0.48px;
       text-transform: uppercase;
+
+      @media @vertical {
+        font-size: 10px;
+        top: 68px;
+        right: 42px;
+        width: 87px;
+      }
     }
 
     .eye {
@@ -1850,6 +1915,11 @@ a:visited {
       transition:
               transform cubic-bezier(1,1.06,.99,.78) 1.5s,
               opacity 0.3s;
+
+      @media @vertical {
+        top: 76px;
+        right: 54px;
+      }
     }
   }
 }
