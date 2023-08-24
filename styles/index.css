@@ -1313,7 +1313,15 @@ a:visited {
   width: 826px;
   height: 987px;
   bottom: 0;
-  left: calc((100% - 826px) / 2);
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.1s;
+}
+@media (aspect-ratio < 0.75) {
+  .secondScreen .girl {
+    height: 351px;
+    width: 294px;
+  }
 }
 .secondScreen .secondText {
   position: absolute;
@@ -1328,25 +1336,56 @@ a:visited {
   letter-spacing: 2.84px;
   text-transform: uppercase;
 }
+@media (aspect-ratio < 0.75) {
+  .secondScreen .secondText {
+    z-index: -1;
+    font-size: 48px;
+    letter-spacing: 0.96px;
+  }
+}
 .secondScreen .secondText .create {
   position: absolute;
   top: 245px;
   left: 150px;
+}
+@media (aspect-ratio < 0.75) {
+  .secondScreen .secondText .create {
+    top: 88px;
+    left: 20px;
+  }
 }
 .secondScreen .secondText .our {
   position: absolute;
   top: 394px;
   left: 393px;
 }
+@media (aspect-ratio < 0.75) {
+  .secondScreen .secondText .our {
+    display: none;
+  }
+}
 .secondScreen .secondText .design {
   position: absolute;
   top: 394px;
   right: 150px;
 }
+@media (aspect-ratio < 0.75) {
+  .secondScreen .secondText .design {
+    top: 136px;
+    right: 20px;
+  }
+}
 .secondScreen .secondText .clothes {
   position: absolute;
   top: 536px;
   right: 200px;
+}
+@media (aspect-ratio < 0.75) {
+  .secondScreen .secondText .clothes {
+    top: 184px;
+    left: 20px;
+    right: unset;
+  }
 }
 .secondScreen .clothesImages {
   position: absolute;
@@ -1364,6 +1403,11 @@ a:visited {
   line-height: 1.15;
   text-transform: uppercase;
 }
+@media (aspect-ratio < 0.75) {
+  .secondScreen .clothesImages .text {
+    font-size: 10px;
+  }
+}
 .secondScreen .clothesImages .tShirt {
   position: absolute;
   transform: rotate(5deg);
@@ -1372,11 +1416,23 @@ a:visited {
   width: 593px;
   height: 737px;
 }
+@media (aspect-ratio < 0.75) {
+  .secondScreen .clothesImages .tShirt {
+    height: 270px;
+    width: 217px;
+  }
+}
 .secondScreen .clothesImages .tShirtText {
   position: absolute;
   transform: rotate(5deg);
   bottom: 514px;
   left: 185px;
+}
+@media (aspect-ratio < 0.75) {
+  .secondScreen .clothesImages .tShirtText {
+    bottom: 182px;
+    left: 68px;
+  }
 }
 .secondScreen .clothesImages .apron {
   position: absolute;
@@ -1388,11 +1444,25 @@ a:visited {
   mask-image: url(/media/image/girlMask.svg#mask1);
   -webkit-mask-image: url(/media/image/girlMask.svg#mask1);
 }
+@media (aspect-ratio < 0.75) {
+  .secondScreen .clothesImages .apron {
+    height: 428px;
+    width: 180px;
+    bottom: -132px;
+    left: 275px;
+  }
+}
 .secondScreen .clothesImages .apronText {
   position: absolute;
   transform: rotate(4deg);
   bottom: 515px;
   left: 855px;
+}
+@media (aspect-ratio < 0.75) {
+  .secondScreen .clothesImages .apronText {
+    bottom: 174px;
+    left: 337px;
+  }
 }
 .secondScreen .eye {
   position: absolute;
@@ -1400,6 +1470,12 @@ a:visited {
   z-index: -1;
   left: calc((100% - 128px) / 2);
   bottom: 430px;
+}
+@media (aspect-ratio < 0.75) {
+  .secondScreen .eye {
+    left: calc((100% - 65px) / 2);
+    bottom: 158px;
+  }
 }
 .cupScreen {
   background: #333333;
@@ -1413,12 +1489,25 @@ a:visited {
   top: 100%;
   left: calc((100% - 703px) / 2);
 }
+@media (aspect-ratio < 0.75) {
+  .cupScreen .cup {
+    width: 201px;
+    height: 200px;
+    left: calc((100% - 201px) / 2);
+  }
+}
 .cupScreen .eye {
   opacity: 0;
   position: absolute;
   top: calc((100% - 90px) / 2);
   left: calc((100% - 128px) / 2);
   transition: transform cubic-bezier(1, 1.06, 0.99, 0.78) 1.5s, opacity 0.3s;
+}
+@media (aspect-ratio < 0.75) {
+  .cupScreen .eye {
+    top: calc((100% + 44px) / 2);
+    left: calc((100% - 62px) / 2);
+  }
 }
 .cupScreen .cupText {
   opacity: 0;
@@ -1432,6 +1521,14 @@ a:visited {
   font-weight: 800;
   letter-spacing: 2.84px;
   text-transform: uppercase;
+}
+@media (aspect-ratio < 0.75) {
+  .cupScreen .cupText {
+    font-size: 48px;
+    top: calc((100% - 72px) / 2);
+    letter-spacing: 0.96px;
+    z-index: 2;
+  }
 }
 .bottleScreen {
   background: #333333;

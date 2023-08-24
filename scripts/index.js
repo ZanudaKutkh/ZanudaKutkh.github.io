@@ -187,8 +187,10 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.left = `${imagesOffset}px`
     secondText.style.top = `${content.offsetHeight * percent}px`
   } else if (currentY < (wrapper.offsetHeight * 2)) {
+    secondText.style.top = `0px`
     const percent = ((wrapper.offsetHeight * 2) - currentY) / wrapper.offsetHeight
     const stop = getStopAttr(content.getElementsByClassName('tShirt'))
+    console.log(stop, imagesOffset - stop)
     const position = Math.round(((imagesOffset - stop) * percent) + stop)
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
@@ -461,13 +463,15 @@ const defaultActivateScreen = (screen, prev, stopAnimation) => {
     const next = current.nextElementSibling
     if (next) {
       if (!stopAnimation) {
-        next.addEventListener('transitionend', e => {
+        const transitionend = e => {
           if (e.target === next) {
             current.style.zIndex = '2'
             next.style.zIndex = ''
             animationNextStop = false
+            next.removeEventListener('transitionend', transitionend)
           }
-        })
+        }
+        next.addEventListener('transitionend', transitionend)
       }
       next.style.top = '100%'
     }

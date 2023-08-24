@@ -1507,7 +1507,14 @@ a:visited {
     width: 826px;
     height: 987px;
     bottom: 0;
-    left: calc((100% - 826px) / 2);
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.1s;
+
+    @media @vertical {
+      height: 351px;
+      width: 294px;
+    }
   }
 
   .secondText {
@@ -1523,28 +1530,54 @@ a:visited {
     letter-spacing: 2.84px;
     text-transform: uppercase;
 
+    @media @vertical {
+      z-index: -1;
+      font-size: 48px;
+      letter-spacing: 0.96px;
+    }
+
     .create {
       position: absolute;
       top: 245px;
       left: 150px;
+
+      @media @vertical {
+        top: 88px;
+        left: 20px;
+      }
     }
 
     .our {
       position: absolute;
       top: 394px;
       left: 393px;
+
+      @media @vertical {
+        display: none;
+      }
     }
 
     .design {
       position: absolute;
       top: 394px;
       right: 150px;
+
+      @media @vertical {
+        top: 136px;
+        right: 20px;
+      }
     }
 
     .clothes {
       position: absolute;
       top: 536px;
       right: 200px;
+
+      @media @vertical {
+        top: 184px;
+        left: 20px;
+        right: unset;
+      }
     }
   }
 
@@ -1563,6 +1596,10 @@ a:visited {
       font-weight: 800;
       line-height: 1.15;
       text-transform: uppercase;
+
+      @media @vertical {
+        font-size: 10px;
+      }
     }
 
     .tShirt {
@@ -1572,6 +1609,11 @@ a:visited {
       left: 0;
       width: 593px;
       height: 737px;
+
+      @media @vertical {
+        height: 270px;
+        width: 217px;
+      }
     }
 
     .tShirtText {
@@ -1579,6 +1621,11 @@ a:visited {
       transform: rotate(5deg);
       bottom: 514px;
       left: 185px;
+
+      @media @vertical {
+        bottom: 182px;
+        left: 68px;
+      }
     }
 
     .apron {
@@ -1590,6 +1637,13 @@ a:visited {
       height: 1092px;
       mask-image: url(/media/image/girlMask.svg#mask1);
       -webkit-mask-image: url(/media/image/girlMask.svg#mask1);
+
+      @media @vertical {
+        height: 428px;
+        width: 180px;
+        bottom: -132px;
+        left: 275px;
+      }
     }
 
     .apronText {
@@ -1597,6 +1651,11 @@ a:visited {
       transform: rotate(4deg);
       bottom: 515px;
       left: 855px;
+
+      @media @vertical {
+        bottom: 174px;
+        left: 337px;
+      }
     }
   }
 
@@ -1606,6 +1665,11 @@ a:visited {
     z-index: -1;
     left: calc((100% - 128px) / 2);
     bottom: 430px;
+
+    @media @vertical {
+      left: calc((100% - 65px) / 2);
+      bottom: 158px;
+    }
   }
 }
 
@@ -1620,6 +1684,12 @@ a:visited {
     height: 699px;
     top: 100%;
     left: calc((100% - 703px) / 2);
+
+    @media @vertical {
+      width: 201px;
+      height: 200px;
+      left: calc((100% - 201px) / 2);
+    }
   }
 
   .eye {
@@ -1630,6 +1700,11 @@ a:visited {
     transition:
             transform cubic-bezier(1,1.06,.99,.78) 1.5s,
             opacity 0.3s;
+
+    @media @vertical {
+      top: calc((100% + 44px) / 2);
+      left: calc((100% - 62px) / 2);
+    }
   }
 
   .cupText {
@@ -1644,6 +1719,13 @@ a:visited {
     font-weight: 800;
     letter-spacing: 2.84px;
     text-transform: uppercase;
+
+    @media @vertical {
+      font-size: 48px;
+      top: calc((100% - 72px) / 2);
+      letter-spacing: 0.96px;
+      z-index: 2;
+    }
   }
 }
 
