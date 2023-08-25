@@ -4,6 +4,8 @@ const animationScreenEnd = {}
 let animationNextStop = false
 let animationStop = false
 let bottleStartOffset
+let boxBadgeStartOffsetTop
+let boxBadgeStartOffsetLeft
 let laptopTextInterval = []
 
 const productsData = {
@@ -75,6 +77,8 @@ const moveToTop = () => {
 
 const resizeContent = () => {
   bottleStartOffset = undefined
+  boxBadgeStartOffsetTop = undefined
+  boxBadgeStartOffsetLeft = undefined
   const hc = document.getElementById('hiddenContent')
   const { body } = document
   scale = Math.min(body.offsetWidth / hc.offsetWidth, body.offsetHeight / hc.offsetHeight)
@@ -194,7 +198,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${position}px`
-    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
   } else if (currentY < (wrapper.offsetHeight * 2.5)) {
@@ -202,12 +206,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s'
+    eye.style.transition = 'opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'tShirt'
   } else if (currentY < (wrapper.offsetHeight * 3)) {
-    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     const percent = ((wrapper.offsetHeight * 3) - currentY) / (wrapper.offsetHeight / 2)
@@ -222,12 +226,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s'
+    eye.style.transition = 'opacity 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'apron'
   } else if (currentY < (wrapper.offsetHeight * 4)) {
-    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
     const stop = getAttr(content.getElementsByClassName('apron'), 'stop', 0)
@@ -236,7 +240,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `calc(${stop - (widthDelta * percent)}px - ${100 * percent}%)`
   } else if (posY >= animationScreenEnd.secondScreen) {
-    eye.style.transition = 'transform cubic-bezier(1,1.06,.99,.78) 1.5s, opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     secondText.style.top = '0'
@@ -376,6 +380,7 @@ const animateBoxScreen = ({ currentY: posY, deltaY }) => {
   const wrapper = content.parentElement || content.parentNode
   const box = document.getElementById('box')
   const boxCover = document.getElementById('boxCover')
+  const boxBadge = document.getElementById('boxBadge')
   const eye = document.querySelector('#boxScreen .eye')
 
   const viewContentHeight = content.offsetHeight * scale
@@ -383,7 +388,15 @@ const animateBoxScreen = ({ currentY: posY, deltaY }) => {
 
   const scrollScreenHeight = content.offsetHeight + (heightDelta * 2)
 
-  animationScreenEnd.boxScreen = animationScreenEnd.bottleScreen + (scrollScreenHeight * 3.3)
+  animationScreenEnd.boxScreen = animationScreenEnd.bottleScreen + (scrollScreenHeight * 5.3)
+
+  if (boxBadgeStartOffsetTop === undefined) {
+    boxBadgeStartOffsetTop = boxBadge.offsetTop
+  }
+
+  if (boxBadgeStartOffsetLeft === undefined) {
+    boxBadgeStartOffsetLeft = boxBadge.offsetLeft
+  }
 
   if (deltaY < 0) {
     box.style.opacity = '1'
@@ -392,17 +405,25 @@ const animateBoxScreen = ({ currentY: posY, deltaY }) => {
   if (deltaY < 0 && currentY <= 0) {
     box.style.transform = 'scale(0)'
     eye.style.opacity = '0'
+    eye.style.zIndex = '-1'
     dispatchAnimationEnd('bottleScreen', true)
   } else if (currentY < scrollScreenHeight) {
     eye.style.opacity = '0'
+    eye.style.zIndex = '-1'
     const animationPercent = currentY / scrollScreenHeight
     box.style.transform = `scale(${animationPercent})`
     boxCover.style.top = '0px'
   } else if (currentY < scrollScreenHeight * 2) {
     if (currentY < scrollScreenHeight * 1.8) {
       eye.style.opacity = '0'
+      eye.style.zIndex = '-1'
+      eye.className = 'eye modalOpen'
+      eye.dataset.product = ''
     } else {
       eye.style.opacity = '1'
+      eye.style.zIndex = '3'
+      eye.className = 'eye modalOpen tShirtEye'
+      eye.dataset.product = 'welcome'
     }
     box.style.transform = 'scale(1)'
     const animationPercent = (currentY - scrollScreenHeight) / scrollScreenHeight
@@ -411,16 +432,60 @@ const animateBoxScreen = ({ currentY: posY, deltaY }) => {
     boxCover.style.top = `${offset}px`
   } else if (currentY < scrollScreenHeight * 2.3) {
     eye.style.opacity = '1'
+    eye.style.zIndex = '3'
+    eye.className = 'eye modalOpen tShirtEye'
+    eye.dataset.product = 'welcome'
     const height = boxCover.offsetHeight - 25
     boxCover.style.top = `${height}px`
+    boxBadge.style.transform = ''
+    boxBadge.style.top = ''
+    boxBadge.style.left = ''
+    boxBadge.style.zIndex = ''
+  } else if (currentY < scrollScreenHeight * 2.8) {
+    const animationPercent = (((scrollScreenHeight * 2.8) - currentY) * 2) / scrollScreenHeight
+    eye.style.opacity = '0'
+    eye.style.zIndex = '-1'
+    eye.className = 'eye modalOpen'
+    eye.dataset.product = ''
+    boxBadge.style.transform = `scale(${1 + (3.2 * (1 - animationPercent))}) rotate(${(39 * (1 - animationPercent)) - (46 * animationPercent)}deg)`
+    boxBadge.style.top = `${(boxBadgeStartOffsetTop * animationPercent) + (((box.offsetHeight - boxBadge.offsetHeight) / 2) * (1 - animationPercent))}px`
+    boxBadge.style.left = `${(boxBadgeStartOffsetLeft * animationPercent) + (((box.offsetWidth - boxBadge.offsetWidth) / 2) * (1 - animationPercent))}px`
+    boxBadge.style.zIndex = '2'
+  } else if (currentY < scrollScreenHeight * 3.8) {
+    eye.style.opacity = '1'
+    eye.style.zIndex = '3'
+    eye.className = 'eye modalOpen boxBadgeEye'
+    eye.dataset.product = 'id'
+    boxBadge.style.transform = 'scale(4.2) rotate(39deg)'
+    boxBadge.style.top = `${(box.offsetHeight - boxBadge.offsetHeight) / 2}px`
+    boxBadge.style.left = `${(box.offsetWidth - boxBadge.offsetWidth) / 2}px`
+    boxBadge.style.zIndex = '2'
+  } else if (currentY < scrollScreenHeight * 4.3) {
+    eye.style.opacity = '0'
+    eye.style.zIndex = '-1'
+    eye.className = 'eye modalOpen'
+    eye.dataset.product = ''
+    const animationPercent = (((scrollScreenHeight * 4.3) - currentY) * 2) / scrollScreenHeight
+    boxBadge.style.transform = `scale(${1 + (3.2 * animationPercent)}) rotate(${39 * animationPercent - (46 * (1 - animationPercent))}deg)`
+    boxBadge.style.top = `${(boxBadgeStartOffsetTop * (1 - animationPercent)) + (((box.offsetHeight - boxBadge.offsetHeight) / 2) * animationPercent)}px`
+    boxBadge.style.left = `${(boxBadgeStartOffsetLeft * (1 - animationPercent)) + (((box.offsetWidth - boxBadge.offsetWidth) / 2) * animationPercent)}px`
+    boxBadge.style.zIndex = '2'
   } else if (posY < animationScreenEnd.boxScreen) {
     eye.style.opacity = '0'
-    const animationPercent = (currentY - (scrollScreenHeight * 2.3)) / scrollScreenHeight
+    eye.style.zIndex = '-1'
+    eye.className = 'eye modalOpen'
+    eye.dataset.product = ''
+    boxBadge.style.transform = ''
+    boxBadge.style.top = ''
+    boxBadge.style.left = ''
+    boxBadge.style.zIndex = ''
+    const animationPercent = (currentY - (scrollScreenHeight * 4.3)) / scrollScreenHeight
     const height = boxCover.offsetHeight - 25
     const offset = height - (height * animationPercent)
     boxCover.style.top = `${offset}px`
   } else {
     eye.style.opacity = '0'
+    eye.style.zIndex = '-1'
     boxCover.style.top = '0px'
     box.style.opacity = '0'
     dispatchAnimationEnd('laptopScreen', false, 500)
@@ -867,7 +932,10 @@ const addEvents = () => {
           zIndex += 1
           modal.style.zIndex = zIndex.toString()
           activateProduct(product, false)
-          target.style.transform = ''
+          target.style.top = target.dataset.top
+          target.style.left = target.dataset.left
+          target.style.transform = target.dataset.transform
+          target.style.transition = target.dataset.transition
           animationStop = true
         }
       })
@@ -877,7 +945,32 @@ const addEvents = () => {
           target = target.parentElement || target.parentNode
           i += 1
         }
-        target.style.transform = 'scale(350)'
+        let content = target
+        i = 0
+        while (!content.classList.contains('content') && i < 100) {
+          content = content.parentElement || content.parentNode
+          i += 1
+        }
+        const wrapper = content?.parentElement || content?.parentNode
+        const viewContentHeight = content.offsetHeight * scale
+        const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
+
+        const height = target.offsetHeight * 0.1
+        const hc = document.getElementById('hiddenContent')
+        const maxSize = Math.max(hc.offsetHeight, hc.offsetWidth)
+
+        target.dataset.top = target.style.transform
+        const offsetTopPx = ((target.offsetHeight * 1.31) / 2) + (heightDelta / 2)
+        const offsetTopPrc = (offsetTopPx * 100) / content.offsetHeight
+        target.style.top = `${50 - offsetTopPrc}%`
+        const offsetLeftPx = target.offsetWidth / 2
+        const offsetLeftPrc = (offsetLeftPx * 100) / content.offsetWidth
+        target.dataset.left = target.style.transform
+        target.style.left = `${50 - offsetLeftPrc}%`
+        target.dataset.transform = target.style.transform
+        target.style.transform = `scale(${(maxSize * 2) / height})`
+        target.dataset.transition = target.style.transition
+        target.style.transition = 'transform cubic-bezier(.4,0,1,.44) 1.5s, top cubic-bezier(.4,0,1,.44) 1.2s, left cubic-bezier(.4,0,1,.44) 1.2s'
       })
     } else {
       modalOpenButton.addEventListener("click", e => {let { target } = e
