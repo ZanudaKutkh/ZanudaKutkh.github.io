@@ -1361,25 +1361,6 @@ a:visited {
         }
       }
 
-      &.badge {
-        top: 110px;
-        left: 635px;
-        width: 215px;
-        height: 240px;
-
-        @media @vertical {
-          display: none;
-        }
-
-        span {
-          font-size: 12px;
-          transform: rotate(-26.5deg);
-          top: 75px;
-          left: 40px;
-          width: 108px;
-        }
-      }
-
       &.bag {
         bottom: 42px;
         left: 387px;
@@ -1854,6 +1835,34 @@ a:visited {
         left: 46px;
         width: 62px;
         height: 70px;
+      }
+
+      img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+      span {
+        position: absolute;
+        color: @white;
+        font-weight: 800;
+        line-height: 1.15;
+        text-transform: uppercase;
+        font-size: 12px;
+        transform: rotate(-26.5deg);
+        top: 75px;
+        left: 40px;
+        width: 108px;
+
+        @media @vertical {
+          font-size: 2px;
+          width: 13px;
+          top: 27px;
+          left: 12px;
+        }
       }
     }
 

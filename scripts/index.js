@@ -106,41 +106,31 @@ const animateFirstScreen = ({ currentY }) => {
   const wrapper = content.parentElement || content.parentNode
   const layer2 = document.getElementById('layer2')
   const eye = document.querySelector('#firstScreen .eye')
-  const badge = document.querySelector('#firstScreen .badge')
 
   const viewContentHeight = content.offsetHeight * scale
   const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
 
-  const badgeStyle = getComputedStyle(badge)
-  const badgeExist = badgeStyle.display !== 'none'
-  const scrollHeightDelta = +badgeExist
-
-  animationScreenEnd.firstScreen = wrapper.offsetHeight * (3.2 + scrollHeightDelta)
+  animationScreenEnd.firstScreen = wrapper.offsetHeight * 3.2
 
   if (currentY >= 0) {
     if (currentY < wrapper.offsetHeight * 0.2) {
       eye.style.opacity = '0'
       layer2.style.top = '0'
       eye.className = 'eye modalOpen'
-    } else if (badgeExist && currentY < wrapper.offsetHeight * 1.2) {
-      eye.style.opacity = '1'
-      eye.className = 'eye modalOpen badge'
-      eye.dataset.product = 'id'
-      layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * (1.2 + scrollHeightDelta)) {
+    } else if (currentY < wrapper.offsetHeight * 1.2) {
       eye.style.opacity = '1'
       eye.className = 'eye modalOpen gift'
       eye.dataset.product = 'gift'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * (2.2 + scrollHeightDelta)) {
+    } else if (currentY < wrapper.offsetHeight * 2.2) {
       eye.style.opacity = '1'
       eye.className = 'eye modalOpen bag'
       eye.dataset.product = 'bag'
       layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * (3.2 + scrollHeightDelta)) {
+    } else if (currentY < wrapper.offsetHeight * 3.2) {
       eye.style.opacity = '0'
       eye.className = 'eye modalOpen'
-      const percent = 1 - ((wrapper.offsetHeight * (3.2 + scrollHeightDelta) - currentY) / wrapper.offsetHeight)
+      const percent = 1 - ((wrapper.offsetHeight * 3.2 - currentY) / wrapper.offsetHeight)
       layer2.style.top = `-${percent * (content.offsetHeight + heightDelta)}px`
     } else {
       layer2.style.top = `-${content.offsetHeight + heightDelta}px`
