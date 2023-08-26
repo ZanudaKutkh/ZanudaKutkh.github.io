@@ -98,6 +98,9 @@ const resizeContent = () => {
     content.style.opacity = '1'
   }
 
+  const menuModalButtons = document.getElementById('menuModalButtons')
+  menuModalButtons.style.transform = `scale(${scale})`
+
   const menuHintContents = document.getElementsByClassName('menuHintContent')
   for(let menuHintContent of menuHintContents) {
     menuHintContent.style.transform = `scale(${scale})`

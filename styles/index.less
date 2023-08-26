@@ -506,6 +506,12 @@ a:visited {
       max-height: 0;
       transition: max-height 0.3s 0.3s;
 
+      @media @vertical {
+        padding: 100px 20px 0;
+        font-size: 14px;
+        line-height: 2.1;
+      }
+
       .navButton {
         cursor: pointer;
         transition: opacity 0.2s;
@@ -529,6 +535,10 @@ a:visited {
       min-height: 100dvh;
       max-width: 100dvw;
       max-height: 100dvh;
+
+      @media @vertical {
+        display: none;
+      }
 
       .menuHintContent {
         display: flex;
@@ -598,6 +608,19 @@ a:visited {
       }
     }
 
+    .modalButtons {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 50px;
+      width: 100%;
+      padding: 0 20px;
+    }
+
     &.open {
       top: unset;
       bottom: 0;
@@ -608,6 +631,18 @@ a:visited {
 
       .navigator {
         max-height: 900px;
+
+        @media @vertical {
+          max-height: 300px;
+        }
+      }
+
+      .modalButtons {
+        opacity: 1;
+        pointer-events: auto;
+        gap: 10px;
+        top: calc(100% - 130px);
+        transition: top cubic-bezier(.4,1.15,.6,-0.15) 3s 1s, gap 1s 2.5s;
       }
     }
   }

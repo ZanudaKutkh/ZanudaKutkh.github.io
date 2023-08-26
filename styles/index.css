@@ -465,6 +465,13 @@ a:visited {
   max-height: 0;
   transition: max-height 0.3s 0.3s;
 }
+@media (aspect-ratio < 0.75) {
+  .modal.menu .navigator {
+    padding: 100px 20px 0;
+    font-size: 14px;
+    line-height: 2.1;
+  }
+}
 .modal.menu .navigator .navButton {
   cursor: pointer;
   transition: opacity 0.2s;
@@ -486,6 +493,11 @@ a:visited {
   min-height: 100dvh;
   max-width: 100dvw;
   max-height: 100dvh;
+}
+@media (aspect-ratio < 0.75) {
+  .modal.menu .menuHintContentWrapper {
+    display: none;
+  }
 }
 .modal.menu .menuHintContentWrapper .menuHintContent {
   display: flex;
@@ -545,6 +557,18 @@ a:visited {
   width: 412px;
   height: 284px;
 }
+.modal.menu .modalButtons {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 50px;
+  width: 100%;
+  padding: 0 20px;
+}
 .modal.menu.open {
   top: unset;
   bottom: 0;
@@ -554,6 +578,18 @@ a:visited {
 }
 .modal.menu.open .navigator {
   max-height: 900px;
+}
+@media (aspect-ratio < 0.75) {
+  .modal.menu.open .navigator {
+    max-height: 300px;
+  }
+}
+.modal.menu.open .modalButtons {
+  opacity: 1;
+  pointer-events: auto;
+  gap: 10px;
+  top: calc(100% - 130px);
+  transition: top cubic-bezier(0.4, 1.15, 0.6, -0.15) 3s 1s, gap 1s 2.5s;
 }
 .modal.about {
   background: rgba(51, 51, 51, 0.4);
