@@ -513,6 +513,9 @@ const animateLaptopScreen = ({ currentY: posY, deltaY }) => {
     dispatchAnimationEnd('boxScreen', true)
   } else if (posY <= animationScreenEnd.laptopScreen) {
     wrapper.style.top = `-${currentY}px`
+  } else {
+    wrapper.style.top = `-${footerHeight}px`
+    animationNextStop = true
   }
 }
 
