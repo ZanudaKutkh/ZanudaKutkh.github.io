@@ -365,6 +365,10 @@ a:visited {
 
   &:not(.open) {
     transition: z-index 0s 2s;
+
+    .content {
+      transform-origin: bottom;
+    }
   }
 
   &.preloader {
@@ -657,7 +661,7 @@ a:visited {
         pointer-events: auto;
         gap: 10px;
         top: calc(100% - 130px);
-        transition: top cubic-bezier(.65,1.2,.35,-0.2) 2s 1s, gap 1s 2s;
+        transition: top cubic-bezier(.65,1.2,.35,-0.2) 2s 1s, gap 1s 2s, opacity 0.3s;
       }
     }
   }
