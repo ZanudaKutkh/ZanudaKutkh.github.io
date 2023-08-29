@@ -205,19 +205,19 @@ a:visited {
     max-width: 14px;
   }
 }
-.headerWrapper .header .catalog {
-  margin-right: auto;
-  width: 200px;
-}
-.headerWrapper .header .catalog img {
+.headerWrapper .header .button img {
   width: 32px;
   height: 32px;
 }
 @media (aspect-ratio < 0.75) {
-  .headerWrapper .header .catalog img {
+  .headerWrapper .header .button img {
     width: 20px;
     height: 20px;
   }
+}
+.headerWrapper .header .catalog {
+  margin-right: auto;
+  width: 200px;
 }
 @media (aspect-ratio < 0.75) {
   .headerWrapper .header .catalog {
@@ -299,6 +299,12 @@ a:visited {
   border-radius: 16px;
   padding: 30px;
 }
+@media (aspect-ratio < 0.75) {
+  .modal .block {
+    border-radius: 8px;
+    padding: 20px;
+  }
+}
 .modal .block .blockTitle {
   color: #7382EC;
   font-size: 24px;
@@ -307,11 +313,21 @@ a:visited {
   letter-spacing: 0.48px;
   text-transform: uppercase;
 }
+@media (aspect-ratio < 0.75) {
+  .modal .block .blockTitle {
+    font-size: 16px;
+  }
+}
 .modal .block .blockContent {
   color: #333333;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.25;
+}
+@media (aspect-ratio < 0.75) {
+  .modal .block .blockContent {
+    font-size: 14px;
+  }
 }
 .modal.open {
   z-index: 100;
@@ -605,6 +621,22 @@ a:visited {
   height: 256px;
   right: 308px;
 }
+@media (aspect-ratio < 0.75) {
+  .modal.about .block {
+    width: 280px;
+    height: auto;
+    right: 20px;
+  }
+}
+.modal.about .block .modalClose {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+}
+.modal.about .block .modalClose img {
+  width: 20px;
+  height: 20px;
+}
 .modal.about:not(.open) {
   transition: opacity 0.3s, z-index 0s 2s;
 }
@@ -615,6 +647,13 @@ a:visited {
   opacity: 1;
   bottom: calc(100% - 256px - 114px);
   transition: opacity 0.2s 0.1s, bottom 0.3s;
+}
+@media (aspect-ratio < 0.75) {
+  .modal.about.open .block {
+    bottom: 50%;
+    transform: translateY(50%);
+    transition: opacity 0.5s;
+  }
 }
 .modal.about.open .headerWrapper {
   display: flex;
@@ -636,6 +675,22 @@ a:visited {
   height: 276px;
   right: 86px;
 }
+@media (aspect-ratio < 0.75) {
+  .modal.contact .block {
+    width: 280px;
+    height: auto;
+    right: 20px;
+  }
+}
+.modal.contact .block .modalClose {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+}
+.modal.contact .block .modalClose img {
+  width: 20px;
+  height: 20px;
+}
 .modal.contact:not(.open) {
   transition: opacity 0.3s, z-index 0s 2s;
 }
@@ -647,13 +702,31 @@ a:visited {
   bottom: calc(100% - 276px - 114px);
   transition: opacity 0.2s 0.1s, bottom 0.3s;
 }
+@media (aspect-ratio < 0.75) {
+  .modal.contact.open .block {
+    bottom: 50%;
+    transform: translateY(50%);
+    transition: opacity 0.5s;
+  }
+}
 .modal.contact.open .block .blockTitle {
   font-size: 40px;
   line-height: 1;
   text-transform: none;
 }
+@media (aspect-ratio < 0.75) {
+  .modal.contact.open .block .blockTitle {
+    font-size: 16px;
+    line-height: 1.15;
+  }
+}
 .modal.contact.open .block .dots {
   margin-top: 20px;
+}
+@media (aspect-ratio < 0.75) {
+  .modal.contact.open .block .dots {
+    margin-top: -4px;
+  }
 }
 .modal.contact.open .headerWrapper {
   display: flex;
@@ -692,6 +765,10 @@ a:visited {
 .modal.product .back {
   position: absolute;
   left: -100%;
+}
+.modal.product .back img {
+  width: 32px;
+  height: 32px;
 }
 .modal.product .imageWrapper {
   position: absolute;
@@ -1939,32 +2016,32 @@ a:visited {
 }
 @media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
   .horizontal {
-    display: none;
+    display: none !important;
   }
 }
 @media (aspect-ratio < 0.75) {
   .horizontal {
-    display: none;
+    display: none !important;
   }
 }
 @media (aspect-ratio >= 1.33) {
   .square {
-    display: none;
+    display: none !important;
   }
 }
 @media (aspect-ratio < 0.75) {
   .square {
-    display: none;
+    display: none !important;
   }
 }
 @media (aspect-ratio >= 1.33) {
   .vertical {
-    display: none;
+    display: none !important;
   }
 }
 @media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
   .vertical {
-    display: none;
+    display: none !important;
   }
 }
 @keyframes caret {
