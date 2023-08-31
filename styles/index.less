@@ -816,6 +816,11 @@ a:visited {
       .quiz,
       .mail {
         align-self: flex-start;
+
+        @media @vertical {
+          align-self: unset;
+          width: 100%;
+        }
       }
 
       .blockTitle {
@@ -824,6 +829,10 @@ a:visited {
 
       .blockContent {
         width: 430px;
+
+        @media @vertical {
+          width: auto;
+        }
 
         a {
           font-weight: 700;
@@ -859,6 +868,11 @@ a:visited {
       height: 650px;
       top: -100%;
 
+      @media @vertical {
+        width: 280px;
+        height: 370px;
+      }
+
       .img {
         position: absolute;
         top: -50%;
@@ -874,43 +888,84 @@ a:visited {
         &.badge img {
           width: 116%;
           transform: translateX(-5%);
+
+          @media @vertical {
+            width: 100%;
+            transform: none;
+          }
         }
 
         &.gift img {
+          width: 98.6%;
           transform: translate(-2%, 2%);
+
+          @media @vertical {
+            transform: translate(11%, 12%);
+            width: 80%;
+          }
         }
 
         &.tShirt img {
           height: 104%;
-          width: 110%;
           transform: translate(-9%, -1%);
+
+          @media @vertical {
+            width: 100%;
+            height: auto;
+            transform: translate(0, 4%);
+          }
         }
 
         &.bag img {
           height: 109%;
           transform: translate(11%, -4%);
+
+          @media @vertical {
+            height: 96%;
+            transform: translate(16%, 0);
+          }
         }
 
         &.apron img {
           height: 109%;
           transform: translate(32%, -4%);
+
+          @media @vertical {
+            height: 100%;
+            transform: translate(38%, 0%);
+          }
         }
 
         &.cup img {
-          width: 143%;
-          height: 106%;
-          transform: translate(-16%, 4%);
+          height: 107%;
+          transform: translate(-15%, 4%);
+
+          @media @vertical {
+            width: 113%;
+            height: auto;
+            transform: translate(-4%, 22%);
+          }
         }
 
         &.bottle img {
           height: 105%;
           transform: translate(66%, -3%) rotate(18deg);
+
+          @media @vertical {
+            height: 96%;
+            transform: translate(79%, 0%) rotate(18deg);
+          }
         }
 
         &.welcome {
           .welcomeWrapper {
             width: 166%;
             transform: translate(-19%, 14%);
+
+            @media @vertical {
+              width: 100%;
+              transform: translate(0, 63%);
+            }
 
             .box {
               object-fit: contain;
@@ -926,6 +981,12 @@ a:visited {
               left: 123px;
               top: calc(50% - 114px);
               transform: translateY(-50%) rotate(-43deg);
+
+              @media @vertical {
+                width: 20%;
+                left: 14%;
+                top: calc(50% - 44px);
+              }
             }
 
             .note {
@@ -936,6 +997,12 @@ a:visited {
               left: 152px;
               bottom: calc(50% - 68px);
               transform: translateY(50%);
+
+              @media @vertical {
+                width: 25%;
+                left: 17%;
+                bottom: calc(50% - 20px);
+              }
             }
 
             .tShirt {
@@ -946,6 +1013,11 @@ a:visited {
               right: 109px;
               top: calc(50% - 2px);
               transform: translateY(-50%);
+
+              @media @vertical {
+                width: 40%;
+                right: 9%;
+              }
             }
           }
         }
@@ -961,13 +1033,23 @@ a:visited {
             left: 50%;
             z-index: -1;
             transform: translate(-48.5%, -37%);
+
+            @media @vertical {
+              width: 72%;
+              height: 39%;
+              transform: translate(-50%, -21%);
+            }
           }
 
           img {
             width: 186%;
-            height: 100%;
-            transform: translate(-22%, 9%);
+            transform: translate(-22%, 21%);
             object-fit: contain;
+
+            @media @vertical {
+              width: 100%;
+              transform: translate(0, 88%);
+            }
           }
         }
 
@@ -987,6 +1069,11 @@ a:visited {
       border-radius: 16px;
       right: -100%;
       overflow: hidden;
+
+      @media @vertical {
+        width: 161px;
+        height: 91px;
+      }
 
       &:after {
         z-index: 2;
@@ -1032,6 +1119,22 @@ a:visited {
       flex-flow: row nowrap;
       gap: 50px;
 
+      @media @vertical {
+        left: 20px;
+        gap: 15px;
+        transform: none;
+        width: calc(100% - 40px);
+        overflow: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+      }
+
       .itemWrapper {
         position: relative;
 
@@ -1044,6 +1147,13 @@ a:visited {
           background: @blue;
           top: 8px;
           right: 8px;
+
+          @media @vertical {
+            width: 10px;
+            height: 10px;
+            top: 3px;
+            right: 3px;
+          }
         }
 
         .item {
@@ -1056,6 +1166,11 @@ a:visited {
           border-radius: 50%;
           overflow: hidden;
           cursor: pointer;
+
+          @media @vertical {
+            width: 50px;
+            height: 50px;
+          }
 
           &.white {
             background: @white;
@@ -1077,6 +1192,13 @@ a:visited {
               left: 32px;
               top: calc(50% - 12px);
               transform: translateY(-50%) rotate(-46deg);
+
+              @media @vertical {
+                width: 8px;
+                height: 8px;
+                left: 14px;
+                top: calc(50% - 5px);
+              }
             }
 
             &.note {
@@ -1086,6 +1208,13 @@ a:visited {
               left: 32px;
               bottom: calc(50% - 8px);
               transform: translateY(50%);
+
+              @media @vertical {
+                height: 12px;
+                width: 11px;
+                left: 13px;
+                bottom: calc(50% - 3px);
+              }
             }
 
             &.tShirt {
@@ -1095,6 +1224,12 @@ a:visited {
               right: 24px;
               top: 50%;
               transform: translateY(-50%);
+
+              @media @vertical {
+                width: 14px;
+                height: 17px;
+                right: 11px;
+              }
             }
           }
 
@@ -1118,6 +1253,10 @@ a:visited {
               margin-top: 10px;
               width: 120%;
               height: 120%;
+
+              @media @vertical {
+                margin-top: 5px;
+              }
             }
           }
 
@@ -1128,6 +1267,10 @@ a:visited {
               margin-top: 20px;
               width: 110%;
               height: 110%;
+
+              @media @vertical {
+                margin-top: 8px;
+              }
             }
           }
         }
@@ -1142,6 +1285,10 @@ a:visited {
           line-height: 1.15;
           text-transform: uppercase;
           transition: opacity 0.2s;
+
+          @media @vertical {
+            display: none;
+          }
         }
 
         &:hover {
@@ -1165,18 +1312,39 @@ a:visited {
         left: 318px;
         opacity: 1;
         transition: left 0.3s 1.1s;
+
+        @media @vertical {
+          width: 200px;
+          top: 160px;
+          left: 20px;
+        }
       }
 
       .back {
         bottom: 457px;
         left: 433px;
         transition: left 0.4s 1.2s;
+
+        @media @vertical {
+          left: 20px;
+          bottom: 418px;
+
+          span {
+            display: none;
+          }
+        }
       }
 
       .imageWrapper {
         top: 128px;
         left: calc((100% - 500px) / 2);
         animation: 1s linear imageActivate;
+
+        @media @vertical {
+          top: 80px;
+          left: 20px;
+          animation: 1s linear imageActivateVertical;
+        }
       }
 
       @keyframes imageActivate {
@@ -1191,15 +1359,36 @@ a:visited {
         }
       }
 
+      @keyframes imageActivateVertical {
+        0% {
+          top: -100%;
+        }
+        70% {
+          top: 90px;
+        }
+        100% {
+          top: 80px;
+        }
+      }
+
       .videoWrapper {
         bottom: 350px;
         right: 370px;
         transition: right 0.5s 1.3s;
+
+        @media @vertical {
+          bottom: 140px;
+          right: 20px;
+        }
       }
 
       .navigator {
         bottom: 84px;
         transition: bottom 0.3s 2s;
+
+        @media @vertical {
+          bottom: 48px;
+        }
       }
     }
 
@@ -2221,31 +2410,43 @@ a:visited {
 
 .horizontal {
   @media @square {
-    display: none !important;
+    &:not(.square) {
+      display: none !important;
+    }
   }
 
   @media @vertical {
-    display: none !important;
+    &:not(.vertical) {
+      display: none !important;
+    }
   }
 }
 
 .square {
   @media @horizontal {
-    display: none !important;
+    &:not(.horizontal) {
+      display: none !important;
+    }
   }
 
   @media @vertical {
-    display: none !important;
+    &:not(.vertical) {
+      display: none !important;
+    }
   }
 }
 
 .vertical {
   @media @horizontal {
-    display: none !important;
+    &:not(.horizontal) {
+      display: none !important;
+    }
   }
 
   @media @square {
-    display: none !important;
+    &:not(.square) {
+      display: none !important;
+    }
   }
 }
 

@@ -13,54 +13,63 @@ const productsData = {
     type: 'product',
     title: 'Хочу выделяться\nво время конференции',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    shortText: 'Хотите заказать аксессуары для конференции?',
     video: '/media/video/conference.webm',
   },
   gift: {
     type: 'product',
     title: 'Хочу подарки\nна праздники',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    shortText: 'Хотите заказать подарки на праздники?',
     video: '/media/video/gift.webm',
   },
   bag: {
     type: 'product',
     title: 'Хочу мерч\nдля продажи',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    shortText: 'Хотите заказать мерч для продажи?',
     video: '/media/video/merch.webm',
   },
   tShirt: {
     type: 'product',
     title: 'Хочу одежду\nсо своим брендигом',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    shortText: 'Хотите заказать одежду со своим брендингом?',
     video: '/media/video/branding.webm',
   },
   apron: {
     type: 'product',
     title: 'Хочу одеть\nсвоих сотрудников',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    shortText: 'Хотите заказать одежду для своих сотрудников?',
     video: '/media/video/corp.webm',
   },
   cup: {
     type: 'product',
     title: 'Хочу аксессуары\nдля офиса',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    shortText: 'Хотите заказать аксессуары для офиса?',
     video: '/media/video/office.webm',
   },
   bottle: {
     type: 'product',
     title: 'Хочу сувениры\nдля спорта и отдыха',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    shortText: 'Хотите заказать сувениры для спорта и отдыха?',
     video: '/media/video/souvenir.webm',
   },
   welcome: {
     type: 'product',
     title: 'Хочу welcome-pack\nдля сотрудников',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
+    shortText: 'Хотите заказать welcome-pack для своих сотрудников?',
     video: '/media/video/welcome.webm',
   },
   laptop: {
     type: 'service',
     title: 'Хотите заказать такую же\nпромо страницу?',
     text: 'У вас есть продукт, который нужно эффектно представить потенциальной аудитории? Хотите видеть на вашей странице подобную анимацию? Тогда отправляйте свой запрос нам на почту <a href="mailto:info@topline.ru">info@topline.ru</a> и в ближайшее время наш менеджер свяжется с вами.',
+    shortText: 'Хотите заказать такую же промо страницу?',
   }
 }
 
@@ -863,6 +872,8 @@ const activateProduct = (product, animate = true) => {
   productTitle.innerHTML = productData.title
   const productText = document.getElementById('productText')
   productText.innerHTML = productData.text
+  const productShortText = document.getElementById('productShortText')
+  productShortText.innerHTML = productData.shortText
 
   const quizButton = document.getElementById('quizButton')
   const mailButton = document.getElementById('mailButton')
