@@ -785,6 +785,12 @@ a:visited {
   width: 32px;
   height: 32px;
 }
+@media (aspect-ratio < 0.75) {
+  .modal.product .back img {
+    width: 20px;
+    height: 20px;
+  }
+}
 .modal.product .imageWrapper {
   position: absolute;
   width: 500px;
@@ -1021,6 +1027,14 @@ a:visited {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+@media (aspect-ratio < 0.75) {
+  .modal.product .videoWrapper .play,
+  .modal.product .videoWrapper .download {
+    border: none;
+    background: transparent;
+    opacity: 0.7;
+  }
 }
 .modal.product .navigator {
   position: absolute;
@@ -2263,6 +2277,17 @@ a:visited {
 @media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
   .vertical:not(.square) {
     display: none !important;
+  }
+}
+.mobileHorizontal {
+  display: none;
+}
+@media (aspect-ratio >= 1) and (height <= 480px) {
+  *:not(.mobileHorizontal) {
+    display: none;
+  }
+  .mobileHorizontal {
+    display: flex;
   }
 }
 @keyframes caret {

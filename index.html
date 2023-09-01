@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="/styles/index.css#q">
 </head>
 <body>
+<div class="mobileHorizontal">
+  Поверните ваше устройство
+</div>
 <div id="hiddenContent"></div>
 <div class="contentWrapper modal preloader open" id="preloader">
   <div class="content">
@@ -440,15 +443,22 @@
       </div>
     </div>
     <button class="button white modalClose back" id="backButton" data-modal="modalProduct">
-      <img src="/media/image/arrow.svg" alt="arrow" />
+      <img class="horizontal square" src="/media/image/arrow.svg" alt="arrow" />
+      <img class="vertical" src="/media/image/arrowSmall.svg" alt="arrow" />
       <span>Вернуться назад</span>
     </button>
     <div class="videoWrapper" id="productVideo">
       <video>
         <source src="/media/video/preloader.webm" type="video/webm" />
       </video>
-      <button class="button white play" id="playButton">Смотреть видео</button>
-      <a class="button white download" id="downloadButton">Скачать презентацию</a>
+      <button class="button white play horizontal square" id="playButton">Смотреть видео</button>
+      <button class="play vertical" id="playButtonMobile">
+        <img src="/media/image/play.svg" width="20" height="20" />
+      </button>
+      <a class="button white download horizontal square" id="downloadButton">Скачать презентацию</a>
+      <a class="download vertical" id="downloadButtonMobile">
+        <img src="/media/image/download.svg" width="20" height="20" />
+      </a>
     </div>
     <div class="navigator">
       <div class="itemWrapper" id="navigatorId">

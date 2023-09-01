@@ -787,14 +787,41 @@ const playFullVideo = e => {
   const modalProduct = document.getElementById('modalProduct')
   const backButton = document.getElementById('backButton')
   const playButton = document.getElementById('playButton')
-  const video = document.querySelector('#modalProduct video')
 
   playButton.style.display = 'none'
   backButton.removeEventListener('click', closeModal)
   backButton.addEventListener('click', closeFullVideoOrQuiz)
   modalProduct.classList.remove('inactiveVideoOrQuiz')
   modalProduct.classList.add('activeVideo')
+}
+
+const fullScreenChange = (e) => {
+  let fullscreenElement = document.fullscreenElement
+  if (!fullscreenElement && document.mozFullScreenElement) {
+    fullscreenElement = document.mozFullScreenElement
+  } else if (!fullscreenElement && document.webkitFullscreenElement) {
+    fullscreenElement = document.webkitFullscreenElement
+  }
+
+  const video = document.querySelector('#modalProduct video')
+  if (e.target === fullscreenElement) {
+    video.removeEventListener('timeupdate', videoSample)
+    console.log('Video in full screen')
+  } else {
+    video.addEventListener('timeupdate', videoSample)
+  }
+}
+
+const fullScreenVideo = () => {
+  const video = document.querySelector('#modalProduct video')
   video.removeEventListener('timeupdate', videoSample)
+  if (video.requestFullscreen) {
+    video.requestFullscreen()
+  } else if (video.mozRequestFullScreen) {
+    video.mozRequestFullScreen()
+  } else if (video.webkitRequestFullScreen) {
+    video.webkitRequestFullScreen()
+  }
 }
 
 const startQuiz = e => {
@@ -880,7 +907,9 @@ const activateProduct = (product, animate = true) => {
 
   const productVideo = document.getElementById('productVideo')
   const playButton = document.getElementById('playButton')
+  const playButtonMobile = document.getElementById('playButtonMobile')
   const downloadButton = document.getElementById('downloadButton')
+  const downloadButtonMobile = document.getElementById('downloadButtonMobile')
 
   const videos = productVideo.getElementsByTagName('video')
   while (videos.length) {
@@ -891,7 +920,9 @@ const activateProduct = (product, animate = true) => {
     quizButton.style.display = 'none'
     mailButton.style.display = 'flex'
     playButton.style.display = 'none'
+    playButtonMobile.style.display = 'none'
     downloadButton.style.display = 'flex'
+    downloadButtonMobile.style.display = 'flex'
     productVideo.classList.add('empty')
     productVideo.style.height = ''
     productVideo.style.width = ''
@@ -899,11 +930,20 @@ const activateProduct = (product, animate = true) => {
     mailButton.style.display = 'none'
     quizButton.style.display = 'flex'
     downloadButton.style.display = 'none'
+    downloadButtonMobile.style.display = 'none'
     playButton.style.display = 'flex'
+    playButtonMobile.style.display = 'flex'
 
     productVideo.classList.remove('empty')
     const video = document.createElement('video')
     video.addEventListener('timeupdate', videoSample)
+    if (video.requestFullscreen) {
+      video.addEventListener('fullscreenchange', fullScreenChange)
+    } else if (video.mozRequestFullScreen) {
+      video.addEventListener('mozfullscreenchange', fullScreenChange)
+    } else if (video.webkitRequestFullScreen) {
+      video.addEventListener('webkitfullscreenchange', fullScreenChange)
+    }
     video.autoplay = true
     video.loop = true
     const source = document.createElement('source')
@@ -913,6 +953,7 @@ const activateProduct = (product, animate = true) => {
     productVideo.insertBefore(video, productVideo.firstChild)
 
     playButton.addEventListener('click', playFullVideo)
+    playButtonMobile.addEventListener('click', fullScreenVideo)
     quizButton.addEventListener('click', startQuiz)
   }
 }
