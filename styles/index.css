@@ -2283,8 +2283,11 @@ a:visited {
   display: none;
 }
 @media (aspect-ratio >= 1) and (height <= 480px) {
-  *:not(.mobileHorizontal) {
+  body *:not(.mobileHorizontal):not(.modal.product):not(.modal.product .content):not(.modal.product .videoWrapper):not(.modal.product video) {
     display: none;
+  }
+  body .modal.product {
+    background: none;
   }
   .mobileHorizontal {
     display: flex;
