@@ -129,6 +129,7 @@ const resizeContent = () => {
       navigator.style.width = `${(window.innerWidth / scale / scale) + Math.abs(offset * 2)}px`
     }
   } else {
+    navigator.style.width = ''
     productNavigator.style.width = ''
     productNavigator.style.left = ''
   }
@@ -1022,7 +1023,8 @@ const addEvents = () => {
           animationStop = true
         }
       })
-      modalOpenButton.addEventListener('click', e => {let { target } = e
+      modalOpenButton.addEventListener('click', e => {
+        let { target } = e
         let i = 0
         while (!target.classList.contains('modalOpen') && i < 10) {
           target = target.parentElement || target.parentNode
@@ -1042,18 +1044,14 @@ const addEvents = () => {
         const hc = document.getElementById('hiddenContent')
         const maxSize = Math.max(hc.offsetHeight, hc.offsetWidth)
 
-        target.dataset.top = target.style.transform
-        const offsetTopPx = ((target.offsetHeight * 1.31) / 2) + (heightDelta / 2)
-        const offsetTopPrc = (offsetTopPx * 100) / content.offsetHeight
-        target.style.top = `${50 - offsetTopPrc}%`
-        const offsetLeftPx = target.offsetWidth / 2
-        const offsetLeftPrc = (offsetLeftPx * 100) / content.offsetWidth
-        target.dataset.left = target.style.transform
-        target.style.left = `${50 - offsetLeftPrc}%`
+        target.dataset.transition = target.style.transition
+        target.style.transition = 'transform cubic-bezier(.4,0,1,.44) 1.5s, top cubic-bezier(.4,0,1,.44) 1.5s, left cubic-bezier(.4,0,1,.44) 1.5s'
+        target.dataset.top = target.style.top
+        target.style.top = `-100%`
+        target.dataset.left = target.style.left
+        target.style.left = `calc(50% - ${target.offsetWidth / 2}px)`
         target.dataset.transform = target.style.transform
         target.style.transform = `scale(${(maxSize * 2) / height})`
-        target.dataset.transition = target.style.transition
-        target.style.transition = 'transform cubic-bezier(.4,0,1,.44) 1.5s, top cubic-bezier(.4,0,1,.44) 1.2s, left cubic-bezier(.4,0,1,.44) 1.2s'
       })
     } else {
       modalOpenButton.addEventListener("click", e => {let { target } = e

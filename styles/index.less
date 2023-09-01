@@ -2113,18 +2113,18 @@ a:visited {
         letter-spacing: unset;
       }
     }
+  }
 
-    .eye {
-      opacity: 0;
-      position: absolute;
-      top: calc((100% - 90px) / 2);
-      left: calc((100% - 128px) / 2);
-      transition: opacity 0.3s;
+  .eye {
+    opacity: 0;
+    position: absolute;
+    top: calc(((100% - 90px) / 2) + 70px);
+    left: calc((100% - 128px) / 2);
+    transition: opacity 0.3s;
 
-      @media @vertical {
-        top: 252px;
-        left: calc((100% - 62px) / 2);
-      }
+    @media @vertical {
+      top: 320px;
+      left: calc((100% - 62px) / 2);
     }
   }
 }
@@ -2249,31 +2249,30 @@ a:visited {
         width: 87px;
       }
     }
+  }
 
-    .eye {
-      opacity: 0;
-      position: absolute;
-      transition:
-              opacity 0.3s;
+  .eye {
+    opacity: 0;
+    position: absolute;
+    transition: opacity 0.3s;
 
-      &.tShirtEye {
-        top: 270px;
-        left: 608px;
+    &.tShirtEye {
+      top: calc(50% - 60px);
+      left: calc(50% + 125px);
 
-        @media @vertical {
-          top: 76px;
-          left: 163px;
-        }
+      @media @vertical {
+        top: calc(50% - 20px);
+        left: calc(50% + 25px);
       }
+    }
 
-      &.boxBadgeEye {
-        top: calc((100% - 90px) / 2);
-        left: calc((100% - 128px) / 2);
+    &.boxBadgeEye {
+      top: calc((100% - 90px) / 2);
+      left: calc((100% - 128px) / 2);
 
-        @media @vertical {
-          top: calc((100% - 44px) / 2);
-          left: calc((100% - 62px) / 2);
-        }
+      @media @vertical {
+        top: calc((100% - 44px) / 2);
+        left: calc((100% - 62px) / 2);
       }
     }
   }
@@ -2349,19 +2348,19 @@ a:visited {
           }
         }
       }
+    }
+  }
 
-      .eye {
-        opacity: 0;
-        position: absolute;
-        top: calc((100% - 90px) / 2);
-        left: calc((100% - 128px) / 2);
-        transition: opacity 0.3s;
+  .eye {
+    opacity: 0;
+    position: absolute;
+    top: calc((100% - 90px) / 2);
+    left: calc((100% - 128px) / 2);
+    transition: opacity 0.3s;
 
-        @media @vertical {
-          top: calc((100% - 44px) / 2);
-          left: calc((100% - 62px) / 2);
-        }
-      }
+    @media @vertical {
+      top: calc((100% - 44px) / 2);
+      left: calc((100% - 62px) / 2);
     }
   }
 }
