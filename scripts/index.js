@@ -110,6 +110,29 @@ const resizeContent = () => {
   const menuModalButtons = document.getElementById('menuModalButtons')
   menuModalButtons.style.transform = `scale(${scale})`
 
+  const productNavigator = document.getElementById('productNavigator')
+  const navigator = document.querySelector('#productNavigator .navigator')
+  productNavigator.style.transform = `scale(${scale})`
+  const isVertical = (window.innerWidth / window.innerHeight) < 0.75
+  if (isVertical) {
+    if (scale < 1) {
+      const width = window.innerWidth / scale / scale
+      productNavigator.style.width = `${width}px`
+      const offset = ((window.innerWidth / scale) - width) / 2
+      productNavigator.style.left = `${offset}px`
+      navigator.style.width = `calc(100% - ${Math.abs(offset) * 2}px)`
+    } else {
+      const width = window.innerWidth
+      productNavigator.style.width = `${width}px`
+      const offset = (width - (window.innerWidth / scale)) / 2
+      productNavigator.style.left = `${offset}px`
+      navigator.style.width = `${(window.innerWidth / scale / scale) + Math.abs(offset * 2)}px`
+    }
+  } else {
+    productNavigator.style.width = ''
+    productNavigator.style.left = ''
+  }
+
   const menuHintContents = document.getElementsByClassName('menuHintContent')
   for(let menuHintContent of menuHintContents) {
     menuHintContent.style.transform = `scale(${scale})`
@@ -677,7 +700,7 @@ const startMainFlow = () => {
 
   dispatchAnimationEnd('firstScreen', false)
   preloaderRound.style.transform = `scale(${maxSize / scale})`
-  const isVertical = (preloader.offsetWidth / preloader.offsetHeight) < 0.75
+  const isVertical = (window.innerWidth / window.innerHeight) < 0.75
   if (isVertical) {
     preloaderButton.style.bottom = '20px'
     preloaderButton.style.width = '280px'
@@ -806,9 +829,10 @@ const fullScreenChange = (e) => {
   const video = document.querySelector('#modalProduct video')
   if (e.target === fullscreenElement) {
     video.removeEventListener('timeupdate', videoSample)
-    console.log('Video in full screen')
+    e.target.classList.add('mobileHorizontal')
   } else {
     video.addEventListener('timeupdate', videoSample)
+    e.target.classList.remove('mobileHorizontal')
   }
 }
 
@@ -893,6 +917,7 @@ const activateProduct = (product, animate = true) => {
     if (nav !== productNavigator) nav.classList.remove('active')
   }
   productNavigator.classList.add('active')
+  navigator.scrollTo(productNavigator.offsetLeft - (navigator.offsetWidth / 2), 0)
 
   const productData = productsData[product]
   const productTitle = document.getElementById('productTitle')

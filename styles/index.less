@@ -1122,20 +1122,29 @@ a:visited {
       }
     }
 
+    .navigatorWrapper {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
     .navigator {
       position: absolute;
       left: 50%;
-      bottom: -100%;
-      transform: translateX(-50%);
+      bottom: 0;
+      transform: translate(-50%, 100%);
       display: flex;
       flex-flow: row nowrap;
       gap: 50px;
+      transform-origin: bottom left;
 
       @media @vertical {
-        left: 20px;
+        left: 0;
         gap: 15px;
-        transform: none;
-        width: calc(100% - 40px);
+        transform: translateY(100%);
+        width: 100%;
+        padding: 0 20px;
         overflow: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -1396,10 +1405,12 @@ a:visited {
 
       .navigator {
         bottom: 84px;
-        transition: bottom 0.3s 2s;
+        transform: translateX(-50%);
+        transition: bottom 0.3s 2s, transform 0.3s 2s;
 
         @media @vertical {
           bottom: 48px;
+          transform: none;
         }
       }
     }
@@ -1412,8 +1423,9 @@ a:visited {
       }
 
       .navigator {
-        bottom: -100%;
-        transition: bottom 1.2s;
+        bottom: 0;
+        transform: translate(-50%, 100%);
+        transition: bottom 1.2s, transform 1.2s;
       }
     }
 
@@ -1448,7 +1460,15 @@ a:visited {
         left: 50%;
         top: 272px;
         height: 614px !important;
-        transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s;
+        transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s, width 1.2s;
+
+        @media @vertical {
+          width: 280px;
+          transform: none;
+          left: 20px;
+          top: 130px;
+          height: 404px !important;
+        }
       }
 
       .back {
@@ -1456,6 +1476,12 @@ a:visited {
         bottom: calc(100% - 165px);
         transform: translateY(100%);
         transition: bottom 1.2s, left 1.2s, transform 1.2s;
+
+        @media @vertical {
+          left: 20px;
+          bottom: 448px;
+          transform: none;
+        }
       }
 
       .videoWrapper {
@@ -1478,7 +1504,9 @@ a:visited {
       }
 
       .navigator {
-        transition: bottom 1.2s;
+        bottom: 0;
+        transform: translate(-50%, 100%);
+        transition: bottom 1.2s, transform 1.2s;
       }
 
       .videoWrapper {
@@ -2462,20 +2490,22 @@ a:visited {
   }
 }
 
-.mobileHorizontal {
+.mobileHorizontal:not(video) {
   display: none;
 }
 
 @media @mobileHorizontal {
-  body *:not(.mobileHorizontal):not(.modal.product):not(.modal.product .content):not(.modal.product .videoWrapper):not(.modal.product video) {
+  body *:not(.mobileHorizontal):not(.modal.product):not(.modal.product .content):not(.modal.product .videoWrapper) {
     display: none;
   }
-  body .modal.product {
+
+  .modal.product,
+  .modal.product .videoWrapper:after {
     background: none;
   }
 
   .mobileHorizontal {
-    display: flex;
+    display: flex !important;
   }
 }
 

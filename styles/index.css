@@ -1036,21 +1036,29 @@ a:visited {
     opacity: 0.7;
   }
 }
+.modal.product .navigatorWrapper {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
 .modal.product .navigator {
   position: absolute;
   left: 50%;
-  bottom: -100%;
-  transform: translateX(-50%);
+  bottom: 0;
+  transform: translate(-50%, 100%);
   display: flex;
   flex-flow: row nowrap;
   gap: 50px;
+  transform-origin: bottom left;
 }
 @media (aspect-ratio < 0.75) {
   .modal.product .navigator {
-    left: 20px;
+    left: 0;
     gap: 15px;
-    transform: none;
-    width: calc(100% - 40px);
+    transform: translateY(100%);
+    width: 100%;
+    padding: 0 20px;
     overflow: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -1290,11 +1298,13 @@ a:visited {
 }
 .modal.product.open .navigator {
   bottom: 84px;
-  transition: bottom 0.3s 2s;
+  transform: translateX(-50%);
+  transition: bottom 0.3s 2s, transform 0.3s 2s;
 }
 @media (aspect-ratio < 0.75) {
   .modal.product.open .navigator {
     bottom: 48px;
+    transform: none;
   }
 }
 .modal.product.activeQuiz .imageWrapper,
@@ -1304,8 +1314,9 @@ a:visited {
 }
 .modal.product.activeQuiz .navigator,
 .modal.product.activeVideo .navigator {
-  bottom: -100%;
-  transition: bottom 1.2s;
+  bottom: 0;
+  transform: translate(-50%, 100%);
+  transition: bottom 1.2s, transform 1.2s;
 }
 .modal.product.activeVideo .block {
   left: -100%;
@@ -1331,13 +1342,29 @@ a:visited {
   left: 50%;
   top: 272px;
   height: 614px !important;
-  transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s;
+  transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s, width 1.2s;
+}
+@media (aspect-ratio < 0.75) {
+  .modal.product.activeQuiz .block {
+    width: 280px;
+    transform: none;
+    left: 20px;
+    top: 130px;
+    height: 404px !important;
+  }
 }
 .modal.product.activeQuiz .back {
   left: calc(50% - (554px / 2));
   bottom: calc(100% - 165px);
   transform: translateY(100%);
   transition: bottom 1.2s, left 1.2s, transform 1.2s;
+}
+@media (aspect-ratio < 0.75) {
+  .modal.product.activeQuiz .back {
+    left: 20px;
+    bottom: 448px;
+    transform: none;
+  }
 }
 .modal.product.activeQuiz .videoWrapper {
   right: -100%;
@@ -1353,7 +1380,9 @@ a:visited {
   transition: top 1.2s;
 }
 .modal.product.inactiveVideoOrQuiz .navigator {
-  transition: bottom 1.2s;
+  bottom: 0;
+  transform: translate(-50%, 100%);
+  transition: bottom 1.2s, transform 1.2s;
 }
 .modal.product.inactiveVideoOrQuiz .videoWrapper {
   transition: width 1.2s, height 1.2s, bottom 1.2s, right 1.2s;
@@ -2279,18 +2308,19 @@ a:visited {
     display: none !important;
   }
 }
-.mobileHorizontal {
+.mobileHorizontal:not(video) {
   display: none;
 }
 @media (aspect-ratio >= 1) and (height <= 480px) {
-  body *:not(.mobileHorizontal):not(.modal.product):not(.modal.product .content):not(.modal.product .videoWrapper):not(.modal.product video) {
+  body *:not(.mobileHorizontal):not(.modal.product):not(.modal.product .content):not(.modal.product .videoWrapper) {
     display: none;
   }
-  body .modal.product {
+  .modal.product,
+  .modal.product .videoWrapper:after {
     background: none;
   }
   .mobileHorizontal {
-    display: flex;
+    display: flex !important;
   }
 }
 @keyframes caret {
