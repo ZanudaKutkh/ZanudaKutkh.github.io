@@ -379,18 +379,23 @@ const animateBottleScreen = ({ currentY: posY, deltaY }) => {
       const rotate = 90 * animationPercent
       bottle.style.transform = `rotate(${rotate}deg)`
     } else {
-      bottleText.style.opacity = '1'
+      if (currentY > (scrollScreenHeight * 0.3)) {
+        bottleText.style.opacity = '1'
+      } else {
+        bottleText.style.opacity = '0'
+      }
       bottle.style.top = `calc(${bottleStartOffset * (1 - animationPercent)}px + ${bottleStop * animationPercent}px - ${bottle.offsetHeight * animationPercent}px)`
     }
   } else if (currentY < scrollScreenHeight * 2) {
-    eye.style.opacity = '0'
     bottleText.style.opacity = '1'
     if (bottleRotate) {
+      eye.style.opacity = '0'
       const animationPercent = (currentY - scrollScreenHeight) / scrollScreenHeight
       bottle.style.transform = `rotate(90deg)`
       const center = `(50% - ${bottle.offsetHeight / 2}px)`
       bottle.style.top = `calc(${center} - (50% * ${animationPercent}))`
     } else {
+      eye.style.opacity = '1'
       bottle.style.top = `${bottleStop - bottle.offsetHeight}px`
     }
   } else if (posY < animationScreenEnd.bottleScreen) {
@@ -1040,9 +1045,6 @@ const addEvents = () => {
           content = content.parentElement || content.parentNode
           i += 1
         }
-        const wrapper = content?.parentElement || content?.parentNode
-        const viewContentHeight = content.offsetHeight * scale
-        const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
 
         const height = target.offsetHeight * 0.1
         const hc = document.getElementById('hiddenContent')
@@ -1051,7 +1053,7 @@ const addEvents = () => {
         target.dataset.transition = target.style.transition
         target.style.transition = 'transform cubic-bezier(.4,0,1,.44) 1.5s, top cubic-bezier(.4,0,1,.44) 1.5s, left cubic-bezier(.4,0,1,.44) 1.5s'
         target.dataset.top = target.style.top
-        target.style.top = `-100%`
+        target.style.top = `-40%`
         target.dataset.left = target.style.left
         target.style.left = `calc(50% - ${target.offsetWidth / 2}px)`
         target.dataset.transform = target.style.transform
