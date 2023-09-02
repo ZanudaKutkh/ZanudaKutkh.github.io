@@ -702,10 +702,14 @@ const startMainFlow = () => {
   dispatchAnimationEnd('firstScreen', false)
   preloaderRound.style.transform = `scale(${maxSize / scale})`
   const isVertical = (window.innerWidth / window.innerHeight) < 0.75
+  const isSquare = 1.33 > (window.innerWidth / window.innerHeight) >= 0.75
   if (isVertical) {
     preloaderButton.style.bottom = '20px'
     preloaderButton.style.width = '280px'
-  } else  {
+  } else if (isSquare) {
+    preloaderButton.style.bottom = '36px'
+    preloaderButton.style.width = '1008px'
+  } else {
     preloaderButton.style.bottom = `calc(100% + ${heightDelta}px)`
   }
   preloader.style.opacity = `0.1`

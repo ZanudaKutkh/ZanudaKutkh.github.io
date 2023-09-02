@@ -56,6 +56,7 @@ a:visited {
   align-items: center;
   justify-content: center;
   height: 64px;
+  min-width: 64px;
   border-radius: 32px;
   gap: 26px;
   margin: 0;
@@ -77,16 +78,26 @@ a:visited {
   background: #FFFFFF;
   color: #7382EC;
 }
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .button {
+    height: 76px;
+    min-width: 76px;
+    border-radius: 38px;
+    padding: 0 10px;
+  }
+}
 @media (aspect-ratio < 0.75) {
   .button {
     height: 40px;
+    min-width: 40px;
     border-radius: 20px;
     font-size: 14px;
-    padding: 0 10px;
+    padding: 0 20px;
   }
 }
 .button.big {
   height: 92px;
+  min-width: 92px;
   padding: 0 85px;
   font-size: 40px;
   border-radius: 70px;
@@ -94,6 +105,7 @@ a:visited {
 @media (aspect-ratio < 0.75) {
   .button.big {
     height: 50px;
+    min-width: 50px;
     border-radius: 25px;
     font-size: 14px;
     padding: 0 50px;
@@ -175,8 +187,10 @@ a:visited {
 }
 @media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
   .headerWrapper .header {
+    padding: 32px 32px 0;
     min-width: 1080px;
     max-width: 1080px;
+    justify-content: space-between;
   }
 }
 @media (aspect-ratio < 0.75) {
@@ -186,12 +200,6 @@ a:visited {
     max-width: 320px;
     justify-content: space-between;
   }
-  .headerWrapper .header .contact {
-    display: none;
-  }
-  .headerWrapper .header .about {
-    display: none;
-  }
 }
 .headerWrapper .header .logo {
   width: 147px;
@@ -199,15 +207,27 @@ a:visited {
   margin-right: 40px;
   cursor: pointer;
 }
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .headerWrapper .header .logo {
+    width: 246px;
+    height: 28px;
+  }
+}
 @media (aspect-ratio < 0.75) {
   .headerWrapper .header .logo {
-    min-width: 130px;
-    max-width: 14px;
+    width: 130px;
+    height: 14px;
   }
 }
 .headerWrapper .header .button img {
   width: 32px;
   height: 32px;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .headerWrapper .header .button img {
+    width: 36px;
+    height: 36px;
+  }
 }
 @media (aspect-ratio < 0.75) {
   .headerWrapper .header .button img {
@@ -218,6 +238,15 @@ a:visited {
 .headerWrapper .header .catalog {
   margin-right: auto;
   width: 200px;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .headerWrapper .header .catalog {
+    margin-right: 0;
+    width: auto;
+  }
+  .headerWrapper .header .catalog span {
+    display: none;
+  }
 }
 @media (aspect-ratio < 0.75) {
   .headerWrapper .header .catalog {
@@ -427,6 +456,11 @@ a:visited {
   transition: bottom 0.3s 0.3s, width 0.3s 0.3s;
 }
 @media (aspect-ratio < 0.75) {
+  .modal.preloader .button {
+    transition: bottom 0.3s, width 0.3s;
+  }
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
   .modal.preloader .button {
     transition: bottom 0.3s, width 0.3s;
   }
@@ -1459,6 +1493,12 @@ a:visited {
   letter-spacing: 2.84px;
   text-transform: uppercase;
 }
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .text {
+    font-size: 100px;
+    letter-spacing: 2px;
+  }
+}
 @media (aspect-ratio < 0.75) {
   .firstScreen .layer2 .text {
     font-size: 48px;
@@ -1468,6 +1508,12 @@ a:visited {
 .firstScreen .layer2 .text.choose {
   top: 206px;
   left: 50px;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .text.choose {
+    top: 300px;
+    left: 44px;
+  }
 }
 @media (aspect-ratio < 0.75) {
   .firstScreen .layer2 .text.choose {
@@ -1479,6 +1525,11 @@ a:visited {
   top: 348px;
   left: 184px;
 }
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .text.exactly {
+    display: none;
+  }
+}
 @media (aspect-ratio < 0.75) {
   .firstScreen .layer2 .text.exactly {
     display: none;
@@ -1487,6 +1538,12 @@ a:visited {
 .firstScreen .layer2 .text.that {
   top: 490px;
   left: 516px;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .text.that {
+    top: 400px;
+    left: 215px;
+  }
 }
 @media (aspect-ratio < 0.75) {
   .firstScreen .layer2 .text.that {
@@ -1500,21 +1557,35 @@ a:visited {
     right: -0.25em;
   }
 }
-.firstScreen .layer2 .text.you {
-  bottom: 162px;
-  right: 230px;
+.firstScreen .layer2 .text.what {
+  bottom: 446px;
+  right: 442px;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .text.what {
+    bottom: unset;
+    top: 400px;
+    right: 175px;
+  }
 }
 @media (aspect-ratio < 0.75) {
-  .firstScreen .layer2 .text.you {
+  .firstScreen .layer2 .text.what {
     bottom: unset;
-    top: 228px;
-    right: 28px;
-    z-index: -1;
+    right: unset;
+    top: 131px;
+    left: 160px;
   }
 }
 .firstScreen .layer2 .text.want {
   bottom: 304px;
   right: 230px;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .text.want {
+    bottom: unset;
+    top: 500px;
+    right: 100px;
+  }
 }
 @media (aspect-ratio < 0.75) {
   .firstScreen .layer2 .text.want {
@@ -1525,16 +1596,23 @@ a:visited {
     z-index: -1;
   }
 }
-.firstScreen .layer2 .text.what {
-  bottom: 446px;
-  right: 442px;
+.firstScreen .layer2 .text.you {
+  bottom: 162px;
+  right: 230px;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .text.you {
+    bottom: unset;
+    top: 600px;
+    right: 100px;
+  }
 }
 @media (aspect-ratio < 0.75) {
-  .firstScreen .layer2 .text.what {
+  .firstScreen .layer2 .text.you {
     bottom: unset;
-    right: unset;
-    top: 131px;
-    left: 160px;
+    top: 228px;
+    right: 28px;
+    z-index: -1;
   }
 }
 .firstScreen .layer2 .img {
@@ -1569,6 +1647,12 @@ a:visited {
   height: 550px;
   transform: rotate(36deg);
 }
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .img.bag {
+    bottom: 90px;
+    left: 50px;
+  }
+}
 @media (aspect-ratio < 0.75) {
   .firstScreen .layer2 .img.bag {
     bottom: 147px;
@@ -1596,6 +1680,12 @@ a:visited {
   top: 280px;
   width: 248px;
   height: 317px;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .img.gift {
+    top: 690px;
+    right: 120px;
+  }
 }
 @media (aspect-ratio < 0.75) {
   .firstScreen .layer2 .img.gift {
@@ -1625,17 +1715,17 @@ a:visited {
   width: 280px;
   left: 20px;
 }
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .button {
+    bottom: 32px;
+    width: 1008px;
+    left: 32px;
+  }
+}
 .firstScreen .layer2 .eye {
   position: absolute;
   opacity: 0;
   z-index: -1;
-}
-.firstScreen .layer2 .eye.badge {
-  opacity: 1;
-  z-index: auto;
-  top: 198px;
-  left: 683px;
-  transition: top 0.3s, left 0.3s, opacity 0.3s;
 }
 .firstScreen .layer2 .eye.gift {
   opacity: 1;
@@ -1643,6 +1733,12 @@ a:visited {
   top: 424px;
   left: calc(100% - 365px);
   transition: top 0.3s, left 0.3s, opacity 0.3s;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .eye.gift {
+    top: 815px;
+    left: calc(100% - 310px);
+  }
 }
 @media (aspect-ratio < 0.75) {
   .firstScreen .layer2 .eye.gift {
@@ -1655,6 +1751,12 @@ a:visited {
   top: calc(100% - 290px);
   left: 425px;
   transition: top 0.3s, left 0.3s, opacity 0.3s;
+}
+@media (aspect-ratio < 1.33) and (aspect-ratio >= 0.75) {
+  .firstScreen .layer2 .eye.bag {
+    top: 730px;
+    left: 90px;
+  }
 }
 @media (aspect-ratio < 0.75) {
   .firstScreen .layer2 .eye.bag {

@@ -71,6 +71,7 @@ a:visited {
   align-items: center;
   justify-content: center;
   height: 64px;
+  min-width: 64px;
   border-radius: 32px;
   gap: 26px;
   margin: 0;
@@ -94,21 +95,31 @@ a:visited {
     color: @blue;
   }
 
+  @media @square {
+    height: 76px;
+    min-width: 76px;
+    border-radius: 38px;
+    padding: 0 10px;
+  }
+
   @media @vertical {
     height: 40px;
+    min-width: 40px;
     border-radius: 20px;
     font-size: 14px;
-    padding: 0 10px;
+    padding: 0 20px;
   }
 
   &.big {
     height: 92px;
+    min-width: 92px;
     padding: 0 85px;
     font-size: 40px;
     border-radius: 70px;
 
     @media @vertical {
       height: 50px;
+      min-width: 50px;
       border-radius: 25px;
       font-size: 14px;
       padding: 0 50px;
@@ -195,8 +206,10 @@ a:visited {
     transform-origin: top;
 
     @media @square {
+      padding: 32px 32px 0;
       min-width: 1080px;
       max-width: 1080px;
+      justify-content: space-between;
     }
 
     @media @vertical {
@@ -204,14 +217,6 @@ a:visited {
       min-width: 320px;
       max-width: 320px;
       justify-content: space-between;
-
-      .contact {
-        display: none;
-      }
-
-      .about {
-        display: none;
-      }
     }
 
     .logo {
@@ -220,9 +225,14 @@ a:visited {
       margin-right: 40px;
       cursor: pointer;
 
+      @media @square {
+        width: 246px;
+        height: 28px;
+      }
+
       @media @vertical {
-        min-width: 130px;
-        max-width: 14px;
+        width: 130px;
+        height: 14px;
       }
     }
 
@@ -230,6 +240,11 @@ a:visited {
       img {
         width: 32px;
         height: 32px;
+
+        @media @square {
+          width: 36px;
+          height: 36px;
+        }
 
         @media @vertical {
           width: 20px;
@@ -241,6 +256,15 @@ a:visited {
     .catalog {
       margin-right: auto;
       width: 200px;
+
+      @media @square {
+        margin-right: 0;
+        width: auto;
+
+        span {
+          display: none;
+        }
+      }
 
       @media @vertical {
         margin-right: 0;
@@ -461,6 +485,10 @@ a:visited {
       transition: bottom 0.3s 0.3s, width 0.3s 0.3s;
 
       @media @vertical {
+        transition: bottom 0.3s, width 0.3s;
+      }
+
+      @media @square {
         transition: bottom 0.3s, width 0.3s;
       }
     }
@@ -1598,6 +1626,11 @@ a:visited {
       letter-spacing: 2.84px;
       text-transform: uppercase;
 
+      @media @square {
+        font-size: 100px;
+        letter-spacing: 2px;
+      }
+
       @media @vertical {
         font-size: 48px;
         letter-spacing: 0.96px;
@@ -1606,6 +1639,11 @@ a:visited {
       &.choose {
         top: 206px;
         left: 50px;
+
+        @media @square {
+          top: 300px;
+          left: 44px;
+        }
 
         @media @vertical {
           top: 83px;
@@ -1617,6 +1655,10 @@ a:visited {
         top: 348px;
         left: 184px;
 
+        @media @square {
+          display: none;
+        }
+
         @media @vertical {
           display: none;
         }
@@ -1625,6 +1667,11 @@ a:visited {
       &.that {
         top: 490px;
         left: 516px;
+
+        @media @square {
+          top: 400px;
+          left: 215px;
+        }
 
         @media @vertical {
           top: 131px;
@@ -1639,21 +1686,33 @@ a:visited {
         }
       }
 
-      &.you {
-        bottom: 162px;
-        right: 230px;
+      &.what {
+        bottom: 446px;
+        right: 442px;
+
+        @media @square {
+          bottom: unset;
+          top: 400px;
+          right: 175px;
+        }
 
         @media @vertical {
           bottom: unset;
-          top: 228px;
-          right: 28px;
-          z-index: -1;
+          right: unset;
+          top: 131px;
+          left: 160px;
         }
       }
 
       &.want {
         bottom: 304px;
         right: 230px;
+
+        @media @square {
+          bottom: unset;
+          top: 500px;
+          right: 100px;
+        }
 
         @media @vertical {
           bottom: unset;
@@ -1664,15 +1723,21 @@ a:visited {
         }
       }
 
-      &.what {
-        bottom: 446px;
-        right: 442px;
+      &.you {
+        bottom: 162px;
+        right: 230px;
+
+        @media @square {
+          bottom: unset;
+          top: 600px;
+          right: 100px;
+        }
 
         @media @vertical {
           bottom: unset;
-          right: unset;
-          top: 131px;
-          left: 160px;
+          top: 228px;
+          right: 28px;
+          z-index: -1;
         }
       }
     }
@@ -1710,6 +1775,11 @@ a:visited {
         height: 550px;
         transform: rotate(36deg);
 
+        @media @square {
+          bottom: 90px;
+          left: 50px;
+        }
+
         @media @vertical {
           bottom: 147px;
           left: 16px;
@@ -1737,6 +1807,11 @@ a:visited {
         top: 280px;
         width: 248px;
         height: 317px;
+
+        @media @square {
+          top: 690px;
+          right: 120px;
+        }
 
         @media @vertical {
           top: unset;
@@ -1766,23 +1841,18 @@ a:visited {
       bottom: 20px;
       width: 280px;
       left: 20px;
+
+      @media @square {
+        bottom: 32px;
+        width: 1008px;
+        left: 32px;
+      }
     }
 
     .eye {
       position: absolute;
       opacity: 0;
       z-index: -1;
-
-      &.badge {
-        opacity: 1;
-        z-index: auto;
-        top: 198px;
-        left: 683px;
-        transition:
-                top 0.3s,
-                left 0.3s,
-                opacity 0.3s;
-      }
 
       &.gift {
         opacity: 1;
@@ -1793,6 +1863,11 @@ a:visited {
                 top 0.3s,
                 left 0.3s,
                 opacity 0.3s;
+
+        @media @square {
+          top: 815px;
+          left: calc(100% - 310px);
+        }
 
         @media @vertical {
           left: calc(100% - 123px);
@@ -1808,6 +1883,11 @@ a:visited {
                 top 0.3s,
                 left 0.3s,
                 opacity 0.3s;
+
+        @media @square {
+          top: 730px;
+          left: 90px;
+        }
 
         @media @vertical {
           left: 36px;
