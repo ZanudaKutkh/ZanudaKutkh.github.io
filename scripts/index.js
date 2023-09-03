@@ -73,6 +73,26 @@ const productsData = {
   }
 }
 
+const getDisplayedEl = elements => {
+  for (let el of elements) {
+    const style = getComputedStyle(el)
+    if (style.display !== 'none') return el
+  }
+  return undefined
+}
+
+const getAttr = (elements, name, def) => {
+  const el = getDisplayedEl(elements)
+  if (el) {
+    const attr = el.dataset[name]
+    if (!isNaN(+attr)) return +attr
+    if (attr === 'true') return true
+    if (attr === 'false') return false
+    return el.dataset[name]
+  }
+  return def
+}
+
 const moveToTop = () => {
   const openModals = document.querySelectorAll('.modal.open')
   for (let modal of openModals) {
@@ -109,6 +129,7 @@ const resizeContent = () => {
 
   const menuModalButtons = document.getElementById('menuModalButtons')
   menuModalButtons.style.transform = `scale(${scale})`
+  menuModalButtons.firstElementChild.style.width = `${100 / scale}%`
 
   const productNavigator = document.getElementById('productNavigator')
   const navigator = document.querySelector('#productNavigator .navigator')
@@ -178,26 +199,6 @@ const animateFirstScreen = ({ currentY }) => {
       dispatchAnimationEnd('secondScreen', false)
     }
   }
-}
-
-const getDisplayedEl = elements => {
-  for (let el of elements) {
-    const style = getComputedStyle(el)
-    if (style.display !== 'none') return el
-  }
-  return undefined
-}
-
-const getAttr = (elements, name, def) => {
-  const el = getDisplayedEl(elements)
-  if (el) {
-    const attr = el.dataset[name]
-    if (!isNaN(+attr)) return +attr
-    if (attr === 'true') return true
-    if (attr === 'false') return false
-    return el.dataset[name]
-  }
-  return def
 }
 
 const animateSecondScreen = ({ currentY: posY, deltaY }) => {

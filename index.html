@@ -297,13 +297,15 @@
       </div>
     </div>
   </div>
-  <div class="modalButtons vertical square" id="menuModalButtons">
-    <button class="button white big about modalOpen" data-modal="modalAbout">
-      О проекте
-    </button>
-    <button class="button white big contact modalOpen" data-modal="modalContact">
-      Связаться с нами
-    </button>
+  <div class="modalButtonsWrapper vertical square" id="menuModalButtons">
+    <div class="modalButtons ">
+      <button class="button white big about modalOpen" data-modal="modalAbout">
+        О проекте
+      </button>
+      <button class="button white big contact modalOpen" data-modal="modalContact">
+        Связаться с нами
+      </button>
+    </div>
   </div>
 </div>
 <div class="contentWrapper top modal about" id="modalAbout">
@@ -325,7 +327,7 @@
   </div>
   <div class="content">
     <div class="block">
-      <button class="button white vertical modalClose" data-modal="modalAbout">
+      <button class="button white vertical square modalClose" data-modal="modalAbout">
         <img src="/media/image/close.svg" alt="close" />
       </button>
       <div class="blockTitle">
@@ -356,7 +358,7 @@
   </div>
   <div class="content">
     <div class="block">
-      <button class="button white vertical modalClose" data-modal="modalContact">
+      <button class="button white vertical square modalClose" data-modal="modalContact">
         <img src="/media/image/close.svg" alt="close" />
       </button>
       <div class="blockContent">
