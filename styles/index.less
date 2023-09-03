@@ -1234,6 +1234,7 @@ a:visited {
       left: 0;
       bottom: 0;
       width: 100%;
+      transform-origin: bottom left;
     }
 
     .navigator {
@@ -1245,6 +1246,23 @@ a:visited {
       flex-flow: row nowrap;
       gap: 50px;
       transform-origin: bottom left;
+
+      @media @square {
+        left: 0;
+        gap: 42px;
+        transform: translateY(100%);
+        width: 100%;
+        padding: 0 32px;
+        overflow: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+      }
 
       @media @vertical {
         left: 0;
@@ -1265,6 +1283,11 @@ a:visited {
 
       .itemWrapper {
         position: relative;
+        max-width: 124px;
+
+        @media @vertical {
+          max-width: 50px;
+        }
 
         &.active:after {
           content: '';
@@ -1527,6 +1550,10 @@ a:visited {
         transform: translateX(-50%);
         transition: bottom 0.3s 2s, transform 0.3s 2s;
 
+        @media @square {
+          transform: none;
+        }
+
         @media @vertical {
           bottom: 48px;
           transform: none;
@@ -1566,6 +1593,10 @@ a:visited {
         bottom: 247px;
         right: 440px;
         transition: width 1.2s, height 1.2s, bottom 1.2s, right 1.2s;
+
+        @media @square {
+          right: 20px;
+        }
 
         &:after {
           display: none;
@@ -2781,11 +2812,14 @@ a:visited {
 
 @media @mobileHorizontal {
   body *:not(.mobileHorizontal):not(.modal.product):not(.modal.product .content):not(.modal.product .videoWrapper) {
-    display: none;
+    display: none !important;
   }
 
-  .modal.product,
   .modal.product .videoWrapper:after {
+    display: none !important;
+  }
+
+  .modal.product {
     background: none;
   }
 

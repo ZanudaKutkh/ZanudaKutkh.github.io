@@ -132,6 +132,9 @@ const resizeContent = () => {
   menuModalButtons.firstElementChild.style.width = `${100 / scale}%`
 
   const productNavigator = document.getElementById('productNavigator')
+  productNavigator.style.width = `${100 / scale}%`
+  productNavigator.style.transform = `scale(${scale})`
+  /*
   const navigator = document.querySelector('#productNavigator .navigator')
   productNavigator.style.transform = `scale(${scale})`
   const isVertical = (window.innerWidth / window.innerHeight) < 0.75
@@ -154,6 +157,7 @@ const resizeContent = () => {
     productNavigator.style.width = ''
     productNavigator.style.left = ''
   }
+   */
 
   const menuHintContents = document.getElementsByClassName('menuHintContent')
   for(let menuHintContent of menuHintContents) {
