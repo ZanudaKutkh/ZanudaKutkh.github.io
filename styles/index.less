@@ -1,7 +1,7 @@
-@horizontal: ~"(aspect-ratio >= 1.33)";
-@square: ~"(aspect-ratio < 1.33) and (aspect-ratio >= 0.75)";
-@vertical: ~"(aspect-ratio < 0.75)";
-@mobileHorizontal: ~"(aspect-ratio >= 1) and (height <= 480px)";
+@horizontal: ~"(min-aspect-ratio: 4/3)";
+@square: ~"(max-aspect-ratio: 4/3) and (min-aspect-ratio: 3/4)";
+@vertical: ~"(max-aspect-ratio: 3/4)";
+@mobileHorizontal: ~"(min-aspect-ratio: 1/1) and (max-height: 480px)";
 
 @white: #FFFFFF;
 @gray: #7E7D77;
@@ -12,6 +12,10 @@
 @green: #D5FD74;
 @pink: #FFEFDF;
 
+html {
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -19,6 +23,10 @@ body {
   min-height: 100vh;
   max-width: 100vw;
   max-height: 100vh;
+  min-width: calc(var(--1dvw, 1vw) * 100);
+  min-height: calc(var(--1dvh, 1vh) * 100);
+  max-width: calc(var(--1dvw, 1vw) * 100);
+  max-height: calc(var(--1dvh, 1vh) * 100);
   min-width: 100dvw;
   min-height: 100dvh;
   max-width: 100dvw;
@@ -430,19 +438,16 @@ a:visited {
       position: absolute;
       background: @green;
       width: 2px;
-      max-width: 890px;
       height: 2px;
-      max-height: 890px;
       border-radius: 50%;
       top: calc(50% + 150px);
       left: calc(50% - 1px);
-      transition: transform 0.5s;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
 
       @media @vertical {
         width: 2px;
-        max-width: 300px;
         height: 2px;
-        max-height: 300px;
         top: calc(50% + 125px);
       }
     }
@@ -514,10 +519,12 @@ a:visited {
       }
 
       .preloaderRound {
-        transform: scale(445);
+        height: 890px;
+        width: 890px;
 
         @media @vertical {
-          transform: scale(150);
+          height: 300px;
+          width: 300px;
         }
       }
 

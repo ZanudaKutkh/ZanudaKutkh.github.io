@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no">
   <title>Top Line</title>
   <script src="/scripts/lodash.throttle@4.1.1.js#q"></script>
-  <script src="/scripts/pseudoScrollEvent.js#q"></script>
-  <script src="/scripts/animationEndEvent.js#q"></script>
+  <script src="/scripts/viewport-units-polyfill.min.js#q"></script>
+  <script src="/scripts/pseudoScrollEvent.min.js#q"></script>
+  <script src="/scripts/animationEndEvent.min.js#q"></script>
   <script src="/scripts/index.js#q"></script>
   <link rel="stylesheet" href="/styles/fonts.css#q">
   <link rel="stylesheet" href="/styles/index.css#q">
@@ -26,7 +27,7 @@
     <video class="preloaderVideo" autoplay playsinline muted preload="metadata">
       <source src="/media/video/preloader_vp9.webm" type="video/webm; codecs=vp9" />
       <source src="/media/video/preloader_vp8.webm" type="video/webm; codecs=vp8" />
-      <source src="/media/video/preloader_hevc.mov" type="video/mp4; codecs=hvc1" />
+      <source src="/media/video/preloader_hevc.mov" type="video/quicktime; codecs=hvc1" />
     </video>
     <div class="button white big" id="preloaderButton">
       Начать

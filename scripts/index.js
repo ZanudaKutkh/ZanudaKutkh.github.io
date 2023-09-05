@@ -706,11 +706,13 @@ const startMainFlow = () => {
   const preloaderButton = document.getElementById('preloaderButton')
 
   const maxSize = Math.max(wrapper.offsetHeight, wrapper.offsetWidth)
+  const roundSize = (maxSize / scale) * 2
   const viewContentHeight = content.offsetHeight * scale
   const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
 
   dispatchAnimationEnd('firstScreen', false)
-  preloaderRound.style.transform = `scale(${maxSize / scale})`
+  preloaderRound.style.height = `${roundSize}px`
+  preloaderRound.style.width = `${roundSize}px`
   const isVertical = (window.innerWidth / window.innerHeight) < 0.75
   const isSquare = 1.33 > (window.innerWidth / window.innerHeight) >= 0.75
   if (isVertical) {
