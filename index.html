@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no">
   <title>Top Line</title>
   <script src="/scripts/lodash.throttle@4.1.1.js#q"></script>
   <script src="/scripts/pseudoScrollEvent.js#q"></script>
@@ -23,9 +23,10 @@
     </div>
     <div class="preloaderRound" id="preloaderRound"></div>
     <img class="preloaderImage" id="preloaderImage" src="/media/image/girl.png" alt="girl" />
-    <video class="preloaderVideo" autoplay playsinline muted preload="metadata">
-      <source src="/media/video/preloader.webm" type="video/webm; codecs=vp9" />
-      <source src="/media/video/preloader.mov" type="video/mp4; codecs=hevc" />
+    <video class="preloaderVideo" autoplay playsinline muted>
+      <source src="/media/video/preloader.webm" type="video/webm; codecs=vp09" />
+      <source src="/media/video/preloader2.webm" type="video/webm; codecs=vp08" />
+      <source src="/media/video/preloader.mov" type="video/mp4; codecs=hvc1" />
     </video>
     <div class="button white big" id="preloaderButton">
       Начать
