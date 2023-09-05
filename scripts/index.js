@@ -14,56 +14,56 @@ const productsData = {
     title: 'Хочу выделяться\nво время конференции',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать аксессуары для конференции?',
-    video: '/media/video/conference.webm',
+    video: '/media/video/conference',
   },
   gift: {
     type: 'product',
     title: 'Хочу подарки\nна праздники',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать подарки на праздники?',
-    video: '/media/video/gift.webm',
+    video: '/media/video/gift',
   },
   bag: {
     type: 'product',
     title: 'Хочу мерч\nдля продажи',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать мерч для продажи?',
-    video: '/media/video/merch.webm',
+    video: '/media/video/merch',
   },
   tShirt: {
     type: 'product',
     title: 'Хочу одежду\nсо своим брендигом',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать одежду со своим брендингом?',
-    video: '/media/video/branding.webm',
+    video: '/media/video/branding',
   },
   apron: {
     type: 'product',
     title: 'Хочу одеть\nсвоих сотрудников',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать одежду для своих сотрудников?',
-    video: '/media/video/corp.webm',
+    video: '/media/video/corp',
   },
   cup: {
     type: 'product',
     title: 'Хочу аксессуары\nдля офиса',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать аксессуары для офиса?',
-    video: '/media/video/office.webm',
+    video: '/media/video/office',
   },
   bottle: {
     type: 'product',
     title: 'Хочу сувениры\nдля спорта и отдыха',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать сувениры для спорта и отдыха?',
-    video: '/media/video/souvenir.webm',
+    video: '/media/video/souvenir',
   },
   welcome: {
     type: 'product',
     title: 'Хочу welcome-pack\nдля сотрудников',
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать welcome-pack для своих сотрудников?',
-    video: '/media/video/welcome.webm',
+    video: '/media/video/welcome',
   },
   laptop: {
     type: 'service',
@@ -858,10 +858,14 @@ const fullScreenVideo = () => {
   video.removeEventListener('timeupdate', videoSample)
   if (video.requestFullscreen) {
     video.requestFullscreen()
-  } else if (video.mozRequestFullScreen) {
-    video.mozRequestFullScreen()
+  } else if (video.webkitEnterFullscreen) {
+    video.webkitEnterFullscreen()
   } else if (video.webkitRequestFullScreen) {
     video.webkitRequestFullScreen()
+  } else if (video.mozRequestFullScreen) {
+    video.mozRequestFullScreen()
+  } else if (video.msRequestFullscreen) {
+    video.msRequestFullscreen()
   }
 }
 
@@ -988,10 +992,14 @@ const activateProduct = (product, animate = true) => {
     }
     video.autoplay = true
     video.loop = true
-    const source = document.createElement('source')
-    source.src = productData.video
-    source.type = 'video/webm'
-    video.append(source)
+    const source1 = document.createElement('source')
+    source1.src = productData.video + '.webm'
+    source1.type = 'video/webm'
+    video.append(source1)
+    const source2 = document.createElement('source')
+    source2.src = productData.video + '.mp4'
+    source2.type = 'video/mp4'
+    video.append(source2)
     productVideo.insertBefore(video, productVideo.firstChild)
 
     playButton.addEventListener('click', playFullVideo)
