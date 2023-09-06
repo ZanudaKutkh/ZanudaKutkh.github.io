@@ -855,6 +855,7 @@ const fullScreenChange = (e) => {
 
 const fullScreenVideo = () => {
   const video = document.querySelector('#modalProduct video')
+  video.playsInline = undefined
   video.removeEventListener('timeupdate', videoSample)
   if (video.requestFullscreen) {
     video.requestFullscreen()
@@ -992,6 +993,7 @@ const activateProduct = (product, animate = true) => {
     }
     video.autoplay = true
     video.loop = true
+    video.playsInline = true
     const source1 = document.createElement('source')
     source1.src = productData.video + '.webm'
     source1.type = 'video/webm'
