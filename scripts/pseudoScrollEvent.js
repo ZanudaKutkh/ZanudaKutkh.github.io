@@ -62,7 +62,7 @@ const registerPseudoScrollEvent = (el, getStopPseudoScroll) => {
     if (e.touches.length === 1 && !isNaN(+startY)) {
       const [touch] = e.touches
       const thisY = touch?.clientY
-      const deltaY = startY - thisY
+      const deltaY = (startY - thisY) * 2
       startY = thisY
       const stopPseudoScroll = getStopPseudoScroll(deltaY)
       let nextY = currentY + deltaY
