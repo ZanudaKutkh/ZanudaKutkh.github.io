@@ -1029,24 +1029,29 @@ const addEvents = () => {
     const { classList, dataset } = modalOpenButton
     const { modal: modalName } = dataset
     if (classList.contains('eye')) {
-      modalOpenButton.addEventListener('transitionend', e => {let { target } = e
-        let i = 0
-        while (!target.classList.contains('modalOpen') && i < 10) {
-          target = target.parentElement || target.parentNode
-          i += 1
-        }
-        if (target === modalOpenButton && e.propertyName === 'transform') {
-          const { product } = dataset
-          const modal = document.getElementById(modalName)
-          modal.classList.add('open')
-          zIndex += 1
-          modal.style.zIndex = zIndex.toString()
-          activateProduct(product, false)
-          target.style.top = target.dataset.top
-          target.style.left = target.dataset.left
-          target.style.transform = target.dataset.transform
-          target.style.transition = target.dataset.transition
-          animationStop = true
+      modalOpenButton.addEventListener('transitionend', e => {
+        if (e.propertyName === 'width') {
+          let { target } = e
+          let i = 0
+          while (!target.classList.contains('modalOpen') && i < 10) {
+            target = target.parentElement || target.parentNode
+            i += 1
+          }
+          if (target === modalOpenButton) {
+            const { product } = dataset
+            const modal = document.getElementById(modalName)
+            modal.classList.add('open')
+            zIndex += 1
+            modal.style.zIndex = zIndex.toString()
+            activateProduct(product, false)
+            target.style.top = target.dataset.top
+            target.style.left = target.dataset.left
+            target.style.height = target.dataset.height
+            target.style.width = target.dataset.width
+            target.style.fontSize = target.dataset.fontSize
+            target.style.transition = target.dataset.transition
+            animationStop = true
+          }
         }
       })
       modalOpenButton.addEventListener('click', e => {
@@ -1063,21 +1068,36 @@ const addEvents = () => {
           i += 1
         }
 
-        const height = target.offsetHeight * 0.1
         const hc = document.getElementById('hiddenContent')
         const maxSize = Math.max(hc.offsetHeight, hc.offsetWidth)
+        const proportion = target.offsetHeight / target.offsetWidth
+        let width
+        let height
+        if (proportion > 1) {
+          height = maxSize * 15
+          width = (maxSize * 15) / proportion
+        } else {
+          height = maxSize * 15 * proportion
+          width = maxSize * 15
+        }
+        const scale = height / target.offsetHeight
 
         target.dataset.transition = target.style.transition
-        target.style.transition = 'transform cubic-bezier(.4,0,1,.44) 1.5s, top cubic-bezier(.4,0,1,.44) 1.5s, left cubic-bezier(.4,0,1,.44) 1.5s'
+        target.style.transition = 'font-size cubic-bezier(.4,0,1,.44) 1.5s, width cubic-bezier(.4,0,1,.44) 1.5s, height cubic-bezier(.4,0,1,.44) 1.5s, top cubic-bezier(.4,0,1,.44) 1.5s, left cubic-bezier(.4,0,1,.44) 1.5s'
         target.dataset.top = target.style.top
-        target.style.top = `-40%`
+        target.style.top = '50%'
         target.dataset.left = target.style.left
-        target.style.left = `calc(50% - ${target.offsetWidth / 2}px)`
-        target.dataset.transform = target.style.transform
-        target.style.transform = `scale(${(maxSize * 2) / height})`
+        target.style.left = '50%'
+        target.dataset.height = target.style.height
+        target.style.height = `${height}px`
+        target.dataset.width = target.style.width
+        target.style.width = `${width}px`
+        target.dataset.fontSize = target.style.fontSize
+        target.style.fontSize = `${10 * scale}px`
       })
     } else {
-      modalOpenButton.addEventListener("click", e => {let { target } = e
+      modalOpenButton.addEventListener("click", e => {
+        let { target } = e
         let i = 0
         while (!target.classList.contains('modalOpen') && i < 10) {
           target = target.parentElement || target.parentNode
