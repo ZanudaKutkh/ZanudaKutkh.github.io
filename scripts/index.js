@@ -8,6 +8,103 @@ let boxBadgeStartOffsetTop
 let boxBadgeStartOffsetLeft
 let laptopTextInterval = []
 
+const quizData = {
+  clothes: [
+    {
+      type: 'MULTI_CHOICE',
+      question: 'Какая одежда необходима?',
+      choices: [
+        'Футболки',
+        'Поло',
+        'Жилеты',
+        'Куртка (ветровка)',
+        'Худи (толстовка)',
+        'Фартук',
+        'Нужно нанесение принта на готовое изделие',
+      ],
+      other: 'Свой вариант',
+    },
+    {
+      type: 'INPUT',
+      question: 'Какое количество необходимо?',
+      placeholder: 'Укажите общее количество (минимальный тираж 30 шт.)',
+    },
+    {
+      type: 'CHOICE',
+      question: 'Нужно ли нанесение логотипа (принта)?',
+      choices: [
+        'Нужно, есть макет',
+        'Нужно, нет макета',
+        'Не нужно',
+      ],
+    },
+  ],
+  office: [
+    {
+      type: 'MULTI_CHOICE',
+      question: 'Какие аксессуары необходимы?',
+      choices: [
+        'Бейдж с лентой',
+        'Внешний аккумулятор / powerbank',
+        'Ежедневник',
+        'Ручка',
+        'Термостакан / бутылка для воды',
+        'Стикерпак с локальными мемами',
+        'Шоппер',
+        'Беспроводные наушники',
+        'Бейсболка',
+        'Футболка с принтом',
+      ],
+      other: 'Свой вариант',
+    },
+    {
+      type: 'INPUT',
+      question: 'Какое количество необходимо?',
+      placeholder: 'Укажите общее количество (минимальный тираж 30 шт.)',
+    },
+    {
+      type: 'CHOICE',
+      question: 'Нужно ли нанесение логотипа (принта)?',
+      choices: [
+        'Нужно, есть макет',
+        'Нужно, нет макета',
+        'Не нужно',
+      ],
+    },
+  ],
+  gift: [
+    {
+      type: 'MULTI_CHOICE',
+      question: 'Какие позиции необходимы?',
+      choices: [
+        'Внешний аккумулятор / powerbank',
+        'Термостакан / бутылка для воды',
+        'Вместительная сумка-шоппер',
+        'Рюкзак',
+        'Плед / декоративная подушка',
+        'Зонт',
+        'Футболка',
+        'Худи',
+      ],
+      other: 'Свой вариант',
+    },
+    {
+      type: 'INPUT',
+      question: 'Какое количество необходимо?',
+      placeholder: 'Укажите общее количество (минимальный тираж 30 шт.)',
+    },
+    {
+      type: 'CHOICE',
+      question: 'Нужно ли нанесение логотипа (принта)?',
+      choices: [
+        'Нужно, есть макет',
+        'Нужно, нет макета',
+        'Не нужно',
+      ],
+    },
+  ],
+}
+
 const productsData = {
   id: {
     type: 'product',
@@ -15,6 +112,8 @@ const productsData = {
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать аксессуары для конференции?',
     video: '/media/video/conference',
+    quizTitle: 'Аксессуары для конференции',
+    quizKey: 'office',
   },
   gift: {
     type: 'product',
@@ -22,6 +121,8 @@ const productsData = {
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать подарки на праздники?',
     video: '/media/video/gift',
+    quizTitle: 'Подарки на праздники',
+    quizKey: 'gift',
   },
   bag: {
     type: 'product',
@@ -29,6 +130,8 @@ const productsData = {
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать мерч для продажи?',
     video: '/media/video/merch',
+    quizTitle: 'Мерч для продажи',
+    quizKey: 'gift',
   },
   tShirt: {
     type: 'product',
@@ -36,6 +139,8 @@ const productsData = {
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать одежду со своим брендингом?',
     video: '/media/video/branding',
+    quizTitle: 'Одежда с брендингом',
+    quizKey: 'clothes',
   },
   apron: {
     type: 'product',
@@ -43,6 +148,8 @@ const productsData = {
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать одежду для своих сотрудников?',
     video: '/media/video/corp',
+    quizTitle: 'Одежда для сотрудников',
+    quizKey: 'clothes',
   },
   cup: {
     type: 'product',
@@ -50,6 +157,8 @@ const productsData = {
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать аксессуары для офиса?',
     video: '/media/video/office',
+    quizTitle: 'Аксессуары для офиса',
+    quizKey: 'office',
   },
   bottle: {
     type: 'product',
@@ -57,6 +166,8 @@ const productsData = {
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать сувениры для спорта и отдыха?',
     video: '/media/video/souvenir',
+    quizTitle: 'Сувениры для спорта и отдыха',
+    quizKey: 'gift',
   },
   welcome: {
     type: 'product',
@@ -64,13 +175,15 @@ const productsData = {
     text: 'Хотите заказать одежду со свои логотипом или фирменным стилем? Пройдите небольшую анкенту для того, чтобы мы могли подготовить для вас наилучшее предложение.',
     shortText: 'Хотите заказать welcome-pack для своих сотрудников?',
     video: '/media/video/welcome',
+    quizTitle: 'Welcome-pack',
+    quizKey: 'office',
   },
   laptop: {
     type: 'service',
     title: 'Хотите заказать такую же\nпромо страницу?',
     text: 'У вас есть продукт, который нужно эффектно представить потенциальной аудитории? Хотите видеть на вашей странице подобную анимацию? Тогда отправляйте свой запрос нам на почту <a href="mailto:info@topline.ru">info@topline.ru</a> и в ближайшее время наш менеджер свяжется с вами.',
     shortText: 'Хотите заказать такую же промо страницу?',
-  }
+  },
 }
 
 const getDisplayedEl = elements => {
@@ -113,16 +226,16 @@ const resizeContent = () => {
   scale = Math.min(body.offsetWidth / hc.offsetWidth, body.offsetHeight / hc.offsetHeight)
 
   const headerWrappers = document.getElementsByClassName('headerWrapper')
-  for(let headerWrapper of headerWrappers) {
+  for (let headerWrapper of headerWrappers) {
     headerWrapper.style.transform = `scaleY(${scale})`
-    for(let header of headerWrapper.children) {
+    for (let header of headerWrapper.children) {
       header.style.transform = `scaleX(${scale})`
       header.style.opacity = '1'
     }
   }
 
   const contents = document.getElementsByClassName('content')
-  for(let content of contents) {
+  for (let content of contents) {
     content.style.transform = `scale(${scale})`
     content.style.opacity = '1'
   }
@@ -160,7 +273,7 @@ const resizeContent = () => {
    */
 
   const menuHintContents = document.getElementsByClassName('menuHintContent')
-  for(let menuHintContent of menuHintContents) {
+  for (let menuHintContent of menuHintContents) {
     menuHintContent.style.transform = `scale(${scale})`
     menuHintContent.style.opacity = '1'
   }
@@ -586,7 +699,7 @@ const animate = ({ detail = {} }) => {
       animateLaptopScreen(detail)
       break
     default:
-      // console.log(currentScreen, e)
+    // console.log(currentScreen, e)
   }
 }
 
@@ -784,7 +897,7 @@ const closeModal = e => {
   const modalOpenButtons = document.querySelectorAll('.modalOpen.hideOnClick')
   const { modal: modalName } = target.dataset
   const modal = document.getElementById(modalName)
-  for(let modalOpenButton of modalOpenButtons) {
+  for (let modalOpenButton of modalOpenButtons) {
     if (modalOpenButton.dataset.modal === modalName) {
       modalOpenButton.style.opacity = ''
     }
@@ -870,12 +983,232 @@ const fullScreenVideo = () => {
   }
 }
 
-const startQuiz = e => {
+const setQuizStep = step => e => {
+  const quizQuestion = document.getElementById('quizQuestion')
+  const curr = quizQuestion.innerText - 1
+
+  if (Number.isInteger(step)) {
+    quizQuestion.innerText = step + 1
+  } else {
+    const quizTitle = document.getElementById('quizTitle')
+    quizTitle.innerText = 'Оставьте свои контакты и имя'
+    const quizCounter = document.getElementById('quizCounter')
+    quizCounter.style.display = 'none'
+  }
+
+  const currQ = document.getElementById('question_' + curr)
+  currQ.classList.remove('active')
+  const nextQ = document.getElementById('question_' + step)
+  nextQ.classList.add('active')
+}
+
+const submitQuiz = e => {
+  e.preventDefault()
+  const form = document.getElementById('quiz')
+  console.dir(Array.from(new window.FormData(form).entries()))
+  const quizTitle = document.getElementById('quizTitle')
+  quizTitle.innerText = 'Уже видим Ваш запрос!'
+  const questions = document.querySelectorAll('#quizBlock .question.active')
+  questions.forEach(q => { q.classList.remove('active') })
+  const message = document.createElement('h2')
+  message.className = 'message'
+  message.innerText = 'Вернемся с расчетом бюджета и сроков в самое ближайшее время'
+  form.append(message)
+}
+
+const checkAnswer = (question, button) => () => {
+  const form = document.getElementById('quiz')
+  const answers = Array.from(new window.FormData(form).entries())
+  const hasValue = answers.find(([key, val]) => {
+    return key.includes('question_' + question) && val
+  })
+  button.disabled = !hasValue
+}
+
+const checkContact = (button) => () => {
+  const form = document.getElementById('quiz')
+  const answers = new window.FormData(form)
+  const phone = answers.get('phone')
+  const phoneValid = phone.length >= 16
+  const mail = answers.get('mail')
+  const mailValid = /[^@]+@[^@]+\.[^@.]+/.test(mail)
+  button.disabled = !(answers.get('name') && (phoneValid || mailValid))
+}
+
+const startQuiz = productData => e => {
   const modalProduct = document.getElementById('modalProduct')
   const productBlock = document.getElementById('productBlock')
   const backButton = document.getElementById('backButton')
   const infoBlock = document.getElementById('infoBlock')
   const quizBlock = document.getElementById('quizBlock')
+  const form = document.getElementById('quiz')
+  form.addEventListener('submit', e => e.preventDefault())
+
+  form.innerHTML = ''
+
+  const quiz = quizData[productData.quizKey]
+
+  const quizHeader = document.createElement('div')
+  quizHeader.className = 'quizHeader'
+
+  const quizTitle = document.createElement('h1')
+  quizTitle.className = 'quizTitle'
+  quizTitle.id = 'quizTitle'
+  quizTitle.innerText = productData.quizTitle
+  quizHeader.append(quizTitle)
+
+  const quizCounter = document.createElement('div')
+  quizCounter.className = 'quizCounter'
+  quizCounter.id = 'quizCounter'
+  const curr = document.createElement('span')
+  curr.innerText = '1'
+  curr.id = 'quizQuestion'
+  quizCounter.append(curr)
+  const total = document.createElement('span')
+  total.innerText = quiz.length.toString()
+  quizCounter.append(total)
+  quizHeader.append(quizCounter)
+
+  form.append(quizHeader)
+
+  const quizKey = document.createElement('input')
+  quizKey.name = 'quizKey'
+  quizKey.type = 'hidden'
+  quizKey.value = productData.quizKey
+  form.append(quizKey)
+
+  quiz.forEach((question, i) => {
+    const q = document.createElement('div')
+    if (!i) {
+      q.className = 'question active'
+    } else {
+      q.className = 'question'
+    }
+    q.id = 'question_' + i
+    const title = document.createElement('h2')
+    title.innerText = question.question
+    q.append(title)
+
+    const next = document.createElement('button')
+
+    if (question.type === 'MULTI_CHOICE') {
+      const subTitle = document.createElement('i')
+      subTitle.innerText = '(можно выбрать несколько вариантов)'
+      title.append(subTitle)
+
+      const fieldSet = document.createElement('fieldset')
+      question.choices.forEach(choice => {
+        const label = document.createElement('label')
+        label.className = 'checkbox'
+        const checkbox = document.createElement('input')
+        checkbox.type = 'checkbox'
+        checkbox.name = 'question_' + i + '_choice'
+        checkbox.value = choice
+        checkbox.addEventListener('change', checkAnswer(i, next))
+        label.append(checkbox)
+        const text = document.createElement('span')
+        text.innerText = choice
+        label.append(text)
+        fieldSet.append(label)
+      })
+      q.append(fieldSet)
+    }
+
+    if (question.type === 'CHOICE') {
+      const fieldSet = document.createElement('fieldset')
+      question.choices.forEach(choice => {
+        const label = document.createElement('label')
+        label.className = 'radio'
+        const radio = document.createElement('input')
+        radio.type = 'radio'
+        radio.name = 'question_' + i + '_choice'
+        radio.value = choice
+        radio.addEventListener('change', checkAnswer(i, next))
+        label.append(radio)
+        const text = document.createElement('span')
+        text.innerText = choice
+        label.append(text)
+        fieldSet.append(label)
+      })
+      q.append(fieldSet)
+    }
+
+    if (question.type === 'INPUT') {
+      const textarea = document.createElement('textarea')
+      textarea.name = 'question_' + i + '_text'
+      textarea.placeholder = question.placeholder
+      textarea.addEventListener('input', checkAnswer(i, next))
+      q.append(textarea)
+    }
+
+    if (question.other) {
+      const textarea = document.createElement('textarea')
+      textarea.name = 'question_' + i + '_text'
+      textarea.placeholder = question.other
+      textarea.addEventListener('input', checkAnswer(i, next))
+      q.append(textarea)
+    }
+
+    const buttons = document.createElement('div')
+    buttons.className = 'buttons'
+    if (i) {
+      const prev = document.createElement('button')
+      prev.className = 'button border blue'
+      prev.innerText = 'Назад'
+      prev.addEventListener('click', setQuizStep(i - 1))
+      buttons.append(prev)
+    }
+    next.className = 'button blue'
+    next.disabled = true
+    if (i < quiz.length - 1) {
+      next.innerText = 'Дальше'
+      next.addEventListener('click', setQuizStep(i + 1))
+    } else {
+      next.innerText = 'Оформить'
+      next.addEventListener('click', setQuizStep('contact'))
+    }
+    buttons.append(next)
+    q.append(buttons)
+
+    form.append(q)
+  })
+
+  {
+    const submit = document.createElement('button')
+    const q = document.createElement('div')
+    q.className = 'question'
+    q.id = 'question_contact'
+
+    const name = document.createElement('input')
+    name.name = 'name'
+    name.placeholder = 'Имя'
+    name.addEventListener('input', checkContact(submit))
+    q.append(name)
+
+    const phone = document.createElement('input')
+    phone.type = 'phone'
+    phone.name = 'phone'
+    phone.placeholder = '+7 ('
+    IMask(phone, {
+      mask: '+{7}(000)000-00-00'
+    })
+    phone.addEventListener('input', checkContact(submit))
+    q.append(phone)
+
+    const mail = document.createElement('input')
+    mail.name = 'mail'
+    mail.placeholder = 'test@test.com'
+    mail.addEventListener('input', checkContact(submit))
+    q.append(mail)
+
+    submit.className = 'submit button blue'
+    submit.innerText = 'Отправить'
+    submit.disabled = true
+    submit.addEventListener('click', submitQuiz)
+    q.append(submit)
+
+    form.append(q)
+  }
 
   productBlock.style.height = `${productBlock.offsetHeight}px`
   backButton.removeEventListener('click', closeModal)
@@ -898,7 +1231,7 @@ const activateProduct = (product, animate = true) => {
   const productNavigatorId = 'navigator' + capitalizedProduct
   const productImage = document.getElementById(productImageId)
   const productWrapper = productImage.parentElement || productImage.parentNode
-  for(let image of productWrapper.children) {
+  for (let image of productWrapper.children) {
     if (image !== productImage && image.classList.contains('active')) {
       if (animate) {
         const keyframes = [
@@ -908,24 +1241,24 @@ const activateProduct = (product, animate = true) => {
             bottom: 0,
             right: 0,
             opacity: 1,
-            transform: 'none'
+            transform: 'none',
           },
           {
             bottom: '-50%',
             right: '-100%',
             opacity: 0,
-            transform: 'rotate(32deg)'
+            transform: 'rotate(32deg)',
           },
           {
             bottom: '-50%',
             right: '-100%',
             opacity: 0,
-            transform: 'rotate(32deg)'
+            transform: 'rotate(32deg)',
           },
         ]
         const timing = {
           duration: 800,
-          iterations: 1
+          iterations: 1,
         }
         image.animate(keyframes, timing)
       }
@@ -935,7 +1268,7 @@ const activateProduct = (product, animate = true) => {
   productImage.classList.add('active')
   const productNavigator = document.getElementById(productNavigatorId)
   const navigator = productNavigator.parentElement || productNavigator.parentNode
-  for(let nav of navigator.children) {
+  for (let nav of navigator.children) {
     if (nav !== productNavigator) nav.classList.remove('active')
   }
   productNavigator.classList.add('active')
@@ -1006,7 +1339,7 @@ const activateProduct = (product, animate = true) => {
 
     playButton.addEventListener('click', playFullVideo)
     playButtonMobile.addEventListener('click', fullScreenVideo)
-    quizButton.addEventListener('click', startQuiz)
+    quizButton.addEventListener('click', startQuiz(productData))
   }
 }
 
@@ -1025,7 +1358,7 @@ const addEvents = () => {
   const modalOpenButtons = document.getElementsByClassName('modalOpen')
   const modalCloseButtons = document.getElementsByClassName('modalClose')
 
-  for(let modalOpenButton of modalOpenButtons) {
+  for (let modalOpenButton of modalOpenButtons) {
     const { classList, dataset } = modalOpenButton
     const { modal: modalName } = dataset
     if (classList.contains('eye')) {
@@ -1096,7 +1429,7 @@ const addEvents = () => {
         target.style.fontSize = `${10 * scale}px`
       })
     } else {
-      modalOpenButton.addEventListener("click", e => {
+      modalOpenButton.addEventListener('click', e => {
         let { target } = e
         let i = 0
         while (!target.classList.contains('modalOpen') && i < 10) {
@@ -1119,16 +1452,16 @@ const addEvents = () => {
     }
   }
 
-  for(let modalCloseButton of modalCloseButtons) {
-    modalCloseButton.addEventListener("click", closeModal)
+  for (let modalCloseButton of modalCloseButtons) {
+    modalCloseButton.addEventListener('click', closeModal)
   }
 
   const changeProductButtons = document.getElementsByClassName('changeProduct')
 
-  for(let changeProductButton of changeProductButtons) {
+  for (let changeProductButton of changeProductButtons) {
     const { dataset } = changeProductButton
     const { product } = dataset
-    changeProductButton.addEventListener("click", () => {
+    changeProductButton.addEventListener('click', () => {
       activateProduct(product)
       animationStop = true
     })
@@ -1139,7 +1472,7 @@ const addEvents = () => {
   const menuContent = menuNavigator.parentElement || menuNavigator.parentNode
   const menuContentWrapper = menuContent.parentElement || menuContent.parentNode
 
-  for(let navButton of navButtons) {
+  for (let navButton of navButtons) {
     const { type } = navButton.dataset
     const menuHintContent = document.querySelector(`.menuHintContentWrapper.${type} .menuHintContent`)
     const menuHintContentWrapper = menuHintContent.parentElement || menuHintContent.parentNode
@@ -1152,9 +1485,9 @@ const addEvents = () => {
         menuHintContent.style.minWidth = `${widthDelta + navigatorDelta}px`
         menuHintContent.style.maxWidth = `${widthDelta + navigatorDelta}px`
       }
-      menuHintContentWrapper.style.transition = 'left 0.3s 0.2s';
+      menuHintContentWrapper.style.transition = 'left 0.3s 0.2s'
       menuHintContentWrapper.style.left = `calc(100% - ${contentWidth}px)`
-      for(let navButton2 of navButtons) {
+      for (let navButton2 of navButtons) {
         if (navButton2 !== navButton) {
           navButton2.style.opacity = '0.3'
         }
@@ -1163,9 +1496,9 @@ const addEvents = () => {
     navButton.addEventListener('mouseout', () => {
       menuHintContent.style.minWidth = ''
       menuHintContent.style.maxWidth = ''
-      menuHintContentWrapper.style.transition = 'left 0.3s';
+      menuHintContentWrapper.style.transition = 'left 0.3s'
       menuHintContentWrapper.style.left = '100%'
-      for(let navButton2 of navButtons) {
+      for (let navButton2 of navButtons) {
         if (navButton2 !== navButton) {
           navButton2.style.opacity = ''
         }
