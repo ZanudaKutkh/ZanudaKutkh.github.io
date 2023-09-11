@@ -210,9 +210,9 @@ const moveToTop = () => {
   const openModals = document.querySelectorAll('.modal.open')
   for (let modal of openModals) {
     modal.classList.remove('open')
-    modal.classList.remove('activeVideo')
-    modal.classList.remove('activeQuiz')
-    modal.classList.remove('inactiveVideoOrQuiz')
+    if (modal.classList.contains('product')) {
+      closeFullVideoOrQuiz()
+    }
     zIndex -= 1
     modal.style.zIndex = ''
   }
