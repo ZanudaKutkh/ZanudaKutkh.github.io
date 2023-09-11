@@ -1256,12 +1256,16 @@ const activateProduct = (product, animate = true) => {
             transform: 'none',
           },
           {
+            top: 'unset',
+            left: 'unset',
             bottom: '-50%',
             right: '-100%',
             opacity: 0,
             transform: 'rotate(32deg)',
           },
           {
+            top: 'unset',
+            left: 'unset',
             bottom: '-50%',
             right: '-100%',
             opacity: 0,
