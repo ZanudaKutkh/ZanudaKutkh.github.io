@@ -41,7 +41,7 @@ a:visited {
   max-width: 1920px;
   max-height: 1080px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   #hiddenContent {
     min-width: 1080px;
     min-height: 1080px;
@@ -90,7 +90,7 @@ a:visited {
   background: #FFFFFF;
   color: #7382EC;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .button {
     padding: 0 28px;
   }
@@ -111,7 +111,7 @@ a:visited {
   font-size: 40px;
   border-radius: 70px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .button.big {
     font-size: 30px;
   }
@@ -211,7 +211,7 @@ a:visited {
   max-width: 1920px;
   transform-origin: top;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .headerWrapper .header {
     padding: 32px 32px 0;
     min-width: 1080px;
@@ -233,7 +233,7 @@ a:visited {
   margin-right: 40px;
   cursor: pointer;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .headerWrapper .header .logo {
     width: 246px;
     height: 32px;
@@ -249,7 +249,7 @@ a:visited {
   width: 32px;
   height: 32px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .headerWrapper .header .button img {
     width: 36px;
     height: 36px;
@@ -265,7 +265,7 @@ a:visited {
   margin-right: auto;
   width: 200px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .headerWrapper .header .catalog {
     margin-right: 0;
     height: 76px;
@@ -317,7 +317,7 @@ a:visited {
   max-height: 1080px;
   transform-origin: bottom;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .contentWrapper .content {
     min-width: 1080px;
     min-height: 1080px;
@@ -467,7 +467,7 @@ a:visited {
   text-transform: uppercase;
   top: calc((100% - 142px) / 2);
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.preloader .preloaderText {
     font-size: 100px;
     letter-spacing: 2px;
@@ -495,7 +495,7 @@ a:visited {
     transition: bottom 0.3s, width 0.3s;
   }
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.preloader .button {
     transition: bottom 0.3s, width 0.3s;
   }
@@ -555,7 +555,7 @@ a:visited {
   max-height: 0;
   transition: max-height 0.3s 0.3s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.menu .navigator {
     padding: 180px 32px 0;
     font-size: 48px;
@@ -593,7 +593,7 @@ a:visited {
   max-width: 100dvw;
   max-height: 100dvh;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.menu .menuHintContentWrapper {
     display: none;
   }
@@ -685,7 +685,7 @@ a:visited {
   gap: 50px;
   padding: 0 20px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.menu .modalButtonsWrapper .modalButtons {
     max-width: 1080px;
     padding: 0 32px;
@@ -713,7 +713,7 @@ a:visited {
   top: calc(100% - 130px);
   transition: top cubic-bezier(0.65, 1.2, 0.35, -0.2) 2s 1s, gap 1s 2s, opacity 0.3s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.menu.open .modalButtons {
     top: calc(100% - 226px);
   }
@@ -748,7 +748,7 @@ a:visited {
   width: 20px;
   height: 20px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.about .block .modalClose {
     width: 76px;
     height: 76px;
@@ -770,7 +770,7 @@ a:visited {
   bottom: calc(100% - 256px - 114px);
   transition: opacity 0.2s 0.1s, bottom 0.3s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.about.open .block {
     bottom: 50%;
     right: 50%;
@@ -821,7 +821,7 @@ a:visited {
   width: 20px;
   height: 20px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.contact .block .modalClose {
     width: 76px;
     height: 76px;
@@ -843,7 +843,7 @@ a:visited {
   bottom: calc(100% - 276px - 114px);
   transition: opacity 0.2s 0.1s, bottom 0.3s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.contact.open .block {
     bottom: 50%;
     right: 50%;
@@ -1408,7 +1408,7 @@ a:visited {
   gap: 50px;
   transform-origin: bottom left;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.product .navigator {
     left: 0;
     gap: 42px;
@@ -1609,7 +1609,7 @@ a:visited {
   opacity: 1;
   transition: left 0.3s 1.1s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.product.open .block {
     left: 32px;
   }
@@ -1626,7 +1626,7 @@ a:visited {
   left: 433px;
   transition: left 0.4s 1.2s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.product.open .back {
     left: 175px;
   }
@@ -1679,7 +1679,7 @@ a:visited {
   right: 370px;
   transition: right 0.5s 1.3s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.product.open .videoWrapper {
     right: 32px;
   }
@@ -1695,7 +1695,7 @@ a:visited {
   transform: translateX(-50%);
   transition: bottom 0.3s 2s, transform 0.3s 2s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.product.open .navigator {
     transform: none;
   }
@@ -1717,7 +1717,7 @@ a:visited {
   transform: translate(-50%, 100%);
   transition: bottom 1.2s, transform 1.2s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.product.activeQuiz .navigator,
   .modal.product.activeVideo .navigator {
     transform: translateY(100%);
@@ -1745,7 +1745,7 @@ a:visited {
   right: 440px;
   transition: width 1.2s, height 1.2s, bottom 1.2s, right 1.2s;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.product.activeVideo .videoWrapper {
     right: 20px;
   }
@@ -1904,7 +1904,7 @@ a:visited {
   letter-spacing: 2.84px;
   text-transform: uppercase;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text {
     font-size: 100px;
     letter-spacing: 2px;
@@ -1920,7 +1920,7 @@ a:visited {
   top: 206px;
   left: 50px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.choose {
     top: 300px;
     left: 44px;
@@ -1936,7 +1936,7 @@ a:visited {
   top: 348px;
   left: 184px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.exactly {
     display: none;
   }
@@ -1950,7 +1950,7 @@ a:visited {
   top: 490px;
   left: 516px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.that {
     top: 400px;
     left: 215px;
@@ -1972,7 +1972,7 @@ a:visited {
   bottom: 446px;
   right: 442px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.what {
     bottom: unset;
     top: 400px;
@@ -1991,7 +1991,7 @@ a:visited {
   bottom: 304px;
   right: 230px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.want {
     bottom: unset;
     top: 500px;
@@ -2011,7 +2011,7 @@ a:visited {
   bottom: 162px;
   right: 230px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.you {
     bottom: unset;
     top: 600px;
@@ -2058,7 +2058,7 @@ a:visited {
   height: 550px;
   transform: rotate(36deg);
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .img.bag {
     bottom: 90px;
     left: 50px;
@@ -2092,7 +2092,7 @@ a:visited {
   width: 248px;
   height: 317px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .img.gift {
     top: 690px;
     right: 120px;
@@ -2135,7 +2135,7 @@ a:visited {
   font-weight: 500;
   line-height: 64px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .hint {
     bottom: 32px;
   }
@@ -2184,7 +2184,7 @@ a:visited {
   top: 460px;
   left: calc(100% - 301px);
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .eye.active.gift {
     top: 860px;
     left: calc(100% - 246px);
@@ -2202,7 +2202,7 @@ a:visited {
   top: calc(100% - 250px);
   left: 485px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .eye.active.bag {
     top: 770px;
     left: 150px;
@@ -2246,7 +2246,7 @@ a:visited {
   letter-spacing: 2.84px;
   text-transform: uppercase;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .secondScreen .secondText {
     font-size: 100px;
     letter-spacing: 2px;
@@ -2264,7 +2264,7 @@ a:visited {
   top: 245px;
   left: 150px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .secondScreen .secondText .create {
     top: 306px;
     left: 36px;
@@ -2281,7 +2281,7 @@ a:visited {
   top: 394px;
   left: 393px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .secondScreen .secondText .our {
     top: 420px;
     left: 117px;
@@ -2297,7 +2297,7 @@ a:visited {
   top: 394px;
   right: 150px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .secondScreen .secondText .design {
     top: 428px;
     right: 24px;
@@ -2314,7 +2314,7 @@ a:visited {
   top: 536px;
   right: 200px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .secondScreen .secondText .clothes {
     top: 528px;
     right: 30px;
@@ -2429,7 +2429,7 @@ a:visited {
   top: 100%;
   left: calc((100% - 703px) / 2);
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .cupScreen .cup {
     width: 552px;
     height: 550px;
@@ -2463,7 +2463,7 @@ a:visited {
   letter-spacing: 2.84px;
   text-transform: uppercase;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .cupScreen .cupText {
     font-size: 100px;
     top: calc((100% - 100px) / 2);
@@ -2500,7 +2500,7 @@ a:visited {
   justify-content: center;
   align-items: center;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .bottleScreen .background {
     width: 972px;
     height: 940px;
@@ -2525,7 +2525,7 @@ a:visited {
   top: 80px;
   left: calc((100% - 516px) / 2);
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .bottleScreen .background .bottle {
     width: 560px;
     height: 1746px;
@@ -2550,7 +2550,7 @@ a:visited {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .bottleScreen .background .bottleText {
     font-size: 70px;
     letter-spacing: unset;
@@ -2726,7 +2726,7 @@ a:visited {
   top: calc((100% - 783px) / 2);
   left: calc((100% - 1352px) / 2);
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .laptopScreen #laptop {
     width: 1008px;
     height: 584px;
@@ -2758,7 +2758,7 @@ a:visited {
   top: calc((100% - 680px) / 2);
   left: calc((100% - 980px) / 2);
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .laptopScreen #laptop .background {
     padding: 20px 40px;
     width: 730px;
@@ -2783,7 +2783,7 @@ a:visited {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .laptopScreen #laptop .background .laptopTextWrapper {
     font-size: 70px;
     letter-spacing: 1.4px;
@@ -2830,7 +2830,7 @@ a:visited {
   padding: 66px 54px 80px;
   color: #FFFFFF;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .footer .content {
     gap: 35px;
     padding: 36px;
@@ -2853,7 +2853,7 @@ a:visited {
   align-items: center;
   margin-bottom: auto;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .footer .content .top {
     order: 2;
     flex-flow: column nowrap;
@@ -2880,7 +2880,7 @@ a:visited {
   font-weight: 800;
   line-height: 1;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .footer .content .main {
     order: 1;
     font-size: 50px;
@@ -2906,7 +2906,7 @@ a:visited {
   align-items: flex-end;
   gap: 40px;
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .footer .content .bottom {
     order: 3;
     justify-content: flex-start;
@@ -2933,7 +2933,7 @@ a:visited {
     font-size: 11px;
   }
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .horizontal:not(.square) {
     display: none !important;
   }
@@ -2943,7 +2943,7 @@ a:visited {
     display: none !important;
   }
 }
-@media (min-aspect-ratio: 4.0001/3) {
+@media (min-aspect-ratio: 400000001/300000000) {
   .square:not(.horizontal) {
     display: none !important;
   }
@@ -2953,12 +2953,12 @@ a:visited {
     display: none !important;
   }
 }
-@media (min-aspect-ratio: 4.0001/3) {
+@media (min-aspect-ratio: 400000001/300000000) {
   .vertical:not(.horizontal) {
     display: none !important;
   }
 }
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3.0001/4) {
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .vertical:not(.square) {
     display: none !important;
   }
