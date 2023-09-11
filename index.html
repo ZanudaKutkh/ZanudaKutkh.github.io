@@ -7,8 +7,8 @@
   <script src="/scripts/lodash.throttle@4.1.1.js"></script>
   <script src="/scripts/viewport-units-polyfill.min.js"></script>
   <script src="/scripts/imask.min.js"></script>
-  <script src="/scripts/pseudoScrollEvent.min.js"></script>
-  <script src="/scripts/animationEndEvent.min.js"></script>
+  <script src="/scripts/pseudoScrollEvent.js"></script>
+  <script src="/scripts/animationEndEvent.js"></script>
   <script src="/scripts/index.js"></script>
   <link rel="stylesheet" href="/styles/fonts.css">
   <link rel="stylesheet" href="/styles/index.css">
@@ -398,10 +398,10 @@
         <img src="/media/image/burger.svg" alt="burger" />
         <span>Каталог</span>
       </button>
-      <button class="button white about horizontal modalOpen" data-modal="modalAbout">
+      <button class="button white about horizontal modalOpen hideOnClick" data-modal="modalAbout">
         О проекте
       </button>
-      <button class="button white contact horizontal modalOpen" data-modal="modalContact">
+      <button class="button white contact horizontal modalOpen hideOnClick" data-modal="modalContact">
         Связаться с нами
       </button>
     </div>
@@ -538,7 +538,8 @@
 <div class="contentWrapper center modal hint" id="modalHint">
   <div class="content">
     <div class="block">
-      <img class="mouse" src="/media/image/mouse.svg" alt="mouse" />
+      <img class="mouse horizontal square" src="/media/image/mouse.svg" alt="mouse" />
+      <img class="mouse vertical" src="/media/image/swipe.svg" alt="swipe" />
       <div class="text">
         Для перемещения по нашей промо странице используй скролл и ты увидишь все возможности.
       </div>

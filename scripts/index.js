@@ -211,12 +211,20 @@ const moveToTop = () => {
   for (let modal of openModals) {
     modal.classList.remove('open')
     if (modal.classList.contains('product')) {
-      closeFullVideoOrQuiz()
+      closeFullVideoOrQuiz(false)
     }
     zIndex -= 1
     modal.style.zIndex = ''
   }
-  moveTo(1)
+  for(let screen of document.querySelectorAll('.contentWrapper')) {
+    screen.style.zIndex = ''
+    screen.style.top = ''
+    screen.style.opacity = ''
+  }
+  dispatchAnimationEnd('firstScreen', false, 0, () => {
+    moveTo(0)
+    rollbackAnimation()
+  })
   animationStop = false
 }
 
@@ -282,7 +290,7 @@ const resizeContent = () => {
   }
 }
 
-const animateFirstScreen = ({ currentY }) => {
+const animateFirstScreen = ({ currentY, deltaY }) => {
   const content = document.querySelector('#firstScreen .content')
   const wrapper = content.parentElement || content.parentNode
   const layer2 = document.getElementById('layer2')
@@ -292,7 +300,7 @@ const animateFirstScreen = ({ currentY }) => {
 
   animationScreenEnd.firstScreen = wrapper.offsetHeight
 
-  if (currentY >= 0) {
+  if (currentY > 0) {
     if (currentY < wrapper.offsetHeight) {
       const percent = 1 - ((wrapper.offsetHeight - currentY) / wrapper.offsetHeight)
       layer2.style.top = `-${percent * (content.offsetHeight + heightDelta)}px`
@@ -300,8 +308,8 @@ const animateFirstScreen = ({ currentY }) => {
       layer2.style.top = `-${content.offsetHeight + heightDelta}px`
       dispatchAnimationEnd('secondScreen', false)
     }
-  } else {
-    layer2.style.top = '0'
+  } else if (currentY === 0 && deltaY < 0) {
+    layer2.style.top = '0px'
   }
 }
 
@@ -339,7 +347,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${position}px`
-    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s, width 0.3s, height 0.3s, font-size 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
   } else if (currentY < (wrapper.offsetHeight * 2.5)) {
@@ -347,12 +355,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'opacity 0.3s'
+    eye.style.transition = 'opacity 0.3s, width 0.3s, height 0.3s, font-size 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'tShirt'
   } else if (currentY < (wrapper.offsetHeight * 3)) {
-    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s, width 0.3s, height 0.3s, font-size 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     const percent = ((wrapper.offsetHeight * 3) - currentY) / (wrapper.offsetHeight / 2)
@@ -367,12 +375,12 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.opacity = '1'
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `${stop}px`
-    eye.style.transition = 'opacity 0.3s'
+    eye.style.transition = 'opacity 0.3s, width 0.3s, height 0.3s, font-size 0.3s'
     eye.style.zIndex = '3'
     eye.style.opacity = '1'
     eye.dataset.product = 'apron'
   } else if (currentY < (wrapper.offsetHeight * 4)) {
-    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s, width 0.3s, height 0.3s, font-size 0.3s'
     eye.style.zIndex = '-1'
     eye.style.opacity = '0'
     const stop = getAttr(content.getElementsByClassName('apron'), 'stop', 0)
@@ -381,7 +389,7 @@ const animateSecondScreen = ({ currentY: posY, deltaY }) => {
     clothesImages.style.zIndex = '2'
     clothesImages.style.left = `calc(${stop - (widthDelta * percent)}px - ${100 * percent}%)`
   } else if (posY >= animationScreenEnd.secondScreen) {
-    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s'
+    eye.style.transition = 'opacity 0.3s, z-index 0s 0.3s, width 0.3s, height 0.3s, font-size 0.3s'
     eye.style.opacity = '0'
     eye.style.zIndex = '-1'
     secondText.style.top = '0'
@@ -685,9 +693,17 @@ const animate = ({ detail = {} }) => {
     case 'laptopScreen':
       animateLaptopScreen(detail)
       break
-    default:
-    // console.log(currentScreen, e)
   }
+}
+
+const rollbackAnimation = () => {
+  const detail = { currentY: 0, deltaY: -1 }
+  animateFirstScreen(detail)
+  animateSecondScreen(detail)
+  animateCupScreen(detail)
+  animateBottleScreen(detail)
+  animateBoxScreen(detail)
+  animateLaptopScreen(detail)
 }
 
 const defaultActivateScreen = (screen, prev, stopAnimation) => {
@@ -760,7 +776,7 @@ const activateLaptopScreen = () => {
 }
 
 const changeCurrentScreen = (e) => {
-  const { nextScreen, prev, delay } = e.detail
+  const { nextScreen, prev, delay, callback } = e.detail
   if (delay) {
     animationStop = true
   }
@@ -769,6 +785,11 @@ const changeCurrentScreen = (e) => {
     switch (nextScreen) {
       case 'firstScreen':
         defaultActivateScreen(nextScreen, prev)
+        setTimeout(() => {
+          for (let eye of document.querySelectorAll('#firstScreen .eye')) {
+            eye.classList.add('active')
+          }
+        }, 1000)
         animationNextStop = false
         break
       case 'secondScreen':
@@ -780,8 +801,10 @@ const changeCurrentScreen = (e) => {
       case 'laptopScreen':
         defaultActivateScreen(nextScreen, prev, true)
         activateLaptopScreen()
+        break
     }
     currentScreen = nextScreen
+    callback && callback()
   }, delay)
 }
 
@@ -900,7 +923,7 @@ const closeModal = e => {
   }
 }
 
-const closeFullVideoOrQuiz = () => {
+const closeFullVideoOrQuiz = (addInactiveClass = true) => {
   const productBlock = document.getElementById('productBlock')
   const modalProduct = document.getElementById('modalProduct')
   const backButton = document.getElementById('backButton')
@@ -921,8 +944,8 @@ const closeFullVideoOrQuiz = () => {
   backButton.addEventListener('click', closeModal)
   modalProduct.classList.remove('activeVideo')
   modalProduct.classList.remove('activeQuiz')
-  modalProduct.classList.add('inactiveVideoOrQuiz')
-  video.addEventListener('timeupdate', videoSample)
+  if (addInactiveClass) modalProduct.classList.add('inactiveVideoOrQuiz')
+  if (video) video.addEventListener('timeupdate', videoSample)
 }
 
 const playFullVideo = () => {
@@ -1375,7 +1398,6 @@ const addEvents = () => {
               target.style.fontSize = target.dataset.fontSize
               target.style.transition = target.dataset.transition
               target.style.zIndex = target.dataset.zIndex
-              zIndex -= 1
               animationStop = true
             }
           }

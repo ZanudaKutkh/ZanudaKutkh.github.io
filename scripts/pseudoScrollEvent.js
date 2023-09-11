@@ -4,7 +4,7 @@ const registerPseudoScrollEvent = (el, getStopPseudoScroll) => {
   const maxScrollLength = 30
 
   const dispatchPseudoScroll = (detail) => {
-    currentY = detail?.currentY || currentY
+    currentY = detail?.currentY === undefined ? currentY : detail.currentY
     const pseudoScrollEvent = new CustomEvent('pseudoScroll', { detail })
     el.dispatchEvent(pseudoScrollEvent)
   }
@@ -13,26 +13,34 @@ const registerPseudoScrollEvent = (el, getStopPseudoScroll) => {
 
   el.addEventListener("moveTo", e => {
     const { detail } = e
-    const { moveTo, step = maxScrollLength, delayStep = 10 } = detail
+    const { moveTo, step = maxScrollLength, delayStep } = detail
 
     let delay = 0;
     if (moveTo >= currentY) {
-      for (let i = currentY; i < moveTo + step; i += step) {
-        delay += delayStep;
-        const nextY = i > moveTo ? moveTo : i
-        const deltaY = nextY - currentY
-        setTimeout(() => {
-          dispatchPseudoScroll({ currentY: nextY, deltaY })
-        }, delay)
+      if (delayStep) {
+        for (let i = currentY; i < moveTo + step; i += step) {
+          delay += delayStep;
+          const nextY = i > moveTo ? moveTo : i
+          const deltaY = nextY - currentY
+          setTimeout(() => {
+            dispatchPseudoScroll({ currentY: nextY, deltaY })
+          }, delay)
+        }
+      } else {
+        dispatchPseudoScroll({ currentY: moveTo, deltaY: moveTo - currentY })
       }
     } else {
-      for (let i = currentY; i > moveTo - step; i -= step) {
-        delay += delayStep;
-        const nextY = i < moveTo ? moveTo : i
-        setTimeout(() => {
+      if (delayStep) {
+        for (let i = currentY; i > moveTo - step; i -= step) {
+          delay += delayStep;
+          const nextY = i < moveTo ? moveTo : i
           const deltaY = nextY - currentY
-          dispatchPseudoScroll({ currentY: nextY, deltaY })
-        }, delay)
+          setTimeout(() => {
+            dispatchPseudoScroll({ currentY: nextY, deltaY })
+          }, delay)
+        }
+      } else {
+        dispatchPseudoScroll({ currentY: moveTo, deltaY: moveTo - currentY })
       }
     }
   })
