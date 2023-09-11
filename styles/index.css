@@ -145,7 +145,7 @@ a:visited {
   color: #7382EC;
   position: absolute;
   left: 0;
-  bottom: 10px;
+  bottom: 9%;
   font-size: inherit;
   font-weight: 800;
   text-align: center;
@@ -477,7 +477,7 @@ a:visited {
   transform: translateX(-50%);
   left: 50%;
   bottom: -100px;
-  transition: bottom 0.3s 0.3s, width 0.3s 0.3s;
+  transition: bottom 0.3s 0.3s, width 0.3s 0.3s, height 0.3s 0.3s;
 }
 @media (max-aspect-ratio: 3/4) {
   .modal.preloader .button {
@@ -2108,30 +2108,78 @@ a:visited {
     width: 100px;
   }
 }
-.firstScreen .layer2 .button {
+.firstScreen .layer2 .hint {
   position: absolute;
-  bottom: 20px;
-  width: 280px;
-  left: 20px;
+  width: 343px;
+  height: 64px;
+  bottom: 90px;
+  transform: translateX(-50%);
+  left: 50%;
+  border-radius: 32px;
+  background: #FFFFFF;
+  color: #7382EC;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 64px;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3/4) {
-  .firstScreen .layer2 .button {
+  .firstScreen .layer2 .hint {
     bottom: 32px;
-    width: 1008px;
-    left: 32px;
+  }
+}
+.firstScreen .layer2 .hint .imageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background: #7382EC;
+  transform: translate(-50%, -70%);
+  top: 0;
+  left: 50%;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+}
+.firstScreen .layer2 .hint .imageWrapper img {
+  width: 70%;
+  height: 70%;
+}
+@media (max-aspect-ratio: 3/4) {
+  .firstScreen .layer2 .hint {
+    height: 40px;
+    bottom: 20px;
+    width: 280px;
+    font-size: 12px;
+    line-height: 40px;
+  }
+  .firstScreen .layer2 .hint .imageWrapper {
+    width: 40px;
+    height: 40px;
   }
 }
 .firstScreen .layer2 .eye {
   position: absolute;
   opacity: 0;
   z-index: -1;
+  transition: width 0.3s, height 0.3s, font-size 0.3s;
+}
+.firstScreen .layer2 .eye:hover {
+  width: 168px;
+  height: 118px;
+  font-size: 12px;
+}
+@media (max-aspect-ratio: 3/4) {
+  .firstScreen .layer2 .eye:hover {
+    width: 80px;
+    height: 56px;
+  }
 }
 .firstScreen .layer2 .eye.gift {
   opacity: 1;
   z-index: auto;
   top: 460px;
   left: calc(100% - 301px);
-  transition: top 0.3s, left 0.3s, opacity 0.3s;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3/4) {
   .firstScreen .layer2 .eye.gift {
@@ -2150,7 +2198,6 @@ a:visited {
   z-index: auto;
   top: calc(100% - 250px);
   left: 485px;
-  transition: top 0.3s, left 0.3s, opacity 0.3s;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 3/4) {
   .firstScreen .layer2 .eye.bag {

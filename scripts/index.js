@@ -283,38 +283,22 @@ const animateFirstScreen = ({ currentY }) => {
   const content = document.querySelector('#firstScreen .content')
   const wrapper = content.parentElement || content.parentNode
   const layer2 = document.getElementById('layer2')
-  const eye = document.querySelector('#firstScreen .eye')
 
   const viewContentHeight = content.offsetHeight * scale
   const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
 
-  animationScreenEnd.firstScreen = wrapper.offsetHeight * 3.2
+  animationScreenEnd.firstScreen = wrapper.offsetHeight
 
   if (currentY >= 0) {
-    if (currentY < wrapper.offsetHeight * 0.2) {
-      eye.style.opacity = '0'
-      layer2.style.top = '0'
-      eye.className = 'eye modalOpen'
-    } else if (currentY < wrapper.offsetHeight * 1.2) {
-      eye.style.opacity = '1'
-      eye.className = 'eye modalOpen gift'
-      eye.dataset.product = 'gift'
-      layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 2.2) {
-      eye.style.opacity = '1'
-      eye.className = 'eye modalOpen bag'
-      eye.dataset.product = 'bag'
-      layer2.style.top = '0'
-    } else if (currentY < wrapper.offsetHeight * 3.2) {
-      eye.style.opacity = '0'
-      eye.className = 'eye modalOpen'
-      const percent = 1 - ((wrapper.offsetHeight * 3.2 - currentY) / wrapper.offsetHeight)
+    if (currentY < wrapper.offsetHeight) {
+      const percent = 1 - ((wrapper.offsetHeight - currentY) / wrapper.offsetHeight)
       layer2.style.top = `-${percent * (content.offsetHeight + heightDelta)}px`
     } else {
       layer2.style.top = `-${content.offsetHeight + heightDelta}px`
-      eye.className = 'eye modalOpen'
       dispatchAnimationEnd('secondScreen', false)
     }
+  } else {
+    layer2.style.top = '0'
   }
 }
 
@@ -830,12 +814,16 @@ const startMainFlow = () => {
   const isSquare = 1.33 > (window.innerWidth / window.innerHeight) >= 0.75
   if (isVertical) {
     preloaderButton.style.bottom = '20px'
+    preloaderButton.style.height = '40px'
     preloaderButton.style.width = '280px'
   } else if (isSquare) {
-    preloaderButton.style.bottom = '36px'
-    preloaderButton.style.width = '1008px'
+    preloaderButton.style.bottom = '32px'
+    preloaderButton.style.height = '64px'
+    preloaderButton.style.width = '343px'
   } else {
-    preloaderButton.style.bottom = `calc(100% + ${heightDelta}px)`
+    preloaderButton.style.bottom = '90px'
+    preloaderButton.style.height = '64px'
+    preloaderButton.style.width = '343px'
   }
   preloader.style.opacity = `0.1`
 
@@ -911,7 +899,7 @@ const closeModal = e => {
   }
 }
 
-const closeFullVideoOrQuiz = e => {
+const closeFullVideoOrQuiz = () => {
   const productBlock = document.getElementById('productBlock')
   const modalProduct = document.getElementById('modalProduct')
   const backButton = document.getElementById('backButton')
@@ -936,7 +924,7 @@ const closeFullVideoOrQuiz = e => {
   video.addEventListener('timeupdate', videoSample)
 }
 
-const playFullVideo = e => {
+const playFullVideo = () => {
   const modalProduct = document.getElementById('modalProduct')
   const backButton = document.getElementById('backButton')
   const playButton = document.getElementById('playButton')
@@ -983,7 +971,7 @@ const fullScreenVideo = () => {
   }
 }
 
-const setQuizStep = step => e => {
+const setQuizStep = step => () => {
   const quizQuestion = document.getElementById('quizQuestion')
   const curr = quizQuestion.innerText - 1
 
@@ -1035,7 +1023,7 @@ const checkContact = (button) => () => {
   button.disabled = !(answers.get('name') && (phoneValid || mailValid))
 }
 
-const startQuiz = productData => e => {
+const startQuiz = productData => () => {
   const modalProduct = document.getElementById('modalProduct')
   const productBlock = document.getElementById('productBlock')
   const backButton = document.getElementById('backButton')
@@ -1365,25 +1353,30 @@ const addEvents = () => {
       modalOpenButton.addEventListener('transitionend', e => {
         if (e.propertyName === 'width') {
           let { target } = e
-          let i = 0
-          while (!target.classList.contains('modalOpen') && i < 10) {
-            target = target.parentElement || target.parentNode
-            i += 1
-          }
-          if (target === modalOpenButton) {
-            const { product } = dataset
-            const modal = document.getElementById(modalName)
-            modal.classList.add('open')
-            zIndex += 1
-            modal.style.zIndex = zIndex.toString()
-            activateProduct(product, false)
-            target.style.top = target.dataset.top
-            target.style.left = target.dataset.left
-            target.style.height = target.dataset.height
-            target.style.width = target.dataset.width
-            target.style.fontSize = target.dataset.fontSize
-            target.style.transition = target.dataset.transition
-            animationStop = true
+          if (e.target.dataset.click === '1') {
+            e.target.dataset.click = ''
+            let i = 0
+            while (!target.classList.contains('modalOpen') && i < 10) {
+              target = target.parentElement || target.parentNode
+              i += 1
+            }
+            if (target === modalOpenButton) {
+              const { product } = dataset
+              const modal = document.getElementById(modalName)
+              modal.classList.add('open')
+              zIndex += 1
+              modal.style.zIndex = zIndex.toString()
+              activateProduct(product, false)
+              target.style.top = target.dataset.top
+              target.style.left = target.dataset.left
+              target.style.height = target.dataset.height
+              target.style.width = target.dataset.width
+              target.style.fontSize = target.dataset.fontSize
+              target.style.transition = target.dataset.transition
+              target.style.zIndex = target.dataset.zIndex
+              zIndex -= 1
+              animationStop = true
+            }
           }
         }
       })
@@ -1415,6 +1408,7 @@ const addEvents = () => {
         }
         const scale = height / target.offsetHeight
 
+        target.dataset.click = '1'
         target.dataset.transition = target.style.transition
         target.style.transition = 'font-size cubic-bezier(.4,0,1,.44) 1.5s, width cubic-bezier(.4,0,1,.44) 1.5s, height cubic-bezier(.4,0,1,.44) 1.5s, top cubic-bezier(.4,0,1,.44) 1.5s, left cubic-bezier(.4,0,1,.44) 1.5s'
         target.dataset.top = target.style.top
@@ -1427,6 +1421,9 @@ const addEvents = () => {
         target.style.width = `${width}px`
         target.dataset.fontSize = target.style.fontSize
         target.style.fontSize = `${10 * scale}px`
+        target.dataset.zIndex = target.style.zIndex
+        zIndex += 1
+        target.style.zIndex = zIndex
       })
     } else {
       modalOpenButton.addEventListener('click', e => {

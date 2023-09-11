@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" xml:space="preserve">
+<style type="text/css">
+	.animate {
+		animation: move 1s ease 1s infinite alternate;
+	}
+
+	@keyframes move {
+		0% {
+			transform: translate(0, 0);
+		}
+		100% {
+			transform: translate(0, 10px);
+		}
+	}
+</style>
+<path fill="#FFFFFF" d="M16,32c-5.3,0-9.7-4.4-9.7-9.7V9.7C6.3,4.3,10.7,0,16,0c5.3,0,9.7,4.3,9.7,9.7v12.6C25.7,27.6,21.3,32,16,32z
+	 M16,1.9c-4.3,0-7.8,3.5-7.8,7.8v12.6c0,4.3,3.5,7.8,7.8,7.8s7.8-3.5,7.8-7.8V9.7C23.8,5.4,20.3,1.9,16,1.9z"/>
+<path class="animate" fill="#FFFFFF" d="M16,4.6L16,4.6c0.5,0,1,0.4,1,1v4.8c0,0.5-0.4,1-1,1l0,0c-0.5,0-1-0.4-1-1V5.6C15,5,15.5,4.6,16,4.6z"/>
+</svg>
