@@ -1166,17 +1166,17 @@ const startQuiz = productData => () => {
     if (i) {
       const prev = document.createElement('button')
       prev.className = 'button border blue'
-      prev.innerText = 'Назад'
+      prev.innerHTML = '<span>Назад</span>'
       prev.addEventListener('click', setQuizStep(i - 1))
       buttons.append(prev)
     }
     next.className = 'button blue'
     next.disabled = true
     if (i < quiz.length - 1) {
-      next.innerText = 'Дальше'
+      next.innerHTML = '<span>Дальше</span>'
       next.addEventListener('click', setQuizStep(i + 1))
     } else {
-      next.innerText = 'Оформить'
+      next.innerHTML = '<span>Оформить</span>'
       next.addEventListener('click', setQuizStep('contact'))
     }
     buttons.append(next)
@@ -1214,7 +1214,7 @@ const startQuiz = productData => () => {
     q.append(mail)
 
     submit.className = 'submit button blue'
-    submit.innerText = 'Отправить'
+    submit.innerHTML = '<span>Отправить</span>'
     submit.disabled = true
     submit.addEventListener('click', submitQuiz)
     q.append(submit)
@@ -1541,6 +1541,7 @@ const closeHint = () => {
 }
 
 window.onload = () => {
+
   animationStop = true
   registerPseudoScrollEvent(window, getStopPseudoScroll)
   resizeContent()

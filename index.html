@@ -32,7 +32,7 @@
       <source src="/media/video/preloader_hevc.mov" type="video/quicktime; codecs=hvc1" />
     </video>
     <div class="button white big" id="preloaderButton">
-      Начать
+      <span>Начать</span>
     </div>
   </div>
 </div>
@@ -44,10 +44,10 @@
       <span>Каталог</span>
     </button>
     <button class="button white horizontal about horizontal modalOpen hideOnClick" data-modal="modalAbout">
-      О проекте
+      <span>О проекте</span>
     </button>
     <button class="button white horizontal contact horizontal modalOpen hideOnClick" data-modal="modalContact">
-      Связаться с нами
+      <span>Связаться с нами</span>
     </button>
   </div>
 </div>
@@ -180,16 +180,16 @@
   <div class="content">
     <div class="top">
       <button class="button white horizontal" onclick="moveToTop()">
-        Вернуться к началу
+        <span>Вернуться к началу</span>
       </button>
       <button class="button white horizontal catalog modalOpen" data-modal="modalMenu">
-        Открыть каталог
+        <span>Открыть каталог</span>
       </button>
       <button class="button white big vertical square" onclick="moveToTop()">
-        Вернуться к началу
+        <span>Вернуться к началу</span>
       </button>
       <button class="button white big vertical square catalog modalOpen" data-modal="modalMenu">
-        Открыть каталог
+        <span>Открыть каталог</span>
       </button>
     </div>
     <div class="main">
@@ -226,10 +226,10 @@
         <span>Закрыть</span>
       </button>
       <button class="button white about horizontal modalOpen hideOnClick" data-modal="modalAbout">
-        О проекте
+        <span>О проекте</span>
       </button>
       <button class="button white contact horizontal modalOpen hideOnClick" data-modal="modalContact">
-        Связаться с нами
+        <span>Связаться с нами</span>
       </button>
     </div>
   </div>
@@ -310,10 +310,10 @@
   <div class="modalButtonsWrapper vertical square" id="menuModalButtons">
     <div class="modalButtons ">
       <button class="button white big about modalOpen" data-modal="modalAbout">
-        О проекте
+        <span>О проекте</span>
       </button>
       <button class="button white big contact modalOpen" data-modal="modalContact">
-        Связаться с нами
+        <span>Связаться с нами</span>
       </button>
     </div>
   </div>
@@ -331,7 +331,7 @@
         <span>Закрыть</span>
       </button>
       <button style="opacity: 0; pointer-events: none" class="button white contact horizontal modalOpen" data-modal="modalContact">
-        Связаться с нами
+        <span>Связаться с нами</span>
       </button>
     </div>
   </div>
@@ -358,7 +358,7 @@
         <span>Каталог</span>
       </button>
       <button style="opacity: 0; pointer-events: none" class="button white about horizontal modalOpen" data-modal="modalAbout">
-        О проекте
+        <span>О проекте</span>
       </button>
       <button class="button white contact horizontal modalClose" data-modal="modalContact">
         <img src="/media/image/close.svg" alt="close" />
@@ -400,10 +400,10 @@
         <span>Каталог</span>
       </button>
       <button class="button white about horizontal modalOpen hideOnClick" data-modal="modalAbout">
-        О проекте
+        <span>О проекте</span>
       </button>
       <button class="button white contact horizontal modalOpen hideOnClick" data-modal="modalContact">
-        Связаться с нами
+        <span>Связаться с нами</span>
       </button>
     </div>
   </div>
@@ -443,7 +443,7 @@
       </div>
     </div>
     <div class="block" id="productBlock">
-      <div id="infoBlock">
+      <div class="block" id="infoBlock">
         <div class="blockTitle horizontal square" id="productTitle"></div>
         <div class="blockContent horizontal square" id="productText"></div>
         <div class="blockContent vertical" id="productShortText"></div>
@@ -451,9 +451,11 @@
           <span class="horizontal square">Заполнить анкету</span>
           <span class="vertical">Заказать</span>
         </button>
-        <a href="mailto:info@topline.ru" class="button blue mail" id="mailButton">Написать</a>
+        <a href="mailto:info@topline.ru" class="button blue mail" id="mailButton">
+          <span>Написать</span>
+        </a>
       </div>
-      <div id="quizBlock">
+      <div class="block" id="quizBlock">
         <form id="quiz">
         </form>
       </div>
@@ -464,11 +466,15 @@
       <span>Вернуться назад</span>
     </button>
     <div class="videoWrapper" id="productVideo">
-      <button class="button white play horizontal square" id="playButton">Смотреть видео</button>
+      <button class="button white play horizontal square" id="playButton">
+        <span>Смотреть видео</span>
+      </button>
       <button class="play vertical" id="playButtonMobile">
         <img src="/media/image/play.svg" width="20" height="20" alt="play" />
       </button>
-      <a class="button white download horizontal square" id="downloadButton">Скачать презентацию</a>
+      <a class="button white download horizontal square" id="downloadButton">
+        <span>Скачать презентацию</span>
+      </a>
       <a class="download vertical" id="downloadButtonMobile">
         <img src="/media/image/download.svg" width="20" height="20" alt="download" />
       </a>
@@ -549,7 +555,7 @@
         При нажатии на кнопку «Посмотреть», ты узнаешь все подробности.
       </div>
       <button class="button blue" onclick="closeHint()">
-        Понятно
+        <span>Понятно</span>
       </button>
     </div>
   </div>

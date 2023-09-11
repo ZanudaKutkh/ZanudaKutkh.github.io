@@ -68,7 +68,6 @@ a:visited {
   height: 64px;
   min-width: 64px;
   border-radius: 32px;
-  gap: 26px;
   margin: 0;
   padding: 0 32px;
   color: #333333;
@@ -79,6 +78,13 @@ a:visited {
   white-space: nowrap;
   border: none;
   background: transparent;
+}
+.button:after {
+  content: '';
+  margin-right: -26px;
+}
+.button > * {
+  margin-right: 26px;
 }
 .button.blue {
   color: #FFFFFF;
@@ -180,8 +186,8 @@ a:visited {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  gap: 20px;
   margin-right: auto;
+  margin-left: -20px;
 }
 .dots .dot {
   background: #D5FD74;
@@ -189,6 +195,7 @@ a:visited {
   height: 36px;
   flex-shrink: 0;
   border-radius: 50%;
+  margin-left: 20px;
 }
 .headerWrapper {
   display: flex;
@@ -208,11 +215,14 @@ a:visited {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  gap: 20px;
   padding: 32px 54px 0;
   min-width: 1920px;
   max-width: 1920px;
   transform-origin: top;
+  margin-left: -20px;
+}
+.headerWrapper .header > * {
+  margin-left: 20px;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .headerWrapper .header {
@@ -354,13 +364,19 @@ a:visited {
 .modal .block {
   display: flex;
   flex-flow: column nowrap;
-  gap: 20px;
   opacity: 0;
   position: absolute;
   background: #FFFFFF;
   bottom: 100%;
   border-radius: 16px;
   padding: 30px;
+}
+.modal .block > * {
+  margin-top: 20px;
+}
+.modal .block:before {
+  content: '';
+  margin-top: -20px;
 }
 @media (max-aspect-ratio: 3/4) {
   .modal .block {
@@ -685,8 +701,10 @@ a:visited {
   left: 50%;
   display: flex;
   flex-flow: column nowrap;
-  gap: 50px;
   padding: 0 20px;
+}
+.modal.menu .modalButtonsWrapper .modalButtons > :not(:last-child) {
+  margin-bottom: 50px;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.menu .modalButtonsWrapper .modalButtons {
@@ -712,9 +730,12 @@ a:visited {
 .modal.menu.open .modalButtons {
   opacity: 1;
   pointer-events: auto;
-  gap: 10px;
   top: calc(100% - 130px);
-  transition: top cubic-bezier(0.65, 1.2, 0.35, -0.2) 2s 1s, gap 1s 2s, opacity 0.3s;
+  transition: top cubic-bezier(0.65, 1.2, 0.35, -0.2) 2s 1s, opacity 0.3s;
+}
+.modal.menu.open .modalButtons > :not(:last-child) {
+  margin-bottom: 10px;
+  transition: margin-bottom 1s 2s;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.menu.open .modalButtons {
@@ -733,7 +754,7 @@ a:visited {
 .modal.about .block {
   width: 554px;
   height: 256px;
-  right: 308px;
+  right: 325px;
 }
 @media (max-aspect-ratio: 3/4) {
   .modal.about .block {
@@ -806,7 +827,7 @@ a:visited {
 .modal.contact .block {
   width: 554px;
   height: 276px;
-  right: 86px;
+  right: 101px;
 }
 @media (max-aspect-ratio: 3/4) {
   .modal.contact .block {
@@ -873,11 +894,11 @@ a:visited {
   }
 }
 .modal.contact.open .block .dots {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 @media (max-aspect-ratio: 3/4) {
   .modal.contact.open .block .dots {
-    margin-top: -4px;
+    margin-top: 16px;
   }
 }
 .modal.contact.open .headerWrapper {
@@ -887,59 +908,65 @@ a:visited {
   background: #D5FD74;
   z-index: -100;
 }
-.modal.product .block {
+.modal.product .content > .block {
   bottom: unset;
   left: -100%;
 }
-.modal.product .block .quiz,
-.modal.product .block .mail {
+.modal.product .content > .block .quiz,
+.modal.product .content > .block .mail {
   align-self: flex-start;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block .quiz,
-  .modal.product .block .mail {
+  .modal.product .content > .block .quiz,
+  .modal.product .content > .block .mail {
     align-self: unset;
     width: 100%;
   }
 }
-.modal.product .block .blockTitle {
+.modal.product .content > .block .blockTitle {
   white-space: pre-wrap;
 }
-.modal.product .block .blockContent {
+.modal.product .content > .block .blockContent {
   width: 430px;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block .blockContent {
+  .modal.product .content > .block .blockContent {
     width: auto;
   }
 }
-.modal.product .block .blockContent a {
+.modal.product .content > .block .blockContent a {
   font-weight: 700;
 }
-.modal.product .block #infoBlock {
+.modal.product .content > .block #infoBlock,
+.modal.product .content > .block #quizBlock {
+  position: relative;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  bottom: unset;
+  opacity: 1;
+}
+.modal.product .content > .block #infoBlock {
   display: flex;
   flex-flow: column nowrap;
-  gap: 20px;
 }
-.modal.product .block #quizBlock {
+.modal.product .content > .block #quizBlock {
   display: none;
   flex-flow: column nowrap;
   flex: 1;
-  gap: 20px;
   overflow: hidden;
 }
-.modal.product .block #quizBlock form {
+.modal.product .content > .block #quizBlock form {
   display: flex;
   flex-flow: column nowrap;
   flex: 1;
   max-height: 100%;
 }
-.modal.product .block #quizBlock form .quizHeader {
+.modal.product .content > .block #quizBlock form .quizHeader {
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 40px;
   color: #7382EC;
   font-size: 24px;
   font-weight: 800;
@@ -949,68 +976,80 @@ a:visited {
   margin-bottom: 40px;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .quizHeader {
+  .modal.product .content > .block #quizBlock form .quizHeader {
     flex-flow: column-reverse nowrap;
-    gap: 10px;
     margin-bottom: 16px;
   }
 }
-.modal.product .block #quizBlock form .quizHeader .quizTitle {
+.modal.product .content > .block #quizBlock form .quizHeader .quizTitle {
   font-size: inherit;
   font-weight: inherit;
   margin: 0;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .quizHeader .quizTitle {
+  .modal.product .content > .block #quizBlock form .quizHeader .quizTitle {
     font-size: 16px;
   }
 }
-.modal.product .block #quizBlock form .quizHeader .quizCounter {
+.modal.product .content > .block #quizBlock form .quizHeader .quizCounter {
   white-space: nowrap;
+  margin-left: 40px;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .quizHeader .quizCounter {
+  .modal.product .content > .block #quizBlock form .quizHeader .quizCounter {
     font-size: 10px;
+    margin-left: 0;
+    margin-bottom: 10px;
   }
 }
-.modal.product .block #quizBlock form .quizHeader .quizCounter #quizQuestion:after {
+.modal.product .content > .block #quizBlock form .quizHeader .quizCounter #quizQuestion:after {
   content: '/';
 }
-.modal.product .block #quizBlock form h2 {
+.modal.product .content > .block #quizBlock form h2 {
   color: #333333;
   font-size: 16px;
   font-weight: 700;
   line-height: 1.25;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form h2 {
+  .modal.product .content > .block #quizBlock form h2 {
     font-size: 14px;
   }
 }
-.modal.product .block #quizBlock form h2 i {
+.modal.product .content > .block #quizBlock form h2 i {
   font-style: unset;
   font-weight: 300;
 }
-.modal.product .block #quizBlock form h2 i:before {
+.modal.product .content > .block #quizBlock form h2 i:before {
   content: ' ';
 }
-.modal.product .block #quizBlock form .question {
+.modal.product .content > .block #quizBlock form .question {
   display: none;
   flex-flow: column nowrap;
   flex: 1;
-  gap: 16px;
   overflow: hidden;
 }
+.modal.product .content > .block #quizBlock form .question:after {
+  content: '';
+  margin-bottom: -16px;
+}
+.modal.product .content > .block #quizBlock form .question > * {
+  margin-bottom: 16px;
+}
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .question {
-    gap: 10px;
+  .modal.product .content > .block #quizBlock form .question:after {
+    content: '';
+    margin-bottom: -10px;
+  }
+  .modal.product .content > .block #quizBlock form .question > * {
+    margin-bottom: 10px;
   }
 }
-.modal.product .block #quizBlock form .question.active {
+.modal.product .content > .block #quizBlock form .question.active {
   display: flex;
 }
-.modal.product .block #quizBlock form .question fieldset {
-  margin: 0;
+.modal.product .content > .block #quizBlock form .question fieldset {
+  margin: 0 0 16px;
   margin-inline: 0;
   padding: 0;
   padding-inline: 0;
@@ -1019,65 +1058,70 @@ a:visited {
   flex-flow: column nowrap;
   overflow: auto;
 }
-.modal.product .block #quizBlock form .question label.radio,
-.modal.product .block #quizBlock form .question label.checkbox {
+@media (max-aspect-ratio: 3/4) {
+  .modal.product .content > .block #quizBlock form .question fieldset {
+    margin-bottom: 10px;
+  }
+}
+.modal.product .content > .block #quizBlock form .question label.radio,
+.modal.product .content > .block #quizBlock form .question label.checkbox {
   cursor: pointer;
 }
-.modal.product .block #quizBlock form .question label.radio input,
-.modal.product .block #quizBlock form .question label.checkbox input {
+.modal.product .content > .block #quizBlock form .question label.radio input,
+.modal.product .content > .block #quizBlock form .question label.checkbox input {
   display: none;
 }
-.modal.product .block #quizBlock form .question label.radio span,
-.modal.product .block #quizBlock form .question label.checkbox span {
+.modal.product .content > .block #quizBlock form .question label.radio span,
+.modal.product .content > .block #quizBlock form .question label.checkbox span {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  gap: 20px;
   font-size: 16px;
   line-height: 2;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .question label.radio span,
-  .modal.product .block #quizBlock form .question label.checkbox span {
-    gap: 8px;
+  .modal.product .content > .block #quizBlock form .question label.radio span,
+  .modal.product .content > .block #quizBlock form .question label.checkbox span {
     font-size: 14px;
     line-height: 1.3;
   }
 }
-.modal.product .block #quizBlock form .question label.radio span:before,
-.modal.product .block #quizBlock form .question label.checkbox span:before {
+.modal.product .content > .block #quizBlock form .question label.radio span:before,
+.modal.product .content > .block #quizBlock form .question label.checkbox span:before {
   content: '';
   display: block;
   width: 14px;
   height: 14px;
   border: 1px solid #333333;
+  margin-right: 20px;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .question label.radio span:before,
-  .modal.product .block #quizBlock form .question label.checkbox span:before {
+  .modal.product .content > .block #quizBlock form .question label.radio span:before,
+  .modal.product .content > .block #quizBlock form .question label.checkbox span:before {
     width: 13px;
     height: 13px;
+    margin-right: 8px;
   }
 }
-.modal.product .block #quizBlock form .question label.radio input:checked + span:before,
-.modal.product .block #quizBlock form .question label.checkbox input:checked + span:before {
+.modal.product .content > .block #quizBlock form .question label.radio input:checked + span:before,
+.modal.product .content > .block #quizBlock form .question label.checkbox input:checked + span:before {
   background: #7382EC;
   border-color: #7382EC;
 }
-.modal.product .block #quizBlock form .question label.radio span:before {
+.modal.product .content > .block #quizBlock form .question label.radio span:before {
   border-radius: 50%;
 }
-.modal.product .block #quizBlock form .question textarea {
+.modal.product .content > .block #quizBlock form .question textarea {
   resize: none;
   min-height: 64px;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .question textarea {
+  .modal.product .content > .block #quizBlock form .question textarea {
     min-height: 54px;
   }
 }
-.modal.product .block #quizBlock form .question input,
-.modal.product .block #quizBlock form .question textarea {
+.modal.product .content > .block #quizBlock form .question input,
+.modal.product .content > .block #quizBlock form .question textarea {
   font-size: 16px;
   padding: 4px 20px;
   line-height: 2;
@@ -1087,48 +1131,48 @@ a:visited {
   outline: none;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .question input,
-  .modal.product .block #quizBlock form .question textarea {
+  .modal.product .content > .block #quizBlock form .question input,
+  .modal.product .content > .block #quizBlock form .question textarea {
     font-size: 14px;
     padding: 4px 10px;
     line-height: 1.5;
   }
 }
-.modal.product .block #quizBlock form .question input::-webkit-input-placeholder,
-.modal.product .block #quizBlock form .question textarea::-webkit-input-placeholder,
-.modal.product .block #quizBlock form .question input::-moz-placeholder,
-.modal.product .block #quizBlock form .question textarea::-moz-placeholder,
-.modal.product .block #quizBlock form .question input:-ms-input-placeholder,
-.modal.product .block #quizBlock form .question textarea:-ms-input-placeholder,
-.modal.product .block #quizBlock form .question input:-moz-placeholder,
-.modal.product .block #quizBlock form .question textarea:-moz-placeholder {
+.modal.product .content > .block #quizBlock form .question input::-webkit-input-placeholder,
+.modal.product .content > .block #quizBlock form .question textarea::-webkit-input-placeholder,
+.modal.product .content > .block #quizBlock form .question input::-moz-placeholder,
+.modal.product .content > .block #quizBlock form .question textarea::-moz-placeholder,
+.modal.product .content > .block #quizBlock form .question input:-ms-input-placeholder,
+.modal.product .content > .block #quizBlock form .question textarea:-ms-input-placeholder,
+.modal.product .content > .block #quizBlock form .question input:-moz-placeholder,
+.modal.product .content > .block #quizBlock form .question textarea:-moz-placeholder {
   color: #333333;
 }
-.modal.product .block #quizBlock form .question input:focus,
-.modal.product .block #quizBlock form .question textarea:focus {
+.modal.product .content > .block #quizBlock form .question input:focus,
+.modal.product .content > .block #quizBlock form .question textarea:focus {
   opacity: 1;
 }
-.modal.product .block #quizBlock form .question .button[disabled] {
+.modal.product .content > .block #quizBlock form .question .button[disabled] {
   opacity: 0.3;
   cursor: not-allowed;
 }
-.modal.product .block #quizBlock form .question .buttons {
+.modal.product .content > .block #quizBlock form .question .buttons {
   display: flex;
   flex-flow: row nowrap;
-  gap: 10px;
+  justify-content: space-between;
   margin-top: auto;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .question .buttons .button {
+  .modal.product .content > .block #quizBlock form .question .buttons .button {
     width: calc(50% - 5px);
   }
 }
-.modal.product .block #quizBlock form .question .submit {
+.modal.product .content > .block #quizBlock form .question .submit {
   align-self: flex-start;
   margin-top: auto;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product .block #quizBlock form .question .submit {
+  .modal.product .content > .block #quizBlock form .question .submit {
     width: calc(50% - 5px);
   }
 }
@@ -1408,13 +1452,19 @@ a:visited {
   transform: translate(-50%, 100%);
   display: flex;
   flex-flow: row nowrap;
-  gap: 50px;
   transform-origin: bottom left;
+}
+.modal.product .navigator > :not(:last-child) {
+  margin-right: 50px;
+}
+.modal.product .navigator::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .modal.product .navigator {
     left: 0;
-    gap: 42px;
     transform: translateY(100%);
     width: 100%;
     padding: 0 32px;
@@ -1422,16 +1472,13 @@ a:visited {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  .modal.product .navigator::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+  .modal.product .navigator > :not(:last-child) {
+    margin-right: 42px;
   }
 }
 @media (max-aspect-ratio: 3/4) {
   .modal.product .navigator {
     left: 0;
-    gap: 15px;
     transform: translateY(100%);
     width: 100%;
     padding: 0 20px;
@@ -1439,10 +1486,8 @@ a:visited {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  .modal.product .navigator::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+  .modal.product .navigator > :not(:last-child) {
+    margin-right: 15px;
   }
 }
 .modal.product .navigator .itemWrapper {
@@ -1605,7 +1650,7 @@ a:visited {
 .modal.product.open {
   z-index: 100;
 }
-.modal.product.open .block {
+.modal.product.open .content > .block {
   width: 554px;
   top: 180px;
   left: 318px;
@@ -1613,12 +1658,12 @@ a:visited {
   transition: left 0.3s 1.1s;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
-  .modal.product.open .block {
+  .modal.product.open .content > .block {
     left: 32px;
   }
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product.open .block {
+  .modal.product.open .content > .block {
     width: 200px;
     top: 160px;
     left: 20px;
@@ -1732,7 +1777,7 @@ a:visited {
     transform: translateY(100%);
   }
 }
-.modal.product.activeVideo .block {
+.modal.product.activeVideo .content > .block {
   left: -100%;
   transition: left 1.2s;
 }
@@ -1756,7 +1801,7 @@ a:visited {
 .modal.product.activeVideo .videoWrapper:after {
   display: none;
 }
-.modal.product.activeQuiz .block {
+.modal.product.activeQuiz .content > .block {
   transform: translateX(-50%);
   left: 50%;
   top: 242px;
@@ -1764,7 +1809,7 @@ a:visited {
   transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s, width 1.2s;
 }
 @media (max-aspect-ratio: 3/4) {
-  .modal.product.activeQuiz .block {
+  .modal.product.activeQuiz .content > .block {
     width: 280px;
     transform: none;
     left: 20px;
@@ -1789,7 +1834,7 @@ a:visited {
   right: -100%;
   transition: right 1.2s;
 }
-.modal.product.inactiveVideoOrQuiz .block {
+.modal.product.inactiveVideoOrQuiz .content > .block {
   transition: transform 1.2s, left 1.2s, top 1.2s, height 1.2s, width 1.2s;
 }
 .modal.product.inactiveVideoOrQuiz .back {
@@ -1815,14 +1860,26 @@ a:visited {
 }
 .modal.hint .block {
   width: 554px;
-  gap: 48px;
   padding-top: 48px;
+}
+.modal.hint .block > * {
+  margin-top: 48px;
+}
+.modal.hint .block:before {
+  content: '';
+  margin-top: -48px;
 }
 @media (max-aspect-ratio: 3/4) {
   .modal.hint .block {
     width: 280px;
-    gap: 12px;
     padding-top: 20px;
+  }
+  .modal.hint .block > * {
+    margin-top: 12px;
+  }
+  .modal.hint .block:before {
+    content: '';
+    margin-top: -12px;
   }
 }
 .modal.hint .text {
@@ -1854,9 +1911,18 @@ a:visited {
   align-self: center;
   transform: none;
 }
+.modal.hint .eye:hover {
+  width: 128px;
+  height: 90px;
+  font-size: 10px;
+}
 @media (max-aspect-ratio: 3/4) {
   .modal.hint .eye {
     margin-top: 18px;
+  }
+  .modal.hint .eye:hover {
+    width: 62px;
+    height: 44px;
   }
 }
 .modal.hint .button {
@@ -2834,26 +2900,32 @@ a:visited {
 .footer .content {
   display: flex;
   flex-flow: column nowrap;
-  gap: 60px;
   min-height: 700px;
   max-height: 700px;
   padding: 66px 54px 80px;
   color: #FFFFFF;
 }
+.footer .content > * {
+  margin-bottom: 60px;
+}
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .footer .content {
-    gap: 35px;
     padding: 36px;
     min-height: 780px;
     max-height: 780px;
   }
+  .footer .content > * {
+    margin-bottom: 35px;
+  }
 }
 @media (max-aspect-ratio: 3/4) {
   .footer .content {
-    gap: 35px;
     padding: 25px 20px 20px;
     min-height: 380px;
     max-height: 380px;
+  }
+  .footer .content > * {
+    margin-bottom: 35px;
   }
 }
 .footer .content .top {
@@ -2861,26 +2933,28 @@ a:visited {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: auto;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .footer .content .top {
     order: 2;
     flex-flow: column nowrap;
-    gap: 26px;
     justify-content: unset;
     align-items: unset;
     margin-top: auto;
-    margin-bottom: 0;
+  }
+  .footer .content .top > :not(:last-child) {
+    margin-bottom: 26px;
   }
 }
 @media (max-aspect-ratio: 3/4) {
   .footer .content .top {
     order: 2;
     flex-flow: column nowrap;
-    gap: 10px;
     justify-content: unset;
     align-items: unset;
+  }
+  .footer .content .top > :not(:last-child) {
+    margin-bottom: 10px;
   }
 }
 .footer .content .main {
@@ -2889,14 +2963,16 @@ a:visited {
   font-size: 50px;
   font-weight: 800;
   line-height: 1;
+  margin-top: auto;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .footer .content .main {
     order: 1;
     font-size: 50px;
+    margin-top: unset;
   }
   .footer .content .main .dots {
-    margin: 60px 0 0;
+    margin: 60px 0 0 -20px;
   }
 }
 @media (max-aspect-ratio: 3/4) {
@@ -2904,9 +2980,10 @@ a:visited {
     order: 1;
     font-size: 20px;
     line-height: 1.15;
+    margin-top: unset;
   }
   .footer .content .main .dots {
-    margin: 20px 0 15px;
+    margin: 20px 0 15px -20px;
   }
 }
 .footer .content .bottom {
@@ -2914,13 +2991,12 @@ a:visited {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 40px;
+  margin-bottom: 0;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .footer .content .bottom {
     order: 3;
     justify-content: flex-start;
-    gap: 40px;
   }
 }
 @media (max-aspect-ratio: 3/4) {
@@ -2928,7 +3004,6 @@ a:visited {
     order: 3;
     flex-flow: column nowrap;
     align-items: flex-start;
-    gap: 10px;
   }
 }
 .footer .content .bottom .privacy,
@@ -2936,11 +3011,23 @@ a:visited {
   font-size: 16px;
   font-weight: 400;
   line-height: 1;
+  margin-left: 40px;
 }
 @media (max-aspect-ratio: 3/4) {
   .footer .content .bottom .privacy,
   .footer .content .bottom .copyright {
-    font-size: 11px;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
+  .footer .content .bottom .privacy {
+    margin-left: 0;
+  }
+}
+@media (max-aspect-ratio: 3/4) {
+  .footer .content .bottom .privacy {
+    margin-top: 0;
   }
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
