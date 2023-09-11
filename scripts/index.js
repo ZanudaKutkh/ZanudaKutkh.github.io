@@ -210,6 +210,9 @@ const moveToTop = () => {
   const openModals = document.querySelectorAll('.modal.open')
   for (let modal of openModals) {
     modal.classList.remove('open')
+    modal.classList.remove('activeVideo')
+    modal.classList.remove('activeQuiz')
+    modal.classList.remove('inactiveVideoOrQuiz')
     zIndex -= 1
     modal.style.zIndex = ''
   }
@@ -804,8 +807,6 @@ const startMainFlow = () => {
 
   const maxSize = Math.max(wrapper.offsetHeight, wrapper.offsetWidth)
   const roundSize = (maxSize / scale) * 2
-  const viewContentHeight = content.offsetHeight * scale
-  const heightDelta = Math.floor((wrapper.offsetHeight - viewContentHeight) / scale)
 
   dispatchAnimationEnd('firstScreen', false)
   preloaderRound.style.height = `${roundSize}px`
