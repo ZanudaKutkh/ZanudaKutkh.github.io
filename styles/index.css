@@ -1925,8 +1925,8 @@ a:visited {
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.choose {
-    top: 300px;
-    left: 44px;
+    top: 190px;
+    left: 32px;
   }
 }
 @media (max-aspect-ratio: 3/4) {
@@ -1955,8 +1955,14 @@ a:visited {
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.that {
-    top: 400px;
-    left: 215px;
+    top: 290px;
+    left: 98px;
+  }
+  .firstScreen .layer2 .text.that:after {
+    position: absolute;
+    content: ',';
+    top: 0;
+    right: -0.25em;
   }
 }
 @media (max-aspect-ratio: 3/4) {
@@ -1978,8 +1984,9 @@ a:visited {
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.what {
     bottom: unset;
-    top: 400px;
-    right: 175px;
+    top: 290px;
+    right: unset;
+    left: 272px;
   }
 }
 @media (max-aspect-ratio: 3/4) {
@@ -1997,8 +2004,8 @@ a:visited {
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.want {
     bottom: unset;
-    top: 500px;
-    right: 100px;
+    top: 390px;
+    right: 32px;
   }
 }
 @media (max-aspect-ratio: 3/4) {
@@ -2017,8 +2024,8 @@ a:visited {
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
   .firstScreen .layer2 .text.you {
     bottom: unset;
-    top: 600px;
-    right: 100px;
+    top: 490px;
+    right: 32px;
   }
 }
 @media (max-aspect-ratio: 3/4) {
