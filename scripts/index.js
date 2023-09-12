@@ -785,11 +785,6 @@ const changeCurrentScreen = (e) => {
     switch (nextScreen) {
       case 'firstScreen':
         defaultActivateScreen(nextScreen, prev)
-        setTimeout(() => {
-          for (let eye of document.querySelectorAll('#firstScreen .eye')) {
-            eye.classList.add('active')
-          }
-        }, 1000)
         animationNextStop = false
         break
       case 'secondScreen':
@@ -861,6 +856,12 @@ const startMainFlow = () => {
     zIndex += 1
     modalHint.style.zIndex = zIndex.toString()
     modalHint.classList.add('open')
+  } else {
+    setTimeout(() => {
+      for (let eye of document.querySelectorAll('#firstScreen .eye')) {
+        eye.classList.add('active')
+      }
+    }, 1000)
   }
 }
 
@@ -1422,7 +1423,7 @@ const addEvents = () => {
         }
 
         const hc = document.getElementById('hiddenContent')
-        const maxSize = Math.max(hc.offsetHeight, hc.offsetWidth)
+        const maxSize = Math.max(window.innerHeight, window.innerWidth)
         const proportion = target.offsetHeight / target.offsetWidth
         let width
         let height
@@ -1537,6 +1538,11 @@ const closeHint = () => {
   modalHint.classList.remove('open')
   zIndex -= 1
   modalHint.style.zIndex = ''
+  setTimeout(() => {
+    for (let eye of document.querySelectorAll('#firstScreen .eye')) {
+      eye.classList.add('active')
+    }
+  }, 1000)
   window.localStorage.hintClosed = true
 }
 
