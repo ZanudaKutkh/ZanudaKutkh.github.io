@@ -8,6 +8,24 @@ let boxBadgeStartOffsetTop
 let boxBadgeStartOffsetLeft
 let laptopTextInterval = []
 
+const preloaderVideos = {
+  vp9: {
+    type: 'video/webm',
+    codec: 'vp9',
+    src: '/media/video/preloader_vp9.webm',
+  },
+  vp8: {
+    type: 'video/webm',
+    codec: 'vp8',
+    src: '/media/video/preloader_vp8.webm',
+  },
+  hvc1: {
+    type: 'video/quicktime',
+    codec: 'hvc1',
+    src: '/media/video/preloader_hevc.mov',
+  },
+}
+
 const quizData = {
   clothes: [
     {
@@ -865,6 +883,8 @@ const startMainFlow = () => {
   }
 }
 
+let videoStarted = false
+
 const preloaderActivate = ({ target }) => {
   if (!videoStarted) {
     videoStarted = true
@@ -875,6 +895,7 @@ const preloaderActivate = ({ target }) => {
 
     const viewContentWidth = content.offsetWidth * scale
     const widthDelta = Math.floor(((wrapper.offsetWidth - viewContentWidth) / 2) / scale)
+    console.log(duration)
 
     preloaderText.style.left = `calc(100% + ${widthDelta}px)`
     preloaderText.style.transition = `left ${duration}s`
@@ -882,8 +903,6 @@ const preloaderActivate = ({ target }) => {
     preloaderText.style.opacity = '1'
   }
 }
-
-let videoStarted = false
 
 const preloaderVideoEnd = () => {
   const preloader = document.getElementById('preloader')
@@ -1546,10 +1565,48 @@ const closeHint = () => {
   window.localStorage.hintClosed = true
 }
 
-window.onload = () => {
+const setPreloaderVideo = () => {
+  const isIOs = ['iPad', 'iPhone', 'iPod'].includes(navigator.platform)
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+  const isSafari = window.safari !== undefined
 
+  const preloader = document.getElementById('preloader')
+  const preloaderVideo = document.getElementById('preloaderVideo')
+
+  let src
+
+  if (isSafari || isIOs) {
+    src = preloaderVideos.hvc1.src
+    preloader.style.background = '#FFFFFF'
+    preloader.style.color = '#7382EC'
+  } else if (preloaderVideo.canPlayType && preloaderVideo.canPlayType(`${preloaderVideos.vp9.type}; codecs=${preloaderVideos.vp9.codec}`)) {
+    src = preloaderVideos.vp9.src
+  } else {
+    src = preloaderVideos.vp8.src
+  }
+
+  preloaderVideo.src = src
+  preloaderVideo.oncanplay = () => {
+    preloaderVideo.play()
+  }
+
+  /*
+  fetch(src)
+    .then(response => {
+      return response.blob()
+    })
+    .then(response => {
+      preloaderVideo.src = src
+      preloaderVideo.play()
+    })
+
+   */
+}
+
+window.onload = () => {
   animationStop = true
   registerPseudoScrollEvent(window, getStopPseudoScroll)
   resizeContent()
   addEvents()
+  setPreloaderVideo()
 }

@@ -425,7 +425,8 @@ a:visited {
   transform-origin: bottom;
 }
 .modal.preloader {
-  background: #DDDAD7;
+  background: #7E7D77;
+  color: #D5FD74;
   transition: opacity 1s;
 }
 .modal.preloader:not(.open) {
@@ -484,7 +485,6 @@ a:visited {
 .modal.preloader .preloaderText {
   opacity: 0;
   position: absolute;
-  color: #7382EC;
   font-size: 142px;
   font-weight: 800;
   line-height: 1;
