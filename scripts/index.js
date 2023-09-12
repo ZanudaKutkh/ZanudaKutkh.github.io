@@ -895,7 +895,6 @@ const preloaderActivate = ({ target }) => {
 
     const viewContentWidth = content.offsetWidth * scale
     const widthDelta = Math.floor(((wrapper.offsetWidth - viewContentWidth) / 2) / scale)
-    console.log(duration)
 
     preloaderText.style.left = `calc(100% + ${widthDelta}px)`
     preloaderText.style.transition = `left ${duration}s`
@@ -1037,15 +1036,49 @@ const setQuizStep = step => () => {
 const submitQuiz = e => {
   e.preventDefault()
   const form = document.getElementById('quiz')
-  console.dir(Array.from(new window.FormData(form).entries()))
-  const quizTitle = document.getElementById('quizTitle')
-  quizTitle.innerText = 'Уже видим Ваш запрос!'
-  const questions = document.querySelectorAll('#quizBlock .question.active')
-  questions.forEach(q => { q.classList.remove('active') })
-  const message = document.createElement('h2')
-  message.className = 'message'
-  message.innerText = 'Вернемся с расчетом бюджета и сроков в самое ближайшее время'
-  form.append(message)
+  const formData = new window.FormData(form)
+  const quizKey = formData.get('quizKey')
+  const quiz = quizData[quizKey]
+  let comment = formData.get('quizName')
+
+  const dataKeys = Array.from(formData.keys())
+    .filter((value, index, array) => array.indexOf(value) === index)
+
+  quiz.forEach((q, i) => {
+    comment += '\n' + q.question
+
+    dataKeys.forEach(key => {
+      if (key.includes('question_' + i)) {
+        comment += '\n' + formData.getAll(key).join('\n')
+      }
+    })
+  })
+
+  const queryData = {
+    '_url': window.location.href,
+    'your-name': formData.get('name'),
+    'your-phone': formData.get('phone'),
+    'your-email': formData.get('mail'),
+    'your-message': comment,
+  }
+
+  fetch('http://new.topline.gq/n8n/webhook/promo_orders', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(queryData)
+  })
+    .then(() => {
+      const quizTitle = document.getElementById('quizTitle')
+      quizTitle.innerText = 'Уже видим Ваш запрос!'
+      const questions = document.querySelectorAll('#quizBlock .question.active')
+      questions.forEach(q => { q.classList.remove('active') })
+      const message = document.createElement('h2')
+      message.className = 'message'
+      message.innerText = 'Вернемся с расчетом бюджета и сроков в самое ближайшее время'
+      form.append(message)
+    })
 }
 
 const checkAnswer = (question, button) => () => {
@@ -1108,6 +1141,12 @@ const startQuiz = productData => () => {
   quizKey.type = 'hidden'
   quizKey.value = productData.quizKey
   form.append(quizKey)
+
+  const quizName = document.createElement('input')
+  quizName.name = 'quizName'
+  quizName.type = 'hidden'
+  quizName.value = productData.quizTitle
+  form.append(quizName)
 
   quiz.forEach((question, i) => {
     const q = document.createElement('div')
@@ -1589,18 +1628,6 @@ const setPreloaderVideo = () => {
   preloaderVideo.oncanplay = () => {
     preloaderVideo.play()
   }
-
-  /*
-  fetch(src)
-    .then(response => {
-      return response.blob()
-    })
-    .then(response => {
-      preloaderVideo.src = src
-      preloaderVideo.play()
-    })
-
-   */
 }
 
 window.onload = () => {
