@@ -1428,6 +1428,9 @@ const activateProduct = (product, animate = true) => {
     source2.src = productData.video + '.mp4'
     source2.type = 'video/mp4'
     video.append(source2)
+    video.oncanplay = () => {
+      video.play()
+    }
     productVideo.insertBefore(video, productVideo.firstChild)
 
     playButton.addEventListener('click', playFullVideo)
