@@ -3121,4 +3121,30 @@ a:visited {
     top: 0;
   }
 }
+@keyframes moveImageBottomRight {
+  0% {
+    top: unset;
+    left: unset;
+    bottom: 0;
+    right: 0;
+    opacity: 1;
+    transform: none;
+  }
+  50% {
+    top: unset;
+    left: unset;
+    bottom: -25%;
+    right: -50%;
+    opacity: 0.1;
+    transform: rotate(16deg);
+  }
+  100% {
+    top: unset;
+    left: unset;
+    bottom: -50%;
+    right: -100%;
+    opacity: 0;
+    transform: rotate(32deg);
+  }
+}
 /*# sourceMappingURL=index.css.map */

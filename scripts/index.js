@@ -1307,53 +1307,14 @@ const activateProduct = (product, animate = true) => {
   for (let image of productWrapper.children) {
     if (image !== productImage && image.classList.contains('active')) {
       if (animate) {
-        const keyframes = [
-          {
-            top: 'unset',
-            left: 'unset',
-            bottom: 0,
-            right: 0,
-            opacity: 1,
-            transform: 'none',
-          },
-          {
-            top: 'unset',
-            left: 'unset',
-            bottom: '-25%',
-            right: '-50%',
-            opacity: 0,
-            transform: 'rotate(32deg)',
-          },
-          {
-            top: 'unset',
-            left: 'unset',
-            bottom: '-50%',
-            right: '-100%',
-            opacity: 0,
-            transform: 'rotate(32deg)',
-          },
-          {
-            top: 'unset',
-            left: 'unset',
-            bottom: '-50%',
-            right: '-100%',
-            opacity: 0,
-            transform: 'rotate(32deg)',
-          },
-          {
-            top: 'unset',
-            left: 'unset',
-            bottom: '-50%',
-            right: '-100%',
-            opacity: 0,
-            transform: 'rotate(32deg)',
-          },
-        ]
-        const timing = {
-          duration: 800,
-          iterations: 1,
+        image.style.animationName = 'moveImageBottomRight'
+        image.style.animationDuration = '0.3s'
+        image.style.animationTimingFunction = 'linear'
+        image.onanimationend = () => {
+          image.style.animationName = ''
+          image.style.animationDuration = ''
+          image.style.animationTimingFunction = ''
         }
-        image.animate(keyframes, timing)
       }
       image.classList.remove('active')
     }
