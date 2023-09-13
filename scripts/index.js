@@ -1306,16 +1306,6 @@ const activateProduct = (product, animate = true) => {
   const productWrapper = productImage.parentElement || productImage.parentNode
   for (let image of productWrapper.children) {
     if (image !== productImage && image.classList.contains('active')) {
-      if (animate) {
-        image.style.animationName = 'moveImageBottomRight'
-        image.style.animationDuration = '0.3s'
-        image.style.animationTimingFunction = 'linear'
-        image.onanimationend = () => {
-          image.style.animationName = ''
-          image.style.animationDuration = ''
-          image.style.animationTimingFunction = ''
-        }
-      }
       image.classList.remove('active')
     }
   }
