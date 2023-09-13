@@ -225,9 +225,8 @@ a:visited {
   min-width: 1920px;
   max-width: 1920px;
   transform-origin: top;
-  margin-left: -20px;
 }
-.headerWrapper .header > * {
+.headerWrapper .header > :not(:first-child) {
   margin-left: 20px;
 }
 @media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
@@ -419,7 +418,7 @@ a:visited {
   top: 0;
 }
 .modal:not(.open) {
-  transition: z-index 0s 2s;
+  transition: z-index 0s 1s;
 }
 .modal:not(.open) .content {
   transform-origin: bottom;
@@ -431,7 +430,7 @@ a:visited {
 }
 .modal.preloader:not(.open) {
   display: none;
-  transition: opacity 1s, z-index 0s 2s;
+  transition: opacity 1s, z-index 0s 1s;
 }
 .modal.preloader .preloaderImage {
   opacity: 0;
@@ -555,9 +554,10 @@ a:visited {
   top: unset;
   bottom: 100%;
   transition: bottom 0.3s;
+  overflow: hidden;
 }
 .modal.menu:not(.open) {
-  transition: bottom 0.3s, z-index 0s 2s;
+  transition: bottom 0.3s, z-index 0s 0.5s;
 }
 .modal.menu .headerWrapper {
   display: none;
@@ -790,7 +790,7 @@ a:visited {
   }
 }
 .modal.about:not(.open) {
-  transition: opacity 0.3s, z-index 0s 2s;
+  transition: opacity 0.3s, z-index 0s 0.5s;
 }
 .modal.about.open {
   opacity: 1;
@@ -863,7 +863,7 @@ a:visited {
   }
 }
 .modal.contact:not(.open) {
-  transition: opacity 0.3s, z-index 0s 2s;
+  transition: opacity 0.3s, z-index 0s 0.5s;
 }
 .modal.contact.open {
   opacity: 1;
@@ -1792,6 +1792,11 @@ a:visited {
   transform: translateY(100%);
   transition: bottom 1.2s, transform 1.2s;
 }
+@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 300000001/400000000) {
+  .modal.product.activeVideo .back {
+    left: 20px;
+  }
+}
 .modal.product.activeVideo .videoWrapper {
   width: 1040px;
   height: 586px;
@@ -2288,7 +2293,7 @@ a:visited {
 }
 @media (max-aspect-ratio: 3/4) {
   .firstScreen .layer2 .eye.active.gift {
-    top: 440px;
+    top: 460px;
     left: calc(100% - 94px);
   }
 }
@@ -2306,8 +2311,8 @@ a:visited {
 }
 @media (max-aspect-ratio: 3/4) {
   .firstScreen .layer2 .eye.active.bag {
-    left: 65px;
-    top: calc(100% - 268px);
+    left: 75px;
+    top: calc(100% - 240px);
   }
 }
 .secondScreen {

@@ -251,9 +251,8 @@ a:visited {
     min-width: 1920px;
     max-width: 1920px;
     transform-origin: top;
-    margin-left: -20px;
 
-    & > * {
+    & > :not(:first-child) {
       margin-left: 20px;
     }
 
@@ -454,7 +453,7 @@ a:visited {
   }
 
   &:not(.open) {
-    transition: z-index 0s 2s;
+    transition: z-index 0s 1s;
 
     .content {
       transform-origin: bottom;
@@ -468,7 +467,7 @@ a:visited {
 
     &:not(.open) {
       display: none;
-      transition: opacity 1s, z-index 0s 2s;
+      transition: opacity 1s, z-index 0s 1s;
     }
 
     .preloaderImage {
@@ -596,9 +595,10 @@ a:visited {
     top: unset;
     bottom: 100%;
     transition: bottom 0.3s;
+    overflow: hidden;
 
     &:not(.open) {
-      transition: bottom 0.3s, z-index 0s 2s;
+      transition: bottom 0.3s, z-index 0s 0.5s;
     }
 
     .headerWrapper {
@@ -851,7 +851,7 @@ a:visited {
     }
 
     &:not(.open) {
-      transition: opacity 0.3s, z-index 0s 2s;
+      transition: opacity 0.3s, z-index 0s 0.5s;
     }
 
     &.open {
@@ -931,7 +931,7 @@ a:visited {
     }
 
     &:not(.open) {
-      transition: opacity 0.3s, z-index 0s 2s;
+      transition: opacity 0.3s, z-index 0s 0.5s;
     }
 
     &.open {
@@ -1904,6 +1904,10 @@ a:visited {
         bottom: calc(100% - 165px);
         transform: translateY(100%);
         transition: bottom 1.2s, transform 1.2s;
+
+        @media @square {
+          left: 20px;
+        }
       }
 
       .videoWrapper {
@@ -2425,7 +2429,7 @@ a:visited {
         }
 
         @media @vertical {
-          top: 440px;
+          top: 460px;
           left: calc(100% - 94px);
         }
       }
@@ -2442,8 +2446,8 @@ a:visited {
         }
 
         @media @vertical {
-          left: 65px;
-          top: calc(100% - 268px);
+          left: 75px;
+          top: calc(100% - 240px);
         }
       }
     }

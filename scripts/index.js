@@ -971,10 +971,12 @@ const playFullVideo = () => {
   const modalProduct = document.getElementById('modalProduct')
   const backButton = document.getElementById('backButton')
   const playButton = document.getElementById('playButton')
+  const video = document.querySelector('#modalProduct video')
 
   playButton.style.display = 'none'
   backButton.removeEventListener('click', closeModal)
   backButton.addEventListener('click', closeFullVideoOrQuiz)
+  video.removeEventListener('timeupdate', videoSample)
   modalProduct.classList.remove('inactiveVideoOrQuiz')
   modalProduct.classList.add('activeVideo')
 }
@@ -1317,6 +1319,22 @@ const activateProduct = (product, animate = true) => {
           {
             top: 'unset',
             left: 'unset',
+            bottom: '-25%',
+            right: '-50%',
+            opacity: 0,
+            transform: 'rotate(32deg)',
+          },
+          {
+            top: 'unset',
+            left: 'unset',
+            bottom: '-50%',
+            right: '-100%',
+            opacity: 0,
+            transform: 'rotate(32deg)',
+          },
+          {
+            top: 'unset',
+            left: 'unset',
             bottom: '-50%',
             right: '-100%',
             opacity: 0,
@@ -1480,7 +1498,6 @@ const addEvents = () => {
           i += 1
         }
 
-        const hc = document.getElementById('hiddenContent')
         const maxSize = Math.max(window.innerHeight, window.innerWidth)
         const proportion = target.offsetHeight / target.offsetWidth
         let width
