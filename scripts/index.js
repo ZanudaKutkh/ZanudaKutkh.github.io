@@ -847,22 +847,8 @@ const startMainFlow = () => {
   dispatchAnimationEnd('firstScreen', false)
   preloaderRound.style.height = `${roundSize}px`
   preloaderRound.style.width = `${roundSize}px`
-  const isVertical = (window.innerWidth / window.innerHeight) < 0.75
-  const isSquare = 1.33 > (window.innerWidth / window.innerHeight) >= 0.75
-  if (isVertical) {
-    preloaderButton.style.bottom = '20px'
-    preloaderButton.style.height = '40px'
-    preloaderButton.style.width = '280px'
-  } else if (isSquare) {
-    preloaderButton.style.bottom = '32px'
-    preloaderButton.style.height = '64px'
-    preloaderButton.style.width = '343px'
-  } else {
-    preloaderButton.style.bottom = '90px'
-    preloaderButton.style.height = '64px'
-    preloaderButton.style.width = '343px'
-  }
-  preloader.style.opacity = `0.1`
+  preloaderButton.style.display = 'none'
+  preloader.style.opacity = `0`
 
   preloader.addEventListener('transitionend', () => {
     preloader.classList.remove('open')
