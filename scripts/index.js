@@ -1050,7 +1050,7 @@ const submitQuiz = e => {
     'your-message': comment,
   }
 
-  fetch('http://new.topline.gq/n8n/webhook/promo_orders', {
+  fetch('/process.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
